@@ -5,11 +5,13 @@
 
 - [Layout(s)](#layouts)
     - [French layout](#french-layout)
-    - [English layouts](#english-layouts)
+    - [English layout](#english-layout)
 
 <!-- markdown-toc end -->
 
 ## French layout
+
+9 * 11 = 99 LEDs
 
 | COL | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 |
 |:---:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -23,7 +25,9 @@
 | 8   | V  | I  | N  | G  | T  | -  | C  | I  | N  | Q  |    |
 | 9   | Q  | U  | A  | R  | T  | D  | E  | M  | I  |    |    |
 
-## English layouts
+## English layout
+
+8 * 13 = 104 LEDs
 
 | COL | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10  | 11  | 12  | 13  |
 |:---:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|:---:|:---:|:---:|
