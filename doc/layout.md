@@ -6,12 +6,14 @@
 - [Layout(s)](#layouts)
     - [French layout](#french-layout)
     - [English layout](#english-layout)
+    - [Holes](#holes)
 
 <!-- markdown-toc end -->
 
 ## French layout
 
 9 * 11 = 99 LEDs
+Letters missing from the layout: BJKWY
 
 |        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 |
 |:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -25,9 +27,11 @@
 | **08** | V  | I  | N  | G  | T  | -  | C  | I  | N  | Q  |    |
 | **09** | Q  | U  | A  | R  | T  | D  | E  | M  | I  |    |    |
 
+
 ## English layout
 
 8 * 13 = 104 LEDs
+Letters missing from the layout: BDJMZ
 
 |        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10  | 11  | 12  | 13  |
 |:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|:---:|:---:|:---:|
@@ -39,3 +43,14 @@
 | **06** | S  | I  | X  | S  | E  | V  | E  | N  | E  | I   | G   | H   | T   |
 | **07** | N  | I  | N  | E  | T  | E  | N  | E  | L  | E   | V   | E   | N   |
 | **08** | T  | W  | E  | L  | V  | E  |    | O  | C  | L   | O   | C   | K   |
+
+## Holes
+
+The holes in the table can be:
+
+- Left empty
+- Replaced by symbols (weather, day/night, lunar cycle, seasons, etc.)
+- Replaced by random letters
+
+*Note:* It could be interesting to add the letters missing from the layout in
+the holes, as it will allow to make the clock to speak by spelling out words.
