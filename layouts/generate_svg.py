@@ -34,7 +34,7 @@ def generate_svg(width, height, content):
 def generate_letter(x, y, font_size, baseline_height, letter,
                     font_family='Arial',
                     font_weight='normal',
-                    stroke_color='black',
+                    stroke='black',
                     stroke_width=0.5,
                     fill='none'):
     # pylint: disable=unused-argument,too-many-arguments,
@@ -49,7 +49,7 @@ def generate_letter(x, y, font_size, baseline_height, letter,
         letter (chr): The letter.
         font_family (Optional str): The font family (default: Arial).
         font_weight (Optional str): The font weight (default: normal).
-        stroke_color (Optional str): The stroke color (default: black).
+        stroke (Optional str): The stroke color (default: black).
         stroke_width (Optional float): The stroke width (default: 0.5, in mm).
         fill (Optional str): The fill color (default: none)
 
@@ -66,7 +66,7 @@ def generate_letter(x, y, font_size, baseline_height, letter,
 
 
 def generate_rect(x, y, width, height,
-                  stroke_color='black',
+                  stroke='black',
                   stroke_width=0.5,
                   fill='none'):
     # pylint: disable=unused-argument,too-many-arguments
@@ -78,7 +78,7 @@ def generate_rect(x, y, width, height,
         y (float): The y position of the rectangle (in mm).
         width (float): The width of the rectangle (in mm).
         height (float): The height of the rectangle (in mm).
-        stroke_color (Optional str): The stroke color (default: black).
+        stroke (Optional str): The stroke color (default: black).
         stroke_width (Optional float): The stroke width (default: 0.5, in mm).
         fill (Optional str): The fill color (default: none)
 
@@ -134,7 +134,7 @@ def parse_args():
     """
     # Prepare the parser
     parser = argparse.ArgumentParser(
-        description='Generate the SVG drawing for a given wordclock''s layout',
+        description='Generate the SVG drawing of a given wordclock''s layout.',
         add_help=False)
     # Add flags
     flags = parser.add_argument_group("Flags")
@@ -145,10 +145,10 @@ def parse_args():
     params = parser.add_argument_group("Parameters")
     params.add_argument('--hs',
                         type=float, default=10,
-                        help='horizontal spacing of the letter (in mm)')
+                        help='horizontal spacing of the letters (in mm)')
     params.add_argument('--vs',
                         type=float, default=10,
-                        help='vertical spacing of the letter (in mm)')
+                        help='vertical spacing of the letters (in mm)')
     params.add_argument('--hm',
                         type=float, default=10,
                         help='horizontal margins of the drawing (in mm)')
@@ -157,13 +157,13 @@ def parse_args():
                         help='vertical margins of the drawing (in mm)')
     params.add_argument('--fs',
                         type=float, default=8,
-                        help='font size for the letters (in mm)')
+                        help='font size of the letters (in mm)')
     params.add_argument('--ff',
                         type=str, default="",
-                        help='font family for the letters')
+                        help='font family of the letters')
     params.add_argument('--fw',
                         type=str, default="",
-                        help='font weight for the letters')
+                        help='font weight of the letters')
     # Positional arguments
     params.add_argument('filename', metavar="FILENAME",
                         help='name of the text file containing the layout')
@@ -201,15 +201,16 @@ def main():
                 baseline_height=baseline_height,
                 letter=char.strip(),
                 font_family=args.ff, font_weight=args.fw,
-                )
+                fill="white", stroke="none", stroke_width=0)
             rects += generate_rect(x=args.hm + x * args.hs,
                                    y=args.vm + y * args.vs,
                                    width=args.hs, height=args.vs,
-                                   stroke_color='red')
+                                   stroke='red')
     rects += "</g>"
     frame = generate_rect(0, 0,
                           width=num_x * args.hs + 2 * args.hm,
-                          height=num_y * args.vs + 2 * args.vm)
+                          height=num_y * args.vs + 2 * args.vm,
+                          stroke="none", stroke_width=0, fill="#231f20")
     svg = generate_svg(width=num_x * args.hs + 2 * args.hm,
                        height=num_y * args.vs + 2 * args.vm,
                        content=frame + letters + rects)
@@ -232,7 +233,7 @@ LETTER_TEMPLATE = r'''
       font-size="{font_size}mm"
       font-family="{font_family}"
       font-weight="{font_weight}"
-      stroke="{stroke_color}"
+      stroke="{stroke}"
       stroke-width="{stroke_width}mm"
       fill="{fill}"><tspan dy="{dy}mm">{letter}</tspan></text>
 '''
@@ -242,7 +243,7 @@ RECT_TEMPLATE = r'''
       y="{y}mm"
       width="{width}mm"
       height="{height}mm"
-      stroke="{stroke_color}"
+      stroke="{stroke}"
       stroke-width="{stroke_width}mm"
       fill="{fill}"/>
 '''
