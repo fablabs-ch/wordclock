@@ -21,7 +21,7 @@ the tools that can be used to work with them.
 ## Layouts
 
 Two layout are available for now: French and English. Each layout is shown
-below, and it's accessible in a [[raw format]] in the `raw/` folder.
+below, and it's accessible in a [raw format](#raw-format) in the `raw/` folder.
 
 ### French
 
