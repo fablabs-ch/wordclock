@@ -7,12 +7,14 @@ the tools that can be used to work with them.
 **Table of Contents**
 
 - [Layout(s)](#layouts)
-    - [Available layouts](#available-layouts)
+    - [Layouts](#layouts)
         - [French](#french)
         - [English](#english)
         - [Holes](#holes)
+    - [Tools](#tools)
     - [Raw format](#raw-format)
-    - [Generating the SVG](#generating-the-svg)
+    - [SVG generation script](#svg-generation-script)
+    - [Inkscape](#inkscape)
 
 <!-- markdown-toc end -->
 
