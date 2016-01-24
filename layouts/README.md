@@ -12,9 +12,9 @@ the tools that can be used to work with them.
         - [English](#english)
         - [Holes](#holes)
     - [Tools](#tools)
-    - [Raw format](#raw-format)
-    - [SVG generation script](#svg-generation-script)
-    - [Inkscape](#inkscape)
+        - [Raw format](#raw-format)
+        - [SVG generation script](#svg-generation-script)
+        - [Inkscape](#inkscape)
 
 <!-- markdown-toc end -->
 
@@ -74,7 +74,7 @@ the holes, as it will allow to make the clock to speak by spelling out words.
 In order to work with layouts more effectively, a format has been defined to
 work with a script that helps to generate the drawing of the layout.
 
-## Raw format
+### Raw format
 
 The raw layouts for the available layouts are under the `raw/` folder. This
 format is used to make the creation of scripts that work with the layout easier.
@@ -98,7 +98,7 @@ the same number of columns in all rows).
 To customize your wordclock, you can create your own raw layout before using the
 SVG generation script.
 
-## SVG generation script
+### SVG generation script
 
 A tool is provided to generate the SVG of a given raw layout: `generate_svg.py`.
 This permits to simplify the creation of the model in order to make the vinyl.
@@ -117,7 +117,7 @@ parameters that can be modified are:
 - The font family of the letters
 - The font weight of the letters
 
-## Inkscape
+### Inkscape
 
 Once the SVG has been generated, you can open it and edit it with [Inkscape][].
 This let you adapt the colors, strokes style and all other parameters of the
