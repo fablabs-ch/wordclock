@@ -70,7 +70,7 @@ the whole grid. The holes in the table later can be:
 - Replaced by random letters
 
 *Note:* It could be interesting to add the letters missing from the layout in
-the holes, as it will allow to make the clock to speak by spelling out words.
+the holes, as it will allow to make the clock to talk by spelling out words.
 
 ## Tools
 
@@ -106,11 +106,20 @@ SVG generation script.
 A tool is provided to generate the SVG of a given raw layout: `generate_svg.py`.
 This permits to simplify the creation of the model in order to make the vinyl.
 
-The usage is simply `./generate_svg.py <filename>` where filename is the path to
-a raw layout file. For instance you can try `./generate_svg.py raw/en.txt`.
+The usage is simply:
+
+    ./generate_svg.py <filename>
+
+where filename is the path to a raw layout file. For instance you can try:
+
+    ./generate_svg.py raw/en.txt
+
 There is also options to change the size (in mm) and style of the drawing, they
-are described in the help that can be shown with: `./generate_svg.py -h`. Some
-parameters that can be modified are:
+are described in the help message that can be shown with:
+
+    ./generate_svg.py -h
+
+Some parameters that can be modified are:
 
 - The horizontal spacing of the letters (in mm)
 - The vertical spacing of the letters (in mm)
@@ -124,9 +133,9 @@ parameters that can be modified are:
 
 Once the SVG has been generated, you can open it and edit it with [Inkscape][].
 This let you adapt the colors, strokes style and all other parameters of the
-drawing. It is also with Inkscape that you can adapt some letters to span on
-multiple rows/columns, like for instance the big `JAVELIN` that is written on
-the Javelin's wordclock:
+drawing. It is also with Inkscape that you can modify the drawing to have some
+letters that span on multiple rows/columns, like for instance the big `JAVELIN`
+that is written on the Javelin's wordclock:
 
 ![wordclock](http://cdn.instructables.com/FDZ/AQD1/HZTO8RV9/FDZAQD1HZTO8RV9.LARGE.jpg)
 
