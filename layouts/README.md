@@ -25,9 +25,6 @@ below, and it's accessible in a [raw format](#raw-format) in the `raw/` folder.
 
 ### French
 
-9 * 11 = 99 LEDs
-Letters missing from the layout: BJKWY
-
 |        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 |
 |:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | **01** | I  | L  |    | E  | S  | T  |    | U  | N  | E  |    |
@@ -40,11 +37,12 @@ Letters missing from the layout: BJKWY
 | **08** |    | V  | I  | N  | G  | T  | -  | C  | I  | N  | Q  |
 | **09** | Q  | U  | A  | R  | T  |    | D  | E  | M  | I  |    |
 
+Specificity:
+
+- 9 * 11 = 99 LEDs
+- Letters missing from the layout: BJKWY
 
 ### English
-
-8 * 13 = 104 LEDs
-Letters missing from the layout: BDJMZ
 
 |        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 | 13 |
 |:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -56,6 +54,11 @@ Letters missing from the layout: BDJMZ
 | **06** | S  | I  | X  | S  | E  | V  | E  | N  | E  | I  | G  | H  | T  |
 | **07** | N  | I  | N  | E  | T  | E  | N  | E  | L  | E  | V  | E  | N  |
 | **08** | T  | W  | E  | L  | V  | E  |    | O  | C  | L  | O  | C  | K  |
+
+Specificity:
+
+- 8 * 13 = 104 LEDs
+- Letters missing from the layout: BDJMZ
 
 ### Holes
 
