@@ -1,4 +1,4 @@
-# Layout(s)
+# Layouts
 
 This page describes the different available layouts with their specificity, and
 the tools that can be used to work with them.
@@ -6,8 +6,8 @@ the tools that can be used to work with them.
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [Layout(s)](#layouts)
-    - [Layouts](#layouts)
+- [Layouts](#layouts)
+    - [Available layouts](#available-layouts)
         - [French](#french)
         - [English](#english)
         - [Holes](#holes)
@@ -18,7 +18,7 @@ the tools that can be used to work with them.
 
 <!-- markdown-toc end -->
 
-## Layouts
+## Available layouts
 
 Two layout are available for now: French and English. Each layout is shown
 below, and it's accessible in a [raw format](#raw-format) in the `raw/` folder.
