@@ -1,5 +1,5 @@
-#ifndef _TIME_H
-#define _TIME_H
+#ifndef _TIME_MANAGER_H
+#define _TIME_MANAGER_H
 
 #include "debugable.h"
 

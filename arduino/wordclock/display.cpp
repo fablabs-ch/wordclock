@@ -7,3 +7,7 @@ Display::Display(TimeManager* timemanager)
 void Display::init(){
 
 }
+
+void Display::loop(unsigned long){
+
+}

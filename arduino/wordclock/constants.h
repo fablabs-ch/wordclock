@@ -1,0 +1,4 @@
+
+#define PIN_ROTARY_BUTTON 4
+#define PIN_ROTARY_A 3
+#define PIN_ROTARY_B 2
