@@ -10,6 +10,12 @@ void Debugable::debug(String str) {
 	}
 }
 
+void Debugable::debug(char c) {
+	if (this->debugStream) {
+		this->debugStream->print(c);
+	}
+}
+
 void Debugable::debugln(String str) {
 	if (this->debugStream) {
 		this->debugStream->println(str);
@@ -28,6 +34,7 @@ void Debugable::debug(int16_t v) {
 		this->debugStream->print("\t");
 	}
 }
+
 void Debugable::debug(int32_t v) {
 	if (this->debugStream) {
 		this->debugStream->print(v);
@@ -40,4 +47,3 @@ void Debugable::debug(double v) {
 		this->debugStream->print(v, 3);
 	}
 }
-

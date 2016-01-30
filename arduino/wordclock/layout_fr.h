@@ -1,3 +1,6 @@
+#ifndef _LAYOUT_H
+#define _LAYOUT_H
+
 /*
 | I | L |   | E | S | T |   | U | N | E |   |
 | T | R | O | I | S | Q | U | A | T | R | E |
@@ -20,5 +23,13 @@
 |089|   |   |   |   |   |   |   |   |   |099|
 */
 
+#define DISPLAY_ROWS 9
+#define DISPLAY_COLUMNS 11
+#define DISPLAY_LEDS DISPLAY_ROWS*DISPLAY_COLUMNS
+
+#define LAYOUT "il est une troisquatrecinqsixsepthuitneufdix onze douzedeux heure moinset dix vingt-cinqquart demi "
+
 #define HOUR_ONE [008,09,010]
 #define HOUR_TWO [066,067,068,069]
+
+#endif

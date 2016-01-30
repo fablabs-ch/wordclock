@@ -3,20 +3,12 @@
 
 #include "debugable.h"
 #include "timemanager.h"
-
-typedef enum {
-	CLOCK_WORD,
-	CLOCK_DIGITAL,
-	CHANGE_COLOR,
-	CHANGE_BRIGHTNESS,
-	SET_HOUR,
-	SET_MINUTES
-} state_type;
-
+#include "display.h"
+#include "types.h"
 
 class StateManager : public Debugable {
 public:
-	StateManager(TimeManager*);
+	StateManager(TimeManager*, Display*);
 
 	void init();
 
@@ -32,6 +24,7 @@ public:
 
 private:
 	TimeManager* timeManager;
+	Display* display;
 
 	state_type currentState;
 

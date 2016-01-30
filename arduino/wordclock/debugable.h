@@ -13,6 +13,7 @@ protected:
 	void debug(String str);
 	void debugln(String str);
 	void debugln();
+	void debug(char);
 	void debug(int16_t);
 	void debug(int32_t);
 	void debug(double);

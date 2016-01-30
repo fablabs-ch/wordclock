@@ -1,7 +1,7 @@
 #include "statemanager.h"
 
-StateManager::StateManager(TimeManager* timeManager)
-  : timeManager(timeManager) {
+StateManager::StateManager(TimeManager* timeManager, Display* display)
+  : timeManager(timeManager), display(display) {
 }
 
 void StateManager::init(){

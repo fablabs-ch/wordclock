@@ -1,13 +1,12 @@
 
-#include "layout_fr.h"
 #include "statemanager.h"
 #include "timemanager.h"
 #include "input.h"
-#include "display.h"
+#include "screen.h"
 
 TimeManager timeManager;
-Display display(&timeManager);
-StateManager stateManager(&timeManager);
+Display display;
+StateManager stateManager(&timeManager, &display);
 Input input(&stateManager);
 
 unsigned long lastLoop=0;
@@ -20,17 +19,17 @@ void setup(){
   stateManager.init();
   input.init();
 
-  stateManager.debug(&Serial);
+  display.debug(&Serial);
 }
 
 void loop(){
   unsigned long now = millis();
   unsigned long dtMs = now-lastLoop;
 
-  timeManager.loop(dtMs);
-  display.loop(dtMs);
-  stateManager.loop(dtMs);
   input.loop(dtMs);
+  timeManager.loop(dtMs);
+  stateManager.loop(dtMs);
+  display.loop(dtMs);
 
   lastLoop = now;
 }

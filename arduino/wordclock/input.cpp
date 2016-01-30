@@ -17,13 +17,12 @@ void Input::init(){
 
 void Input::loop(unsigned long dtMs){
 	this->updateEncoder();
+	this->checkRotation();
 	this->checkButtonLongPress(dtMs);
 	this->checkButtonNormalPress();
-	this->checkRotation();
 }
 
 void Input::updateEncoder(){
-	this->buttonPressed = digitalRead(PIN_ROTARY_BUTTON) == LOW;
 
   int MSB = digitalRead(PIN_ROTARY_A); //MSB = most significant bit
   int LSB = digitalRead(PIN_ROTARY_B); //LSB = least significant bit
@@ -38,6 +37,8 @@ void Input::updateEncoder(){
 }
 
 void Input::checkButtonLongPress(unsigned long dtMs){
+	this->buttonPressed = digitalRead(PIN_ROTARY_BUTTON) == LOW;
+	
 	if(this->buttonPressed && !this->ignoreNextRelease){
 		this->timeButtonDown += dtMs;
 		if(this->timeButtonDown>=BUTTON_LONG_PRESS_MS){
