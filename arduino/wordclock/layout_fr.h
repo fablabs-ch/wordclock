@@ -29,7 +29,9 @@
 
 #define LAYOUT "il est une troisquatrecinqsixsepthuitneufdix onze douzedeux heure moinset dix vingt-cinqquart demi "
 
-#define HOUR_ONE [008,09,010]
-#define HOUR_TWO [066,067,068,069]
+#define LAYOUT_ITS 001,002
+#define LAYOUT_HOUR_ONE [008,09,010]
+#define LAYOUT_HOUR_TWO [066,067,068,069]
+#define LAYOUT_HOUR_THREE [018,019,020,021,022]
 
 #endif

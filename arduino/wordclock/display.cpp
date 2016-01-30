@@ -4,14 +4,34 @@ Display::Display(){
 }
 
 void Display::init(){
-	memset(&this->ledOn, 0, DISPLAY_LEDS * sizeof(bool));
+	this->allLedsOff();
 }
 
 void Display::loop(unsigned long){
-	this->ledOn[0] = true;
-	this->ledOn[1] = true;
+	this->displayWordTime(1, 0, 0);
 	this->displayDebug();
 	delay(1000);
+}
+
+void Display::displayWordTime(int hour, int minute, int second){
+	this->allLedsOff();
+
+	int leds[] = {LAYOUT_ITS};
+	this->addLedsOn(leds);
+
+
+}
+
+
+void Display::allLedsOff(){
+		//reset the memory
+		memset(&this->ledsOn, 0, DISPLAY_LEDS * sizeof(bool));
+}
+void Display::addLedsOn(int list[]){
+	int nb = sizeof(list);
+	for(int i=0; i<nb; i++){
+		this->ledsOn[i] = true;
+	}
 }
 
 void Display::displayDebug(){
@@ -48,5 +68,5 @@ bool Display::isledOn(int row, int colum){
 	}else{
 		sum+= DISPLAY_COLUMNS-colum;
 	}
-	return this->ledOn[sum];
+	return this->ledsOn[sum];
 }

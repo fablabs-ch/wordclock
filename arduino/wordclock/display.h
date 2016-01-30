@@ -26,8 +26,10 @@ private:
 	int hue;
 	int saturation;
 	int brightness;
-	bool ledOn[DISPLAY_LEDS];
+	bool ledsOn[DISPLAY_LEDS];
 
+	void allLedsOff();
+	void addLedsOn(int[]);
 	void displayDebug();
 	void displayDebugLine(int);
 	bool isledOn(int row, int colum);
