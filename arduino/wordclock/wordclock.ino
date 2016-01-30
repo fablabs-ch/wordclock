@@ -20,7 +20,7 @@ void setup(){
   stateManager.init();
   input.init();
 
-  input.debug(&Serial);
+  stateManager.debug(&Serial);
 }
 
 void loop(){

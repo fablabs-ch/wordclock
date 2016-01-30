@@ -4,6 +4,15 @@
 #include "debugable.h"
 #include "timemanager.h"
 
+typedef enum {
+	CLOCK_WORD,
+	CLOCK_DIGITAL,
+	CHANGE_COLOR,
+	CHANGE_BRIGHTNESS,
+	SET_HOUR,
+	SET_MINUTES
+} state_type;
+
 
 class StateManager : public Debugable {
 public:
@@ -13,14 +22,19 @@ public:
 
 	void loop(unsigned long);
 
-	void buttonUp();
-	void buttonDown();
+	void buttonPressed();
+	void buttonLongPressed();
 	void encoderIncrease();
 	void encoderDecrease();
+
+	state_type getCurrentState();
 
 
 private:
 	TimeManager* timeManager;
+
+	state_type currentState;
+
 
 };
 #endif

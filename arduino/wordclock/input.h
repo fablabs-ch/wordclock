@@ -21,10 +21,14 @@ private:
 	long lastEncoderValue = 0;
 	bool buttonPressed = false;
 	bool lastButtonPressed = false;
+	unsigned long timeButtonDown = 0;
+	bool ignoreNextRelease = false;
 
 
 	void updateEncoder();
-	void checkChanges();
+	void checkButtonLongPress(unsigned long);
+	void checkButtonNormalPress();
+	void checkRotation();
 
 };
 #endif

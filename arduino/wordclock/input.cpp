@@ -17,7 +17,9 @@ void Input::init(){
 
 void Input::loop(unsigned long dtMs){
 	this->updateEncoder();
-	this->checkChanges();
+	this->checkButtonLongPress(dtMs);
+	this->checkButtonNormalPress();
+	this->checkRotation();
 }
 
 void Input::updateEncoder(){
@@ -35,16 +37,35 @@ void Input::updateEncoder(){
   this->lastEncoded = encoded; //store this value for next time
 }
 
-void Input::checkChanges(){
+void Input::checkButtonLongPress(unsigned long dtMs){
+	if(this->buttonPressed && !this->ignoreNextRelease){
+		this->timeButtonDown += dtMs;
+		if(this->timeButtonDown>=BUTTON_LONG_PRESS_MS){
+			this->ignoreNextRelease = true;
+			this->debugln("Button long pressed");
+			this->stateManager->buttonLongPressed();
+		}
+	}
+}
+
+void Input::checkButtonNormalPress(){
 	if(this->lastButtonPressed!=this->buttonPressed){
 		if(this->buttonPressed){
 			this->debugln("Button pressed");
 		}else{
 			this->debugln("Button released");
+			if(!this->ignoreNextRelease){
+				this->stateManager->buttonPressed();
+			}else{
+				this->ignoreNextRelease = false;
+			}
+			this->timeButtonDown = 0;
 		}
 		this->lastButtonPressed = this->buttonPressed;
 	}
+}
 
+void Input::checkRotation(){
 	//divide by 4 to match tics of the rotary encoder
 	int lastEnc = this->lastEncoderValue>>2;
 	int currEnc = this->encoderValue>>2;
@@ -53,10 +74,11 @@ void Input::checkChanges(){
 	if(delta != 0){
 		if(delta<0){
 			this->debugln("Rotary increased");
+			this->stateManager->encoderIncrease();
 		}else{
 			this->debugln("Rotary decreased");
+			this->stateManager->encoderDecrease();
 		}
 		this->lastEncoderValue = this->encoderValue;
 	}
-
 }
