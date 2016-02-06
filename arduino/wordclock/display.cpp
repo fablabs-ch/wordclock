@@ -2,7 +2,7 @@
 
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
-Display::Display(Layout* layout):layout(layout){
+Display::Display(AbstractLayout* layout):layout(layout){
 }
 
 void Display::init(){

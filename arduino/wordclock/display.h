@@ -4,11 +4,11 @@
 #include "debugable.h"
 #include "types.h"
 #include "constants.h"
-#include "layout_fr.h"
+#include "abstractlayout.h"
 
 class Display : public Debugable{
 public:
-	Display(Layout*);
+	Display(AbstractLayout*);
 
 	void init();
 
@@ -23,7 +23,7 @@ public:
 	void setState(state_type);
 
 private:
-	Layout* layout;
+	AbstractLayout* layout;
 
 	int hue;
 	int saturation;
