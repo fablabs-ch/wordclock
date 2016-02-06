@@ -17,6 +17,9 @@ protected:
   void append(short**, short, short, short);
   void append(short**, short, short, short, short);
   void append(short**, short, short, short, short, short);
+  void append(short**, short, short, short, short, short, short);
+  void append(short**, short, short, short, short, short, short, short);
+  void append(short**, short, short, short, short, short, short, short, short);
 
 
 

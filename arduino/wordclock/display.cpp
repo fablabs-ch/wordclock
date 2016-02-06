@@ -29,17 +29,14 @@ void Display::allLedsOff(){
 }
 
 void Display::addLedsOn(short* ptr){
-	debug("buffer : ");
 	short v;
 	do{
 		v = *ptr;
-		debug((int)v);
 		if(v!=-1){
 			this->ledsOn[v] = true;
 			ptr++;
 		}
 	}while(v!=-1);
-	debugln();
 }
 
 void Display::draw(){
@@ -81,7 +78,7 @@ bool Display::isledOn(int row, int colum){
 	if(row%2==0){
 		sum+=colum;
 	}else{
-		sum+= DISPLAY_COLUMNS-colum;
+		sum+= DISPLAY_COLUMNS-colum-1;
 	}
 	return this->ledsOn[sum];
 }

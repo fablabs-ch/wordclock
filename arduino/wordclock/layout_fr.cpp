@@ -41,7 +41,7 @@ void Layout::getLayout(char hour, char minute, char sec, short* dest){
       this->append(d, 7, 8, 9);
 			break;
 		case 2:
-      this->append(d, 65, 66, 67, 68);
+      this->append(d, 62, 63, 64, 65);
 			break;
 	}
 
