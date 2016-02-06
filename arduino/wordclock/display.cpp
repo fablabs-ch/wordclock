@@ -1,6 +1,8 @@
 #include "display.h"
 
-Display::Display(){
+// #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
+
+Display::Display(Layout* layout):layout(layout){
 }
 
 void Display::init(){
@@ -8,18 +10,16 @@ void Display::init(){
 }
 
 void Display::loop(unsigned long){
-	this->displayWordTime(1, 0, 0);
-	this->displayDebug();
-	delay(1000);
+	//nothing to do
 }
 
-void Display::displayWordTime(int hour, int minute, int second){
+void Display::displayWordTime(char hour, char minute, char second){
 	this->allLedsOff();
 
-	int leds[] = {LAYOUT_ITS};
-	this->addLedsOn(leds);
+	this->layout->getLayout(hour, minute, second, this->displayBuffer);
+	this->addLedsOn(this->displayBuffer);
 
-
+	this->draw();
 }
 
 
@@ -27,21 +27,36 @@ void Display::allLedsOff(){
 		//reset the memory
 		memset(&this->ledsOn, 0, DISPLAY_LEDS * sizeof(bool));
 }
-void Display::addLedsOn(int list[]){
-	int nb = sizeof(list);
-	for(int i=0; i<nb; i++){
-		this->ledsOn[i] = true;
-	}
+
+void Display::addLedsOn(short* ptr){
+	debug("buffer : ");
+	short v;
+	do{
+		v = *ptr;
+		debug((int)v);
+		if(v!=-1){
+			this->ledsOn[v] = true;
+			ptr++;
+		}
+	}while(v!=-1);
+	debugln();
+}
+
+void Display::draw(){
+		//this->displayWordTime(1, 0, 0);
+		if(this->isDebugEnabled()){
+			this->displayDebug();
+		}
 }
 
 void Display::displayDebug(){
-	char layout[] = LAYOUT;
+	char* l = layout->getDebugLayout();
 	this->displayDebugLine(DISPLAY_COLUMNS*4+2);
 	for(int row=0; row<DISPLAY_ROWS; row++){
 		for(int col=0; col<DISPLAY_COLUMNS; col++){
 			this->debug(" | ");
 			if(this->isledOn(row, col)){
-				this->debug(layout[row*DISPLAY_COLUMNS+col]);
+				this->debug(l[row*DISPLAY_COLUMNS+col]);
 			}else{
 				this->debug(" ");
 			}

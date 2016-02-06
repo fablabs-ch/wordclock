@@ -47,3 +47,7 @@ void Debugable::debug(double v) {
 		this->debugStream->print(v, 3);
 	}
 }
+
+bool Debugable::isDebugEnabled(){
+	return this->debugStream;
+}

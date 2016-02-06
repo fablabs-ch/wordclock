@@ -17,6 +17,7 @@ protected:
 	void debug(int16_t);
 	void debug(int32_t);
 	void debug(double);
+	bool isDebugEnabled();
 };
 
 #endif

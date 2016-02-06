@@ -22,12 +22,16 @@ public:
 	 */
 	int getTime();
 
+	void getTime(char* hour, char* min, char* sec);
+
+	void setTime(int);
+
 	/**
 	 * Get the unix timestamp in second
 	 */
 	uint32_t getTimestamp();
 
 private:
-
+	int time;
 };
 #endif

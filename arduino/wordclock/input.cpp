@@ -2,6 +2,13 @@
 
 Input::Input(StateManager* stateManager)
 	: stateManager(stateManager){
+	this->lastEncoded = 0;
+	this->encoderValue = 0;
+	this->lastEncoderValue = 0;
+	this->buttonPressed = false;
+	this->lastButtonPressed = false;
+	this->timeButtonDown = 0;
+	this->ignoreNextRelease = false;
 }
 
 void Input::init(){
@@ -38,7 +45,7 @@ void Input::updateEncoder(){
 
 void Input::checkButtonLongPress(unsigned long dtMs){
 	this->buttonPressed = digitalRead(PIN_ROTARY_BUTTON) == LOW;
-	
+
 	if(this->buttonPressed && !this->ignoreNextRelease){
 		this->timeButtonDown += dtMs;
 		if(this->timeButtonDown>=BUTTON_LONG_PRESS_MS){

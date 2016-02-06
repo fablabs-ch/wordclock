@@ -2,10 +2,12 @@
 #include "statemanager.h"
 #include "timemanager.h"
 #include "input.h"
-#include "screen.h"
+#include "display.h"
+#include "layout_fr.h"
 
+Layout layout;
 TimeManager timeManager;
-Display display;
+Display display(&layout);
 StateManager stateManager(&timeManager, &display);
 Input input(&stateManager);
 
@@ -13,6 +15,8 @@ unsigned long lastLoop=0;
 
 void setup(){
   Serial.begin(115200);
+
+  display.debug(&Serial);
 
   timeManager.init();
   display.init();

@@ -28,6 +28,8 @@ private:
 
 	state_type currentState;
 
+	void displayTime();
+
 
 };
 #endif

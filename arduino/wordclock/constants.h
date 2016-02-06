@@ -1,7 +1,7 @@
 #ifndef _CONSTANTS_H
 #define _CONSTANTS_H
 
-#include "layout_fr.h";
+#include "layout_fr.h"
 
 #define PIN_ROTARY_BUTTON 4
 #define PIN_ROTARY_A 3
