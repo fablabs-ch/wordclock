@@ -2,11 +2,16 @@
 
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
-Display::Display(AbstractLayout* layout):layout(layout){
+Display::Display(AbstractLayout* layout):layout(layout), leds(new WS2812(DISPLAY_LEDS)){
+
+	this->leds->setOutput(8);//FIXME make constant
+
+	this->leds->setColorOrderRGB();
 }
 
 void Display::init(){
 	this->allLedsOff();
+	this->draw();
 }
 
 void Display::loop(unsigned long){
@@ -20,6 +25,11 @@ void Display::displayWordTime(char hour, char minute, char second){
 	this->addLedsOn(this->displayBuffer);
 
 	this->draw();
+}
+
+
+void Display::displayDigitalTime(char hour, char minute, char second){
+	//TODO
 }
 
 
@@ -44,6 +54,13 @@ void Display::draw(){
 		if(this->isDebugEnabled()){
 			this->displayDebug();
 		}
+
+		cRGB colorOn = {50,50,50};
+		cRGB colorOff = {0,0,0};
+		for(int i=0; i<DISPLAY_LEDS; i++){
+			this->leds->set_crgb_at(i, ledsOn[i] ? colorOn : colorOff);
+		}
+		this->leds->sync();
 }
 
 void Display::displayDebug(){
@@ -73,12 +90,16 @@ void Display::displayDebugLine(int nb){
 	this->debugln();
 }
 
-bool Display::isledOn(int row, int colum){
-	int sum = row*DISPLAY_COLUMNS;
-	if(row%2==0){
-		sum+=colum;
+bool Display::isledOn(int x, int y){
+	return this->ledsOn[this->getLedIndex(x,y)];
+}
+
+int Display::getLedIndex(int x, int y){
+	int index = x*DISPLAY_COLUMNS;
+	if(x%2==0){
+		index+=y;
 	}else{
-		sum+= DISPLAY_COLUMNS-colum-1;
+		index+= DISPLAY_COLUMNS-y-1;
 	}
-	return this->ledsOn[sum];
+	return index;
 }

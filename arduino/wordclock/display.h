@@ -5,6 +5,7 @@
 #include "types.h"
 #include "constants.h"
 #include "abstractlayout.h"
+#include "WS2812.h"
 
 class Display : public Debugable{
 public:
@@ -30,6 +31,11 @@ private:
 	int brightness;
 	bool ledsOn[DISPLAY_LEDS];
 	short displayBuffer[DISPLAY_LEDS];
+	bool blink;
+
+	WS2812* leds;
+
+	cRGB lastColor = {255, 255, 255};
 
 	void allLedsOff();
 	void addLedsOn(short*);
@@ -37,6 +43,7 @@ private:
 	void displayDebug();
 	void displayDebugLine(int);
 	bool isledOn(int row, int colum);
+	int getLedIndex(int x, int y);
 
 };
 #endif
