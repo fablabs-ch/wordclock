@@ -41,4 +41,9 @@ void StateManager::displayTime(){
   char h,m,s;
   this->timeManager->getTime(&h,&m,&s);
   this->display->displayWordTime(h,m,s);
+  // this->debug("time :");
+  // this->debug((int)h);
+  // this->debug((int)m);
+  // this->debug((int)s);
+  // this->debugln();
 }

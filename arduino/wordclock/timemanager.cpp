@@ -13,11 +13,11 @@ void TimeManager::loop(unsigned long){
 }
 
 
-int TimeManager::getTime(){
+uint32_t TimeManager::getTime(){
   return this->time;
 }
 
-void TimeManager::setTime(int time){
+void TimeManager::setTime(uint32_t time){
   this->time = time;
 }
 

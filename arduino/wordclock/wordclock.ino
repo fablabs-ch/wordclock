@@ -3,7 +3,7 @@
 #include "timemanager.h"
 #include "input.h"
 #include "display.h"
-#include "layout_fr.h"
+#include "layout.h"
 
 Layout layout;
 TimeManager timeManager;
@@ -17,6 +17,7 @@ void setup(){
   Serial.begin(115200);
 
   display.debug(&Serial);
+  stateManager.debug(&Serial);
   input.readFromSerial(&Serial);
 
   timeManager.init();

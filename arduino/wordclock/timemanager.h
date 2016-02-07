@@ -20,11 +20,11 @@ public:
 	/**
 	 * Get the number of second since midnight
 	 */
-	int getTime();
+	uint32_t getTime();
 
 	void getTime(char* hour, char* min, char* sec);
 
-	void setTime(int);
+	void setTime(uint32_t);
 
 	/**
 	 * Get the unix timestamp in second
@@ -32,6 +32,6 @@ public:
 	uint32_t getTimestamp();
 
 private:
-	int time;
+	uint32_t time;
 };
 #endif
