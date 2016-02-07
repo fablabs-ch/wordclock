@@ -1,4 +1,4 @@
-#include "layout_fr.h"
+#include "layout.h"
 
 /*
 | I | L |   | E | S | T |   | U | N | E |   |
@@ -23,9 +23,7 @@
 */
 
 Layout::Layout(){
-
 }
-
 
 void Layout::getLayout(char hour, char minute, char sec, short* dest){
   short** d = &dest;
