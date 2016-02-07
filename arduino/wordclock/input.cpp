@@ -9,6 +9,7 @@ Input::Input(StateManager* stateManager)
 	this->lastButtonPressed = false;
 	this->timeButtonDown = 0;
 	this->ignoreNextRelease = false;
+	this->readStream = 0;
 }
 
 void Input::init(){
@@ -23,10 +24,37 @@ void Input::init(){
 
 
 void Input::loop(unsigned long dtMs){
+	this->readSerial();
 	this->updateEncoder();
 	this->checkRotation();
 	this->checkButtonLongPress(dtMs);
 	this->checkButtonNormalPress();
+}
+
+void Input::readFromSerial(Stream* stream){
+		this->readStream = stream;
+}
+
+void Input::readSerial(){
+	if(readStream){
+		while(readStream->available()){
+			char read = readStream->read();
+			switch(read){
+				case '+':
+				this->stateManager->encoderIncrease();
+				break;
+				case '-':
+				this->stateManager->encoderDecrease();
+				break;
+				case 'p':
+				this->stateManager->buttonPressed();
+				break;
+				case 'l':
+				this->stateManager->buttonLongPressed();
+				break;
+			}
+		}
+	}
 }
 
 void Input::updateEncoder(){

@@ -13,6 +13,8 @@ public:
 
 	void loop(unsigned long);
 
+	void readFromSerial(Stream*);
+
 private:
 	StateManager* stateManager;
 
@@ -23,8 +25,9 @@ private:
 	bool lastButtonPressed;
 	unsigned long timeButtonDown;
 	bool ignoreNextRelease;
+	Stream* readStream;
 
-
+	void readSerial();
 	void updateEncoder();
 	void checkButtonLongPress(unsigned long);
 	void checkButtonNormalPress();

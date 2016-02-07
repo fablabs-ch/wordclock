@@ -17,6 +17,7 @@ void setup(){
   Serial.begin(115200);
 
   display.debug(&Serial);
+  input.readFromSerial(&Serial);
 
   timeManager.init();
   display.init();
