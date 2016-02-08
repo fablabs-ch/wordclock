@@ -48,7 +48,7 @@ Specificity:
 |:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | **01** | I  | T  |    | I  | S  |    | T  | E  | N  | H  | A  | L  | F  |
 | **02** |    |    | A  |    | Q  | U  | A  | R  | T  | E  | R  |    |    |
-| **03** |    | T  | W  | E  | N  | T  | Y  |    | F  | I  | V  | E  |    |
+| **03** |    | T  | W  | E  | N  | T  | Y  | -  | F  | I  | V  | E  |    |
 | **04** | P  | A  | S  | T  | T  | O  |    | O  | N  | E  | T  | W  | O  |
 | **05** | T  | H  | R  | E  | E  | F  | O  | U  | R  | F  | I  | V  | E  |
 | **06** | S  | I  | X  | S  | E  | V  | E  | N  | E  | I  | G  | H  | T  |
@@ -86,7 +86,7 @@ The format is simple, as shown here for the English layout:
 ```text
 | I | T |   | I | S |   | T | E | N | H | A | L | F |
 |   |   | A |   | Q | U | A | R | T | E | R |   |   |
-|   | T | W | E | N | T | Y |   | F | I | V | E |   |
+|   | T | W | E | N | T | Y | - | F | I | V | E |   |
 | P | A | S | T | T | O |   | O | N | E | T | W | O |
 | T | H | R | E | E | F | O | U | R | F | I | V | E |
 | S | I | X | S | E | V | E | N | E | I | G | H | T |
