@@ -3,6 +3,9 @@
 
 #include "debugable.h"
 
+// https://github.com/jarzebski/Arduino-DS3231.git
+#include <DS3231.h>
+
 
 /**
  * This class is in charge of the time.
