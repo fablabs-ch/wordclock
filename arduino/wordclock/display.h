@@ -6,10 +6,11 @@
 #include "constants.h"
 #include "abstractlayout.h"
 #include "WS2812.h"
+#include "config.h"
 
 class Display : public Debugable{
 public:
-	Display(AbstractLayout*);
+	Display(AbstractLayout*, Config*);
 
 	void init();
 
@@ -25,10 +26,8 @@ public:
 
 private:
 	AbstractLayout* layout;
+	Config* config;
 
-	int hue;
-	int saturation;
-	int brightness;
 	bool ledsOn[DISPLAY_LEDS];
 	short displayBuffer[DISPLAY_LEDS];
 	bool blink;
@@ -44,6 +43,8 @@ private:
 	void displayDebugLine(int);
 	bool isledOn(int row, int colum);
 	int getLedIndex(int x, int y);
+
+	cRGB convert(hsv_type);
 
 };
 #endif

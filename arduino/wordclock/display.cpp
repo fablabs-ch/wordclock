@@ -2,10 +2,10 @@
 
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
-Display::Display(AbstractLayout* layout):layout(layout), leds(new WS2812(DISPLAY_LEDS)){
+Display::Display(AbstractLayout* layout, Config* config)
+	:layout(layout), config(config), leds(new WS2812(DISPLAY_LEDS)){
 
-	this->leds->setOutput(8);//FIXME make constant
-
+	this->leds->setOutput(PIN_LED_STRIP);
 	this->leds->setColorOrderRGB();
 }
 
@@ -55,7 +55,7 @@ void Display::draw(){
 			this->displayDebug();
 		}
 
-		cRGB colorOn = {50,50,50};
+		cRGB colorOn = this->convert(config->getColor());
 		cRGB colorOff = {0,0,0};
 		for(int i=0; i<DISPLAY_LEDS; i++){
 			this->leds->set_crgb_at(i, ledsOn[i] ? colorOn : colorOff);
@@ -102,4 +102,43 @@ int Display::getLedIndex(int x, int y){
 		index+= DISPLAY_COLUMNS-y-1;
 	}
 	return index;
+}
+
+cRGB Display::convert(hsv_type hsv){
+	float r = 0, g = 0, b = 0;
+	float h = hsv.h, s = hsv.s, v = hsv.v;
+	s /= 100;
+	v /= 100;
+
+	float t = (float) (((int) (h / 60 * 1000)) % 2000) / 1000;
+	float c = v*s;
+	float x = c * (1 - abs(t - 1));
+	float m = v - c;
+
+	if (h < 60) {
+		r = c;
+		g = x;
+	} else if (h < 120) {
+		r = x;
+		g = c;
+	} else if (h < 180) {
+		g = c;
+		b = x;
+	} else if (h < 240) {
+		g = x;
+		b = c;
+	} else if (h < 300) {
+		r = x;
+		b = c;
+	} else {
+		r = c;
+		b = x;
+	}
+
+	return
+	{
+		((r + m) * 255),
+		((g + m) * 255),
+		((b + m) * 255)
+	};
 }

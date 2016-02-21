@@ -27,6 +27,8 @@ private:
 	bool ignoreNextRelease;
 	Stream* readStream;
 
+	unsigned long antiReboundMs;
+
 	void readSerial();
 	void updateEncoder();
 	void checkButtonLongPress(unsigned long);

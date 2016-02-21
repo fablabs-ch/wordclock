@@ -10,6 +10,7 @@ Input::Input(StateManager* stateManager)
 	this->timeButtonDown = 0;
 	this->ignoreNextRelease = false;
 	this->readStream = 0;
+	this->antiReboundMs = 0;
 }
 
 void Input::init(){
@@ -29,6 +30,12 @@ void Input::loop(unsigned long dtMs){
 	this->checkRotation();
 	this->checkButtonLongPress(dtMs);
 	this->checkButtonNormalPress();
+	if(this->antiReboundMs!=0){
+		this->antiReboundMs-=dtMs;
+		if(antiReboundMs<0){
+			this->antiReboundMs = 0;
+		}
+	}
 }
 
 void Input::readFromSerial(Stream* stream){
@@ -91,7 +98,12 @@ void Input::checkButtonNormalPress(){
 		}else{
 			this->debugln("Button released");
 			if(!this->ignoreNextRelease){
-				this->stateManager->buttonPressed();
+				if(antiReboundMs==0){
+					this->stateManager->buttonPressed();
+					this->antiReboundMs = ANTI_REBOUND_MS;
+				}else{
+					this->debugln("Button reboud detected");
+				}
 			}else{
 				this->ignoreNextRelease = false;
 			}
