@@ -26,6 +26,14 @@ private:
 	TimeManager* timeManager;
 	Display* display;
 
+	void applyButtonPressed();
+	void applyButtonLongPressed();
+	void applyEncoderDelta(int);
+
+	bool isButtonPressed;
+	bool isButtonLongPressed;
+	int encoderDelta;
+
 	state_type currentState;
 
 	void displayTime();

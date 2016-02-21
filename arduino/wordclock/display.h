@@ -16,12 +16,9 @@ public:
 
 	void loop(unsigned long);
 
-	void displayWordTime(char hour, char minute, char second);
-	void displayDigitalTime(char hour, char minute, char second);
+	void displayWordTime(uint8_t hour, uint8_t minute, uint8_t second);
+	void displayDigitalTime(uint8_t hour, uint8_t minute, uint8_t second);
 
-	void setColorHue(int);
-	void setColorSaturation(int);
-	void setColorBrightness(int);
 	void setState(state_type);
 
 private:
@@ -29,7 +26,7 @@ private:
 	Config* config;
 
 	bool ledsOn[DISPLAY_LEDS];
-	short displayBuffer[DISPLAY_LEDS];
+	uint16_t displayBuffer[DISPLAY_LEDS];
 	bool blink;
 
 	WS2812* leds;
@@ -37,7 +34,7 @@ private:
 	cRGB lastColor = {255, 255, 255};
 
 	void allLedsOff();
-	void addLedsOn(short*);
+	void addLedsOn(uint16_t*);
 	void draw();
 	void displayDebug();
 	void displayDebugLine(int);

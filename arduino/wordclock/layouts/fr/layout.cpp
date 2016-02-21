@@ -25,8 +25,15 @@
 Layout::Layout(){
 }
 
-void Layout::getLayout(char hour, char minute, char sec, short* dest){
-  short** d = &dest;
+void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint16_t* dest){
+  uint16_t** d = &dest;
+
+  if(minute>30){
+    hour+=1;
+    if(hour>=24){
+      hour-=24;
+    }
+  }
 
   this->append(d, 0, 1);//il
   this->append(d, 3, 4, 5);//est

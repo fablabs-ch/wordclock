@@ -76,6 +76,9 @@ void Input::updateEncoder(){
   if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) this->encoderValue --;
 
   this->lastEncoded = encoded; //store this value for next time
+	this->debug("encoder value : ");
+	this->debug(this->encoderValue);
+	this->debugln();
 }
 
 void Input::checkButtonLongPress(unsigned long dtMs){

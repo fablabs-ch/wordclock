@@ -18,8 +18,16 @@ void Display::loop(unsigned long){
 	//nothing to do
 }
 
-void Display::displayWordTime(char hour, char minute, char second){
+void Display::displayWordTime(uint8_t hour, uint8_t minute, uint8_t second){
 	this->allLedsOff();
+
+  this->debug("Heure : ");
+  this->debug(hour);
+  this->debug(":");
+  this->debug(minute);
+  this->debug(":");
+  this->debug(second);
+  this->debugln();
 
 	this->layout->getLayout(hour, minute, second, this->displayBuffer);
 	this->addLedsOn(this->displayBuffer);
@@ -28,7 +36,7 @@ void Display::displayWordTime(char hour, char minute, char second){
 }
 
 
-void Display::displayDigitalTime(char hour, char minute, char second){
+void Display::displayDigitalTime(uint8_t hour, uint8_t minute, uint8_t second){
 	//TODO
 }
 
@@ -38,8 +46,8 @@ void Display::allLedsOff(){
 		memset(&this->ledsOn, 0, DISPLAY_LEDS * sizeof(bool));
 }
 
-void Display::addLedsOn(short* ptr){
-	short v;
+void Display::addLedsOn(uint16_t* ptr){
+	uint16_t v;
 	do{
 		v = *ptr;
 		if(v!=-1){

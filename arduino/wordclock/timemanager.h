@@ -3,6 +3,8 @@
 
 #include "debugable.h"
 
+#define SEC_IN_DAYS 86400
+
 // https://github.com/jarzebski/Arduino-DS3231.git
 //#include <DS3231.h>
 
@@ -20,14 +22,9 @@ public:
 
 	void loop(unsigned long);
 
-	/**
-	 * Get the number of second since midnight
-	 */
-	uint32_t getTime();
+	void getTime(uint8_t* hour, uint8_t* min, uint8_t* sec);
 
-	void getTime(char* hour, char* min, char* sec);
-
-	void setTime(uint32_t);
+	void addSeconds(int32_t);
 
 	/**
 	 * Get the unix timestamp in second
@@ -35,6 +32,7 @@ public:
 	uint32_t getTimestamp();
 
 private:
+	//number of second since midnight
 	uint32_t time;
 };
 #endif
