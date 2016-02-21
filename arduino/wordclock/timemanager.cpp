@@ -6,10 +6,27 @@ TimeManager::TimeManager() {
 void TimeManager::init(){
   //fixme take from clock
   this->time = 0;
+  this->accNextSync = 0;
+  this->externalClock.begin();
+
+  //FIXME remove
+  this->externalClock.setDateTime(__DATE__, __TIME__);
 }
 
-void TimeManager::loop(unsigned long){
-  //not used yet
+void TimeManager::loop(unsigned long dtMs){
+  this->accSecond += dtMs;
+  this->accNextSync += dtMs;
+
+  while(this->accSecond>1000){
+    this->accSecond-=1000;
+    this->addSeconds(1);
+  }
+
+  if(this->accNextSync>SYNC_DELAY){
+    this->readFromExternalClock();
+    this->accNextSync -= SYNC_DELAY;
+  }
+
 }
 
 void TimeManager::addSeconds(int32_t sec){
@@ -30,4 +47,20 @@ void TimeManager::getTime(uint8_t* hour, uint8_t* min, uint8_t* sec){
   int r = (this->time-*sec)/60;
   *min = r%60;
   *hour = (r-*min)/60;
+}
+
+void TimeManager::readFromExternalClock(){
+  RTCDateTime dt = this->externalClock.getDateTime();
+  this->time = (uint32_t)dt.hour;
+  this->time *= 60;
+  this->time += (uint32_t)dt.minute;
+  this->time *= 60;
+  this->time += (uint32_t)dt.second;
+
+  this->debug("External clock time : ");
+  this->debug(dt.hour);
+  this->debug(dt.minute);
+  this->debug(dt.second);
+  this->debug((double)this->time);
+  this->debugln();
 }

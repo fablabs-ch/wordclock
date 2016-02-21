@@ -2,11 +2,14 @@
 #define _TIME_MANAGER_H
 
 #include "debugable.h"
+#include <DS3231.h>// https://github.com/jarzebski/Arduino-DS3231.git
+
 
 #define SEC_IN_DAYS 86400
 
-// https://github.com/jarzebski/Arduino-DS3231.git
-//#include <DS3231.h>
+
+
+#define SYNC_DELAY 5000
 
 
 /**
@@ -32,7 +35,12 @@ public:
 	uint32_t getTimestamp();
 
 private:
-	//number of second since midnight
-	uint32_t time;
+	DS3231 externalClock;
+	uint32_t time;//number of second since midnight
+	unsigned long accNextSync;
+	unsigned long accSecond;
+
+	void readFromExternalClock();
+
 };
 #endif

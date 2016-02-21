@@ -11,9 +11,10 @@ void StateManager::init(){
   this->isButtonPressed = false;
   this->isButtonLongPressed = false;
   this->encoderDelta = 0;
+  this->redrawAcc = 0;
 }
 
-void StateManager::loop(unsigned long){
+void StateManager::loop(unsigned long dtMs){
   //defer the action because the callback from the input has to be has quick has possible
 
   if(this->isButtonPressed){
@@ -31,6 +32,12 @@ void StateManager::loop(unsigned long){
   this->encoderDelta = 0;
   if(delta !=0){
     this->applyEncoderDelta(delta);
+  }
+
+  this->redrawAcc+=dtMs;
+  if(this->redrawAcc>REDRAW_DELAY){
+    this->updateDisplay();
+    this->redrawAcc -= REDRAW_DELAY;
   }
 }
 
