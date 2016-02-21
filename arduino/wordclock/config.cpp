@@ -1,7 +1,7 @@
 #include "config.h"
 
 Config::Config(){
-	this->color = {100,50,50};
+	this->color = {0,100,20};
 }
 
 void Config::init(){
@@ -13,6 +13,10 @@ void Config::loop(unsigned long dtMs){
 	//nothing to do
 }
 
-hsv_type Config::getColor(){
+hsl_type Config::getColor(){
 	return this->color;
+}
+
+void Config::setColor(hsl_type color){
+	this->color = color;
 }

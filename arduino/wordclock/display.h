@@ -41,7 +41,7 @@ private:
 	bool isledOn(int row, int colum);
 	int getLedIndex(int x, int y);
 
-	cRGB convert(hsv_type);
+	cRGB convert(hsl_type);
 
 };
 #endif

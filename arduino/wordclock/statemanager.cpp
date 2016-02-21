@@ -55,22 +55,57 @@ void StateManager::encoderDecrease(){
 }
 
 void StateManager::applyEncoderDelta(int delta){
-  this->debug("Encoder changed\t");
-  this->debug(delta);
-  this->debugln();
-
-  this->timeManager->addSeconds(300*delta);
+  switch(this->currentState){
+    case CLOCK_WORD:
+    case CLOCK_DIGITAL:
+      this->applyEncoderDeltaChangeBrightness(delta);
+      break;
+    case CHANGE_HUE:
+      this->applyEncoderDeltaChangeHue(delta);
+      break;
+    case CHANGE_SATURATION:
+      this->applyEncoderDeltaChangeSaturation(delta);
+      break;
+		// case SET_HOUR:
+    //   this->currentState = SET_MINUTES;
+    //   break;
+		// case SET_MINUTES:
+    //   this->currentState = SET_HOUR;
+    //   break;
+  }
+  this->debugState();
   this->updateDisplay();
+  // this->debug("Encoder changed\t");
+  // this->debug(delta);
+  // this->debugln();
+  //
+  // this->timeManager->addSeconds(300*delta);
+  // this->updateDisplay();
 }
 
-void applyEncoderDeltaChangeBrightness(int){
-  this->config
+void StateManager::applyEncoderDeltaChangeBrightness(int delta){
+  hsl_type hsl = this->config->getColor();
+  hsl.l = applyDeltaOnValue(hsl.l, delta*5, 5, 100, false);
+  this->config->setColor(hsl);
+}
+
+void StateManager::applyEncoderDeltaChangeHue(int delta){
+  hsl_type hsl = this->config->getColor();
+  hsl.h = applyDeltaOnValue(hsl.h, delta*5, 0, 360, true);
+  this->config->setColor(hsl);
+}
+
+void StateManager::applyEncoderDeltaChangeSaturation(int delta){
+  hsl_type hsl = this->config->getColor();
+  hsl.s = applyDeltaOnValue(hsl.s, delta*5, 5, 100, false);
+  this->config->setColor(hsl);
 }
 
 void StateManager::applyButtonPressed(){
   switch(this->currentState){
     case CLOCK_WORD:
-      this->currentState = CLOCK_DIGITAL;
+      this->currentState = CHANGE_HUE;
+      // this->currentState = CLOCK_DIGITAL;
       break;
     case CLOCK_DIGITAL:
       this->currentState = CHANGE_HUE;
@@ -138,4 +173,25 @@ void StateManager::debugState(){
       break;
   }
   this->debugln();
+}
+
+
+int StateManager::applyDeltaOnValue(int v, int incr, int min, int max, bool loop){
+  v += incr;
+  if(loop){
+    int loopV = max-min;
+    while(v<=min){
+      v+= loopV;
+    }
+    while(v>max){
+      v-= loopV;
+    }
+  }else{
+    if(v<min){
+      v=min;
+    }else if(v>max){
+      v = max;
+    }
+  }
+  return v;
 }

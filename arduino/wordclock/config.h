@@ -14,10 +14,11 @@ public:
 	void loop(unsigned long);
 
 	void write();
-	hsv_type getColor();
+	hsl_type getColor();
+	void setColor(hsl_type);
 
 private:
-	hsv_type color;
+	hsl_type color;
 
 	void read();
 

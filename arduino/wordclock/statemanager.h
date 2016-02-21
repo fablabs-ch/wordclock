@@ -44,6 +44,7 @@ private:
 
 	void updateDisplay();
 	void debugState();
+	int applyDeltaOnValue(int,int,int,int, bool);
 
 
 };
