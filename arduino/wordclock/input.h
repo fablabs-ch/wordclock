@@ -1,7 +1,6 @@
 #ifndef _PID_H
 #define _PID_H
 
-#include <TimerOne.h>
 #include "constants.h"
 #include "debugable.h"
 #include "statemanager.h"

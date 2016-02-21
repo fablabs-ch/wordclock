@@ -1,7 +1,7 @@
 #include "statemanager.h"
 
-StateManager::StateManager(TimeManager* timeManager, Display* display)
-  : timeManager(timeManager), display(display) {
+StateManager::StateManager(TimeManager* timeManager, Display* display, Config* config)
+  : timeManager(timeManager), display(display), config(config) {
 }
 
 void StateManager::init(){
@@ -60,24 +60,82 @@ void StateManager::applyEncoderDelta(int delta){
   this->debugln();
 
   this->timeManager->addSeconds(300*delta);
-  this->displayTime();
+  this->updateDisplay();
+}
+
+void applyEncoderDeltaChangeBrightness(int){
+  this->config
 }
 
 void StateManager::applyButtonPressed(){
-  this->debugln("Button pressed");
+  switch(this->currentState){
+    case CLOCK_WORD:
+      this->currentState = CLOCK_DIGITAL;
+      break;
+    case CLOCK_DIGITAL:
+      this->currentState = CHANGE_HUE;
+      break;
+    case CHANGE_HUE:
+      this->currentState = CHANGE_SATURATION;
+      break;
+    case CHANGE_SATURATION:
+      this->currentState = CLOCK_WORD;
+      break;
+		case SET_HOUR:
+      this->currentState = SET_MINUTES;
+      break;
+		case SET_MINUTES:
+      this->currentState = SET_HOUR;
+      break;
+    default:
+      this->currentState = CLOCK_WORD;
+  }
+  this->debugState();
+  this->updateDisplay();
 }
 
 void StateManager::applyButtonLongPressed(){
-  this->debugln("Button long pressed");
+  switch(this->currentState){
+    case CLOCK_WORD:
+    case CLOCK_DIGITAL:
+    case CHANGE_HUE:
+    case CHANGE_SATURATION:
+      this->currentState = SET_MINUTES;
+      break;
+    default:
+      this->currentState = CLOCK_WORD;
+  }
+  this->debugState();
+  this->updateDisplay();
 }
 
-void StateManager::displayTime(){
+void StateManager::updateDisplay(){
   uint8_t h,m,s;
   this->timeManager->getTime(&h,&m,&s);
   this->display->displayWordTime(h,m,s);
-  // this->debug("time :");
-  // this->debug((int)h);
-  // this->debug((int)m);
-  // this->debug((int)s);
-  // this->debugln();
+}
+
+void StateManager::debugState(){
+  this->debug("Current state : ");
+  switch(this->currentState){
+    case CLOCK_WORD:
+      this->debug("CLOCK_WORD");
+      break;
+    case CLOCK_DIGITAL:
+      this->debug("CLOCK_DIGITAL");
+      break;
+    case CHANGE_HUE:
+      this->debug("CHANGE_HUE");
+      break;
+    case CHANGE_SATURATION:
+      this->debug("CHANGE_SATURATION");
+      break;
+		case SET_HOUR:
+      this->debug("SET_HOUR");
+      break;
+		case SET_MINUTES:
+      this->debug("SET_MINUTES");
+      break;
+  }
+  this->debugln();
 }

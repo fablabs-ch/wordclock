@@ -8,7 +8,7 @@
 
 class StateManager : public Debugable {
 public:
-	StateManager(TimeManager*, Display*);
+	StateManager(TimeManager*, Display*, Config*);
 
 	void init();
 
@@ -25,10 +25,16 @@ public:
 private:
 	TimeManager* timeManager;
 	Display* display;
+	Config* config;
 
 	void applyButtonPressed();
 	void applyButtonLongPressed();
 	void applyEncoderDelta(int);
+	void applyEncoderDeltaChangeBrightness(int);
+	void applyEncoderDeltaChangeHue(int);
+	void applyEncoderDeltaChangeSaturation(int);
+	void applyEncoderDeltaChangeHour(int);
+	void applyEncoderDeltaChangeMinute(int);
 
 	bool isButtonPressed;
 	bool isButtonLongPressed;
@@ -36,7 +42,8 @@ private:
 
 	state_type currentState;
 
-	void displayTime();
+	void updateDisplay();
+	void debugState();
 
 
 };

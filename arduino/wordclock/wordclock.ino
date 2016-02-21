@@ -13,7 +13,7 @@ Config config;
 Layout layout;
 TimeManager timeManager;
 Display display(&layout, &config);
-StateManager stateManager(&timeManager, &display);
+StateManager stateManager(&timeManager, &display, &config);
 Input input(&stateManager);
 
 unsigned long lastLoop=0;
@@ -23,7 +23,7 @@ void setup(){
 
   //input.debug(&Serial);
   display.debug(&Serial);
-  //stateManager.debug(&Serial);
+  stateManager.debug(&Serial);
 
   input.readFromSerial(&Serial);
 

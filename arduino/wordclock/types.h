@@ -2,13 +2,13 @@
 #define _TYPES_H
 
 	typedef enum {
-		CLOCK_WORD,
-		CLOCK_DIGITAL,
-		CHANGE_HUE,
-		CHANGE_SATURATION,
-		CHANGE_BRIGHTNESS,
-		SET_HOUR,
-		SET_MINUTES
+		CLOCK_WORD,					//0
+		CLOCK_DIGITAL,			//1
+		CHANGE_HUE,					//2
+		CHANGE_SATURATION,	//3
+		CHANGE_BRIGHTNESS,	//4
+		SET_HOUR,						//5
+		SET_MINUTES					//6
 	} state_type;
 
 	typedef struct{
