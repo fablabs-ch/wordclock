@@ -112,16 +112,16 @@ int Display::getLedIndex(int x, int y){
 	return index;
 }
 
-cRGB Display::convert(hsl_type hsv){
+cRGB Display::convert(hsv_type hsv){
 	float r = 0, g = 0, b = 0;
-	float h = hsv.h, s = hsv.s, l = hsv.l;
+	float h = hsv.h, s = hsv.s, v = hsv.v;
 	s /= 100;
-	l /= 100;
+	v /= 100;
 
 	float t = (float) (((int) (h / 60 * 1000)) % 2000) / 1000;
-	float c = l*s;
+	float c = v*s;
 	float x = c * (1 - abs(t - 1));
-	float m = l - c;
+	float m = v - c;
 
 	if (h < 60) {
 		r = c;

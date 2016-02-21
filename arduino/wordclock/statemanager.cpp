@@ -91,19 +91,19 @@ void StateManager::applyEncoderDelta(int delta){
 }
 
 void StateManager::applyEncoderDeltaChangeBrightness(int delta){
-  hsl_type hsl = this->config->getColor();
-  hsl.l = applyDeltaOnValue(hsl.l, delta*5, 5, 100, false);
+  hsv_type hsl = this->config->getColor();
+  hsl.v = applyDeltaOnValue(hsl.v, delta*5, 5, 100, false);
   this->config->setColor(hsl);
 }
 
 void StateManager::applyEncoderDeltaChangeHue(int delta){
-  hsl_type hsl = this->config->getColor();
+  hsv_type hsl = this->config->getColor();
   hsl.h = applyDeltaOnValue(hsl.h, delta*5, 0, 360, true);
   this->config->setColor(hsl);
 }
 
 void StateManager::applyEncoderDeltaChangeSaturation(int delta){
-  hsl_type hsl = this->config->getColor();
+  hsv_type hsl = this->config->getColor();
   hsl.s = applyDeltaOnValue(hsl.s, delta*5, 5, 100, false);
   this->config->setColor(hsl);
 }

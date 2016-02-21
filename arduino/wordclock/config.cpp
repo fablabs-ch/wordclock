@@ -13,10 +13,10 @@ void Config::loop(unsigned long dtMs){
 	//nothing to do
 }
 
-hsl_type Config::getColor(){
+hsv_type Config::getColor(){
 	return this->color;
 }
 
-void Config::setColor(hsl_type color){
+void Config::setColor(hsv_type color){
 	this->color = color;
 }
