@@ -8,9 +8,6 @@ void TimeManager::init(){
   this->time = 0;
   this->accNextSync = 0;
   this->externalClock.begin();
-
-  //FIXME remove
-  this->externalClock.setDateTime(__DATE__, __TIME__);
 }
 
 void TimeManager::loop(unsigned long dtMs){
@@ -50,6 +47,7 @@ void TimeManager::getTime(uint8_t* hour, uint8_t* min, uint8_t* sec){
 }
 
 void TimeManager::readFromExternalClock(){
+  this->debugln("Start reading from external clock");
   RTCDateTime dt = this->externalClock.getDateTime();
   this->time = (uint32_t)dt.hour;
   this->time *= 60;

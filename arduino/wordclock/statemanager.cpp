@@ -82,17 +82,12 @@ void StateManager::applyEncoderDelta(int delta){
   }
   this->debugState();
   this->updateDisplay();
-  // this->debug("Encoder changed\t");
-  // this->debug(delta);
-  // this->debugln();
-  //
-  // this->timeManager->addSeconds(300*delta);
-  // this->updateDisplay();
 }
 
 void StateManager::applyEncoderDeltaChangeBrightness(int delta){
   hsv_type hsl = this->config->getColor();
-  hsl.v = applyDeltaOnValue(hsl.v, delta*5, 5, 100, false);
+  hsl.v = applyDeltaOnValue(hsl.v, delta*2, 5, 100, false);
+  this->debug((int)hsl.v);
   this->config->setColor(hsl);
 }
 
@@ -104,7 +99,7 @@ void StateManager::applyEncoderDeltaChangeHue(int delta){
 
 void StateManager::applyEncoderDeltaChangeSaturation(int delta){
   hsv_type hsl = this->config->getColor();
-  hsl.s = applyDeltaOnValue(hsl.s, delta*5, 5, 100, false);
+  hsl.s = applyDeltaOnValue(hsl.s, delta*2, 5, 100, false);
   this->config->setColor(hsl);
 }
 

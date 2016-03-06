@@ -4,8 +4,8 @@
 #include "layout.h"
 
 #define PIN_ROTARY_BUTTON 4
-#define PIN_ROTARY_A 3
-#define PIN_ROTARY_B 2
+#define PIN_ROTARY_A 2
+#define PIN_ROTARY_B 3
 #define ANTI_REBOUND_MS 50
 
 #define PIN_LED_STRIP 8

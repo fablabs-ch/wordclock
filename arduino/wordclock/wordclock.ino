@@ -23,7 +23,7 @@ void setup(){
   Serial.begin(115200);
 
   //input.debug(&Serial);
-  display.debug(&Serial);
+  //display.debug(&Serial);
   stateManager.debug(&Serial);
   timeManager.debug(&Serial);
 
@@ -34,13 +34,6 @@ void setup(){
   display.init();
   stateManager.init();
   input.init();
-
-  Timer1.initialize(1000);
-  Timer1.attachInterrupt(inputLoop); //Input loop has to be precise
-}
-
-void inputLoop(void){
-  input.loop(1);
 }
 
 void loop(){
@@ -51,6 +44,7 @@ void loop(){
     dtMs = now-lastLoop;
   }
 
+  input.loop(dtMs);
   config.loop(dtMs);
   timeManager.loop(dtMs);
   stateManager.loop(dtMs);
