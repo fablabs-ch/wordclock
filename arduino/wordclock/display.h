@@ -7,35 +7,39 @@
 #include "abstractlayout.h"
 #include "WS2812.h"
 #include "config.h"
+#include "timemanager.h"
 
 class Display : public Debugable{
 public:
-	Display(AbstractLayout*, Config*);
+	Display(AbstractLayout*, Config*, TimeManager*);
 
 	void init();
 
 	void loop(unsigned long);
 
-	void displayWordTime(uint8_t hour, uint8_t minute, uint8_t second);
-	void displayDigitalTime(uint8_t hour, uint8_t minute, uint8_t second);
-
 	void setState(state_type);
+	void draw();
 
 private:
 	AbstractLayout* layout;
 	Config* config;
+	TimeManager* timeManager;
 
 	bool ledsOn[DISPLAY_LEDS];
 	uint16_t displayBuffer[DISPLAY_LEDS];
-	bool blink;
+	unsigned long accNextDraw;
+	bool blinkOn;
+	state_type currentState;
 
 	WS2812* leds;
 
 	cRGB lastColor = {255, 255, 255};
 
+	void displayWordTime();
+	void displayDigitalTime();
 	void allLedsOff();
 	void addLedsOn(uint16_t*);
-	void draw();
+	void writeLeds();
 	void displayDebug();
 	void displayDebugLine(int);
 	bool isledOn(int row, int colum);

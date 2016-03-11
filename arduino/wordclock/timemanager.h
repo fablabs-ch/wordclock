@@ -7,8 +7,6 @@
 
 #define SEC_IN_DAYS 86400
 
-
-
 #define SYNC_DELAY 5000
 
 
@@ -29,6 +27,9 @@ public:
 
 	void addSeconds(int32_t);
 
+	void enterEditionMode();
+	void exitEditionMode();
+
 	/**
 	 * Get the unix timestamp in second
 	 */
@@ -39,8 +40,10 @@ private:
 	uint32_t time;//number of second since midnight
 	unsigned long accNextSync;
 	unsigned long accSecond;
+	bool editionMode;
 
 	void readFromExternalClock();
+	void debugTime();
 
 };
 #endif

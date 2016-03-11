@@ -6,12 +6,10 @@ StateManager::StateManager(TimeManager* timeManager, Display* display, Config* c
 
 void StateManager::init(){
   this->currentState = CLOCK_WORD;
-  this->display->displayWordTime(0, 0, 0);
 
   this->isButtonPressed = false;
   this->isButtonLongPressed = false;
   this->encoderDelta = 0;
-  this->redrawAcc = 0;
 }
 
 void StateManager::loop(unsigned long dtMs){
@@ -32,12 +30,6 @@ void StateManager::loop(unsigned long dtMs){
   this->encoderDelta = 0;
   if(delta !=0){
     this->applyEncoderDelta(delta);
-  }
-
-  this->redrawAcc+=dtMs;
-  if(this->redrawAcc>REDRAW_DELAY){
-    this->updateDisplay();
-    this->redrawAcc -= REDRAW_DELAY;
   }
 }
 
@@ -73,15 +65,14 @@ void StateManager::applyEncoderDelta(int delta){
     case CHANGE_SATURATION:
       this->applyEncoderDeltaChangeSaturation(delta);
       break;
-		// case SET_HOUR:
-    //   this->currentState = SET_MINUTES;
-    //   break;
-		// case SET_MINUTES:
-    //   this->currentState = SET_HOUR;
-    //   break;
+		case SET_HOUR:
+  	  this->applyEncoderDeltaChangeHour(delta);
+      break;
+		case SET_MINUTES:
+      this->applyEncoderDeltaChangeMinute(delta);
+      break;
   }
-  this->debugState();
-  this->updateDisplay();
+  this->display->draw();
 }
 
 void StateManager::applyEncoderDeltaChangeBrightness(int delta){
@@ -101,6 +92,14 @@ void StateManager::applyEncoderDeltaChangeSaturation(int delta){
   hsv_type hsl = this->config->getColor();
   hsl.s = applyDeltaOnValue(hsl.s, delta*2, 5, 100, false);
   this->config->setColor(hsl);
+}
+
+void StateManager::applyEncoderDeltaChangeHour(int delta){
+  this->timeManager->addSeconds(delta*3600);
+}
+
+void StateManager::applyEncoderDeltaChangeMinute(int delta){
+  this->timeManager->addSeconds(delta*60);
 }
 
 void StateManager::applyButtonPressed(){
@@ -128,7 +127,7 @@ void StateManager::applyButtonPressed(){
       this->currentState = CLOCK_WORD;
   }
   this->debugState();
-  this->updateDisplay();
+    this->display->setState(this->currentState);
 }
 
 void StateManager::applyButtonLongPressed(){
@@ -137,19 +136,15 @@ void StateManager::applyButtonLongPressed(){
     case CLOCK_DIGITAL:
     case CHANGE_HUE:
     case CHANGE_SATURATION:
+      this->timeManager->enterEditionMode();
       this->currentState = SET_MINUTES;
       break;
     default:
+      this->timeManager->exitEditionMode();
       this->currentState = CLOCK_WORD;
   }
   this->debugState();
-  this->updateDisplay();
-}
-
-void StateManager::updateDisplay(){
-  uint8_t h,m,s;
-  this->timeManager->getTime(&h,&m,&s);
-  this->display->displayWordTime(h,m,s);
+    this->display->setState(this->currentState);
 }
 
 void StateManager::debugState(){

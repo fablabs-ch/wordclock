@@ -2,8 +2,8 @@
 
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
-Display::Display(AbstractLayout* layout, Config* config)
-	:layout(layout), config(config), leds(new WS2812(DISPLAY_LEDS)){
+Display::Display(AbstractLayout* layout, Config* config, TimeManager* timeManager)
+	:layout(layout), config(config), timeManager(timeManager), leds(new WS2812(DISPLAY_LEDS)){
 
 	this->leds->setOutput(PIN_LED_STRIP);
 	this->leds->setColorOrderRGB();
@@ -11,14 +11,43 @@ Display::Display(AbstractLayout* layout, Config* config)
 
 void Display::init(){
 	this->allLedsOff();
-	this->draw();
+	this->displayWordTime();
+	this->accNextDraw = 0;
 }
 
-void Display::loop(unsigned long){
-	//nothing to do
+void Display::loop(unsigned long dtMs){
+	this->accNextDraw += dtMs;
+
+	bool blink = this->currentState == SET_MINUTES || this->currentState == SET_MINUTES;
+	if(blink){
+		int next = this->blinkOn ? 300 : 700;
+		if(this->accNextDraw>=next){
+			if(this->blinkOn){
+				this->draw();
+			}else{
+				this->allLedsOff();
+				this->writeLeds();
+			}
+			this->blinkOn = !this->blinkOn;
+			this->accNextDraw = 0;
+		}
+	}else{
+		if(this->accNextDraw>=1000){
+			this->draw();
+			this->accNextDraw = 0;
+		}
+	}
 }
 
-void Display::displayWordTime(uint8_t hour, uint8_t minute, uint8_t second){
+void Display::draw(){
+//FIXME blink
+//FIXME digitalDisplay
+	this->displayWordTime();
+}
+
+void Display::displayWordTime(){
+	uint8_t hour, minute, second;
+	this->timeManager->getTime(&hour, &minute, &second);
 	this->allLedsOff();
 
   this->debug("Heure : ");
@@ -32,14 +61,17 @@ void Display::displayWordTime(uint8_t hour, uint8_t minute, uint8_t second){
 	this->layout->getLayout(hour, minute, second, this->displayBuffer);
 	this->addLedsOn(this->displayBuffer);
 
-	this->draw();
+	this->writeLeds();
 }
 
-
-void Display::displayDigitalTime(uint8_t hour, uint8_t minute, uint8_t second){
+void Display::displayDigitalTime(){
 	//TODO
 }
 
+void Display::setState(state_type state){
+	this->currentState = state;
+	this->draw();
+}
 
 void Display::allLedsOff(){
 		//reset the memory
@@ -57,7 +89,7 @@ void Display::addLedsOn(uint16_t* ptr){
 	}while(v!=-1);
 }
 
-void Display::draw(){
+void Display::writeLeds(){
 		//this->displayWordTime(1, 0, 0);
 		if(this->isDebugEnabled()){
 			this->displayDebug();

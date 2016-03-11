@@ -6,8 +6,6 @@
 #include "display.h"
 #include "types.h"
 
-#define REDRAW_DELAY 1000000
-
 class StateManager : public Debugable {
 public:
 	StateManager(TimeManager*, Display*, Config*);
@@ -42,11 +40,8 @@ private:
 	bool isButtonLongPressed;
 	int encoderDelta;
 
-	unsigned long redrawAcc;
-
 	state_type currentState;
 
-	void updateDisplay();
 	void debugState();
 	int applyDeltaOnValue(int,int,int,int, bool);
 

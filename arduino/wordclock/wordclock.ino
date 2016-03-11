@@ -13,7 +13,7 @@
 Config config;
 Layout layout;
 TimeManager timeManager;
-Display display(&layout, &config);
+Display display(&layout, &config, &timeManager);
 StateManager stateManager(&timeManager, &display, &config);
 Input input(&stateManager);
 
@@ -22,8 +22,9 @@ unsigned long lastLoop=0;
 void setup(){
   Serial.begin(115200);
 
-  //input.debug(&Serial);
+  //!\ WARNING debug display can introduce bug on input reading (due to latency of the loop)
   //display.debug(&Serial);
+  input.debug(&Serial);
   stateManager.debug(&Serial);
   timeManager.debug(&Serial);
 
