@@ -13,7 +13,18 @@ public:
 
 	void loop(unsigned long);
 
-	void readFromSerial(Stream*);
+	/**
+	 * Read fake input from serial.
+	 * Commands are:
+	 *
+	 * p : button pressed
+	 * l : button long pressed
+	 * + : rotary increased
+	 * - : rotary decreased
+	 *
+	 * @param stream the stream to read from
+	 */
+	void readFromSerial(Stream* stream);
 
 private:
 	StateManager* stateManager;

@@ -1,6 +1,9 @@
 #ifndef _TYPES_H
 #define _TYPES_H
 
+	/**
+	 * Available state. See state manager for state transition.
+	 */
 	typedef enum {
 		CLOCK_WORD,					//0
 		CLOCK_DIGITAL,			//1
@@ -11,6 +14,9 @@
 		SET_MINUTES					//6
 	} state_type;
 
+	/**
+	 * Hue, Saturation, value
+	 */
 	typedef struct{
 		uint16_t h; // [0,360[
 		uint8_t s; // [0,100]

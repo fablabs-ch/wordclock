@@ -17,7 +17,16 @@ public:
 
 	void loop(unsigned long);
 
-	void setState(state_type);
+  /**
+	 * Set the current state
+	 * @param state new state
+	 */
+	void setState(state_type state);
+
+	/**
+	 * Force redraw.
+	 * Draw will occur at least each second
+	 */
 	void draw();
 
 private:

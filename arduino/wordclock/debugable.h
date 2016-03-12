@@ -3,6 +3,9 @@
 
 #include "Arduino.h"
 
+/**
+ * Abstract class to help debug class
+ */
 class Debugable {
 public:
 	void debug(Stream* debugStream);

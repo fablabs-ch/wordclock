@@ -14,11 +14,29 @@ public:
 
 	void loop(unsigned long);
 
+	/**
+	 * The button was simply pressed
+	 */
 	void buttonPressed();
+
+		/**
+		 * The button was long pressed (1s)
+		 */
 	void buttonLongPressed();
+
+		/**
+		 * The rotary encoder was increased
+		 */
 	void encoderIncrease();
+
+	/**
+	 * The rotary encoder was decreased
+	 */
 	void encoderDecrease();
 
+	/**
+	 * Get the current state
+	 */
 	state_type getCurrentState();
 
 

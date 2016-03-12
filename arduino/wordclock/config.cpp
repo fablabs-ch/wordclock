@@ -5,12 +5,17 @@ Config::Config(){
 }
 
 void Config::init(){
-	//TODO read
+	this->changed = false;
+	this->read();
 }
 
-
 void Config::loop(unsigned long dtMs){
-	//nothing to do
+	if(this->changed){
+		if(lastChange+WAIT_BEFORE_WRITE_MS>=millis()){
+			this->changed = false;
+			this->write();
+		}
+	}
 }
 
 hsv_type Config::getColor(){
@@ -19,4 +24,13 @@ hsv_type Config::getColor(){
 
 void Config::setColor(hsv_type color){
 	this->color = color;
+}
+
+void Config::read(){
+	//TODO
+	this->debugln("Read config");
+}
+
+void Config::write(){
+	this->debugln("Write config");
 }

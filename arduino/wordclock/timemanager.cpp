@@ -4,7 +4,6 @@ TimeManager::TimeManager() {
 }
 
 void TimeManager::init(){
-  //fixme take from clock
   this->time = 0;
   this->accNextSync = 0;
   this->externalClock.begin();
@@ -54,7 +53,7 @@ void TimeManager::enterEditionMode(){
 
 void TimeManager::exitEditionMode(){
   this->debugln("Exiting edition mode, saving time to external clock");
-  
+
   //compute time
   RTCDateTime dt = this->externalClock.getDateTime();
 
