@@ -1,11 +1,22 @@
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
+#include <EEPROM.h>
 #include "constants.h"
 #include "debugable.h"
 #include "types.h"
 
-#define WAIT_BEFORE_WRITE_MS 1000
+//wait before writing to EEPROM (to save some write cycles)
+#define WAIT_BEFORE_WRITE_MS 2000
+
+#define CONFIG_VERSION 1
+#define CONFIG_EEPROM_ADDR 0x0
+
+//Dont forget to change the config version if you change this
+typedef struct{
+	int version;
+	hsv_type color;
+} config_type;
 
 class Config : public Debugable {
 public:
@@ -20,12 +31,14 @@ public:
 
 private:
 	bool changed;
-	unsigned long lastChange;
+	unsigned long lastChangeTime;
 
-	hsv_type color;
+	//hsv_type color;
+	config_type config;
 
 	void read();
 	void write();
+	void reset();
 
 };
 #endif

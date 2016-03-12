@@ -1,17 +1,17 @@
 #include "config.h"
 
 Config::Config(){
-	this->color = {0,100,20};
 }
 
 void Config::init(){
 	this->changed = false;
+
 	this->read();
 }
 
 void Config::loop(unsigned long dtMs){
 	if(this->changed){
-		if(lastChange+WAIT_BEFORE_WRITE_MS>=millis()){
+		if(lastChangeTime+WAIT_BEFORE_WRITE_MS<=millis()){
 			this->changed = false;
 			this->write();
 		}
@@ -19,18 +19,39 @@ void Config::loop(unsigned long dtMs){
 }
 
 hsv_type Config::getColor(){
-	return this->color;
+	return this->config.color;
 }
 
 void Config::setColor(hsv_type color){
-	this->color = color;
+	this->debug("Set color config to ");
+	this->debug((int)color.h);
+	this->debug((int)color.s);
+	this->debug((int)color.v);
+	this->debugln();
+
+	this->config.color = color;
+	this->changed = true;
+	this->lastChangeTime = millis();
 }
 
 void Config::read(){
-	//TODO
 	this->debugln("Read config");
+	EEPROM.get(CONFIG_EEPROM_ADDR, this->config);
+	if(this->config.version!=CONFIG_VERSION){
+		this->debugln("Config version is not the same, reset the config");
+		this->reset();
+	}
 }
 
 void Config::write(){
 	this->debugln("Write config");
+	EEPROM.put(CONFIG_EEPROM_ADDR, this->config);
+}
+
+void Config::reset(){
+	//default value
+	this->config.version = CONFIG_VERSION;
+	this->config.color = {0,80,20};
+
+	this->write();
 }

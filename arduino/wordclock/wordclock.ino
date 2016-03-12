@@ -1,4 +1,5 @@
 
+#include <EEPROM.h>
 #include <Wire.h>
 #include <TimerOne.h> // https://github.com/PaulStoffregen/TimerOne.git
 #include <DS3231.h>   // https://github.com/jarzebski/Arduino-DS3231.git
