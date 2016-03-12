@@ -68,7 +68,7 @@ void StateManager::applyEncoderDelta(int delta){
 		case SET_HOUR:
   	  this->applyEncoderDeltaChangeHour(delta);
       break;
-		case SET_MINUTES:
+		case SET_MINUTE:
       this->applyEncoderDeltaChangeMinute(delta);
       break;
   }
@@ -118,9 +118,9 @@ void StateManager::applyButtonPressed(){
       this->currentState = CLOCK_WORD;
       break;
 		case SET_HOUR:
-      this->currentState = SET_MINUTES;
+      this->currentState = SET_MINUTE;
       break;
-		case SET_MINUTES:
+		case SET_MINUTE:
       this->currentState = SET_HOUR;
       break;
     default:
@@ -137,7 +137,7 @@ void StateManager::applyButtonLongPressed(){
     case CHANGE_HUE:
     case CHANGE_SATURATION:
       this->timeManager->enterEditionMode();
-      this->currentState = SET_MINUTES;
+      this->currentState = SET_MINUTE;
       break;
     default:
       this->timeManager->exitEditionMode();
@@ -165,8 +165,8 @@ void StateManager::debugState(){
 		case SET_HOUR:
       this->debug("SET_HOUR");
       break;
-		case SET_MINUTES:
-      this->debug("SET_MINUTES");
+		case SET_MINUTE:
+      this->debug("SET_MINUTE");
       break;
   }
   this->debugln();

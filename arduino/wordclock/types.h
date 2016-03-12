@@ -11,7 +11,7 @@
 		CHANGE_SATURATION,	//3
 		CHANGE_BRIGHTNESS,	//4
 		SET_HOUR,						//5
-		SET_MINUTES					//6
+		SET_MINUTE					//6
 	} state_type;
 
 	/**

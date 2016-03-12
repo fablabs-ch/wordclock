@@ -18,9 +18,9 @@ void Display::init(){
 void Display::loop(unsigned long dtMs){
 	this->accNextDraw += dtMs;
 
-	bool blink = this->currentState == SET_MINUTES || this->currentState == SET_MINUTES;
+	bool blink = this->currentState == SET_MINUTE || this->currentState == SET_HOUR;
 	if(blink){
-		int next = this->blinkOn ? 300 : 700;
+		int next = this->blinkOn ? 100 : 200;
 		if(this->accNextDraw>=next){
 			if(this->blinkOn){
 				this->draw();
