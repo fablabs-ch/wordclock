@@ -23,12 +23,6 @@ hsv_type Config::getColor(){
 }
 
 void Config::setColor(hsv_type color){
-	this->debug("Set color config to ");
-	this->debug((int)color.h);
-	this->debug((int)color.s);
-	this->debug((int)color.v);
-	this->debugln();
-
 	this->config.color = color;
 	this->changed = true;
 	this->lastChangeTime = millis();
