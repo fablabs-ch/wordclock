@@ -78,7 +78,6 @@ void StateManager::applyEncoderDelta(int delta){
 void StateManager::applyEncoderDeltaChangeBrightness(int delta){
   hsv_type hsl = this->config->getColor();
   hsl.v = applyDeltaOnValue(hsl.v, delta*2, 5, 100, false);
-  this->debug((int)hsl.v);
   this->config->setColor(hsl);
 }
 
