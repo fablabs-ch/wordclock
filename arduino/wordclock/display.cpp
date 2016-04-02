@@ -48,7 +48,6 @@ void Display::draw() {
 void Display::displayWordTime() {
 	uint8_t hour, minute, second;
 	this->timeManager->getTime(&hour, &minute, &second);
-	this->allLedsOff();
 
 	this->debug("Heure : ");
 	this->debug(hour);
@@ -59,6 +58,8 @@ void Display::displayWordTime() {
 	this->debugln();
 
 	this->layout->getLayout(hour, minute, second, this->displayBuffer);
+	this->allLedsOff();
+	this->addLedsOn();
 	this->writeLeds();
 }
 
@@ -78,23 +79,25 @@ void Display::allLedsOff() {
 	}
 }
 
+void Display::addLedsOn(){
+	cRGB colorOn = this->convert(config->getColor());
+	this->allLedsOff();
+	int v;
+	uint8_t* ptr = this->displayBuffer;
+	do {
+		v = (int)(*ptr);
+		if (v != END_OF_LAYOUT) {
+			this->leds->set_crgb_at(v, colorOn);
+			ptr++;
+		}
+	} while (v != END_OF_LAYOUT);
+}
+
 void Display::writeLeds() {
 	//this->displayWordTime(1, 0, 0);
 	if (this->isDebugEnabled()) {
 		this->displayDebug();
 	}
-	
-	cRGB colorOn = this->convert(config->getColor());
-	this->allLedsOff();
-	uint16_t v;
-	uint16_t* ptr = this->displayBuffer;
-	do {
-		v = *ptr;
-		if (v != -1) {
-			this->leds->set_crgb_at(v, colorOn);
-			ptr++;
-		}
-	} while (v != -1);
 	
 	this->leds->sync();
 }
@@ -127,16 +130,16 @@ void Display::displayDebugLine(int nb) {
 
 bool Display::isledOn(int x, int y) {
 	uint16_t index = this->getLedIndex(x, y);
-	uint16_t v;
-	uint16_t* ptr = this->displayBuffer;
+	int v;
+	uint8_t* ptr = this->displayBuffer;
 	do {
-		v = *ptr;
-		if (v != -1) {
+		v = (int)(*ptr);
+		if (v != END_OF_LAYOUT) {
 			if (v == index) {
 				return true;
 			}
 		}
-	} while (v != -1);
+	} while (v != END_OF_LAYOUT);
 
 	return false;
 }

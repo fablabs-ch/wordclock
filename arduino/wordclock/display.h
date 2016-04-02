@@ -36,7 +36,7 @@ private:
 	Config* config;
 	TimeManager* timeManager;
 
-	uint16_t displayBuffer[DISPLAY_BUFFER_SIZE];
+	uint8_t displayBuffer[DISPLAY_BUFFER_SIZE];
 	unsigned long accNextDraw;
 	bool blinkOn;
 	state_type currentState;
@@ -48,6 +48,7 @@ private:
 	void displayWordTime();
 	void displayDigitalTime();
 	void allLedsOff();
+	void addLedsOn();
 	void writeLeds();
 	void displayDebug();
 	void displayDebugLine(int);
