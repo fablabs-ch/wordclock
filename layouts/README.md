@@ -18,6 +18,13 @@ the tools that can be used to work with them.
 
 <!-- markdown-toc end -->
 
+## Generated layouts
+
+The layouts proposed below have their generated `*.svg` proposed in the
+`generated` folder. The font used in these documents is "Glaser Beckes Stencil"
+available for download
+[here](http://ufonts.com/fonts/glaser-becker-stencil.html).
+
 ## Available layouts
 
 Two layout are available for now: French and English. Each layout is shown
@@ -25,39 +32,46 @@ below, and it's accessible in a [raw format](#raw-format) in the `raw/` folder.
 
 ### French
 
-|        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 |
-|:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| **01** | I  | L  |    | E  | S  | T  |    | U  | N  | E  |    |
-| **02** | T  | R  | O  | I  | S  | Q  | U  | A  | T  | R  | E  |
-| **03** | C  | I  | N  | Q  | S  | I  | X  | S  | E  | P  | T  |
-| **04** | H  | U  | I  | T  | N  | E  | U  | F  | D  | I  | X  |
-| **05** |    | O  | N  | Z  | E  |    | D  | O  | U  | Z  | E  |
-| **06** | D  | E  | U  | X  |    | H  | E  | U  | R  | E  |    |
-| **07** | M  | O  | I  | N  | S  | E  | T  |    | D  | I  | X  |
-| **08** |    | V  | I  | N  | G  | T  | -  | C  | I  | N  | Q  |
-| **09** | Q  | U  | A  | R  | T  |    | D  | E  | M  | I  |    |
+|        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 |
+|:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| **01** | I  | L  |    |    | E  | S  | T  |    |    | U  | N  | E  |
+| **02** | T  | R  | O  | I  | S  |    | Q  | U  | A  | T  | R  | E  |
+| **03** | C  | I  | N  | Q  | S  | I  | X  |    | S  | E  | P  | T  |
+| **04** | H  | U  | I  | T  |    | N  | E  | U  | F  | D  | I  | X  |
+| **05** |    | O  | N  | Z  | E  |    | D  | O  | U  | Z  | E  |    |
+| **06** |    |    | D  | E  | U  | X  |    | H  | E  | U  | R  | E  |
+| **07** | M  | O  | I  | N  | S  |    | E  | T  |    | D  | I  | X  |
+| **08** |    |    | V  | I  | N  | G  | T  | -  | C  | I  | N  | Q  |
+| **09** | Q  | U  | A  | R  | T  |    | D  | E  | M  | I  |    |    |
+| **10** |    |    |    |    |    |    |    |    |    |    |    |    |
+| **11** |    |    |    |    | *  | *  | *  | *  |    |    |    |    |
+| **12** |    |    |    |    |    |    |    |    |    |    |    |    |
 
 Specificity:
 
-- 9 * 11 = 99 LEDs
+- 12 * 12 = 144 LEDs
 - Letters missing from the layout: BJKWY
 
 ### English
 
-|        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 | 13 |
-|:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| **01** | I  | T  |    | I  | S  |    | T  | E  | N  | H  | A  | L  | F  |
-| **02** |    |    | A  |    | Q  | U  | A  | R  | T  | E  | R  |    |    |
-| **03** |    | T  | W  | E  | N  | T  | Y  | -  | F  | I  | V  | E  |    |
-| **04** | P  | A  | S  | T  | T  | O  |    | O  | N  | E  | T  | W  | O  |
-| **05** | T  | H  | R  | E  | E  | F  | O  | U  | R  | F  | I  | V  | E  |
-| **06** | S  | I  | X  | S  | E  | V  | E  | N  | E  | I  | G  | H  | T  |
-| **07** | N  | I  | N  | E  | T  | E  | N  | E  | L  | E  | V  | E  | N  |
-| **08** | T  | W  | E  | L  | V  | E  |    | O  | C  | L  | O  | C  | K  |
+|        | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 |
+|:------:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| **01** |    | I  | T  |    | I  | S  |    | H  | A  | L  | F  |    |
+| **02** | T  | E  | N  | A  |    | Q  | U  | A  | R  | T  | E  | R  |
+| **03** |    | T  | W  | E  | N  | T  | Y  | -  | F  | I  | V  | E  |
+| **04** | P  | A  | S  | T  |    | T  | O  |    | O  | N  | E  |    |
+| **05** | T  | W  | O  | T  | H  | R  | E  | E  | F  | O  | U  | R  |
+| **06** | F  | I  | V  | E  | S  | I  | X  | S  | E  | V  | E  | N  |
+| **07** | E  | I  | G  | H  | T  | N  | I  | N  | E  | T  | E  | N  |
+| **08** | E  | L  | E  | V  | E  | N  | T  | W  | E  | L  | V  | E  |
+| **09** |    |    |    | O  | C  | L  | O  | C  | K  |    |    |    |
+| **10** |    |    |    |    |    |    |    |    |    |    |    |    |
+| **11** |    |    |    |    | *  | *  | *  | *  |    |    |    |    |
+| **12** |    |    |    |    |    |    |    |    |    |    |    |    |
 
 Specificity:
 
-- 8 * 13 = 104 LEDs
+- 12 * 12 = 144 LEDs
 - Letters missing from the layout: BDJMZ
 
 ### Holes
@@ -84,14 +98,18 @@ format is used to make the creation of scripts that work with the layout easier.
 The format is simple, as shown here for the English layout:
 
 ```text
-| I | T |   | I | S |   | T | E | N | H | A | L | F |
-|   |   | A |   | Q | U | A | R | T | E | R |   |   |
-|   | T | W | E | N | T | Y | - | F | I | V | E |   |
-| P | A | S | T | T | O |   | O | N | E | T | W | O |
-| T | H | R | E | E | F | O | U | R | F | I | V | E |
-| S | I | X | S | E | V | E | N | E | I | G | H | T |
-| N | I | N | E | T | E | N | E | L | E | V | E | N |
-| T | W | E | L | V | E |   | O | C | L | O | C | K |
+|   | I | T |   | I | S |   | H | A | L | F |   |
+| T | E | N | A |   | Q | U | A | R | T | E | R |
+|   | T | W | E | N | T | Y | - | F | I | V | E |
+| P | A | S | T |   | T | O |   | O | N | E |   |
+| T | W | O | T | H | R | E | E | F | O | U | R |
+| F | I | V | E | S | I | X | S | E | V | E | N |
+| E | I | G | H | T | N | I | N | E | T | E | N |
+| E | L | E | V | E | N | T | W | E | L | V | E |
+|   |   |   | O | C | L | O | C | K |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   | * | * | * | * |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
 ```
 
 It consists of vertical bars (`|`) separating the letters (`[A-Z]`). The number
@@ -128,6 +146,7 @@ Some parameters that can be modified are:
 - The font size of the letters (in mm)
 - The font family of the letters
 - The font weight of the letters
+- The output file
 
 ### Inkscape
 
