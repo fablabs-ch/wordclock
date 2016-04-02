@@ -4,8 +4,8 @@
 #include "abstractlayout.h"
 
 
-#define DISPLAY_ROWS 8
-#define DISPLAY_COLUMNS 13
+#define DISPLAY_ROWS 12
+#define DISPLAY_COLUMNS 12
 #define DISPLAY_LEDS DISPLAY_ROWS*DISPLAY_COLUMNS
 
 class Layout : public AbstractLayout{
