@@ -18,10 +18,14 @@ void setup() {
 
 }
 
+	unsigned long lastTime = 0;
+	int count = 0;
+	
 void loop() {
+	
 	for (int j = 0; j < DISPLAY_LEDS; j++) {
 
-		cRGB colorOn = {255, 0, 0};
+		cRGB colorOn = {255, 255, 255};
 		cRGB colorOff = {10, 10, 10 };
 		
 		for (int i = 0; i < DISPLAY_LEDS; i++) {
@@ -29,7 +33,19 @@ void loop() {
 		}
 		
 		leds.sync();
-		delay(50);
-		Serial.println("synced");
+		
+		count++;
+		
+		
+		unsigned long now = millis();
+		if(lastTime+333<=now){
+			Serial.print(now);
+			Serial.print("\t");
+			Serial.print("value : ");
+			Serial.println(count);
+			lastTime = now;
+			count = 0;
+		}
+		
 	}
 }
