@@ -3,148 +3,155 @@
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
 Display::Display(AbstractLayout* layout, Config* config, TimeManager* timeManager, WS2812* ws2812)
-	:layout(layout), config(config), timeManager(timeManager), leds(ws2812){
+: layout(layout), config(config), timeManager(timeManager), leds(ws2812) {
 
 	this->leds->setOutput(PIN_LED_STRIP);
 	this->leds->setColorOrderRGB();
 }
 
-void Display::init(){
+void Display::init() {
 	this->allLedsOff();
 	this->displayWordTime();
 	this->accNextDraw = 0;
 }
 
-void Display::loop(unsigned long dtMs){
+void Display::loop(unsigned long dtMs) {
 	this->accNextDraw += dtMs;
 
 	bool blink = this->currentState == SET_MINUTE || this->currentState == SET_HOUR;
-	if(blink){
+	if (blink) {
 		int next = this->blinkOn ? 100 : 200;
-		if(this->accNextDraw>=next){
-			if(this->blinkOn){
+		if (this->accNextDraw >= next) {
+			if (this->blinkOn) {
 				this->draw();
-			}else{
+			} else {
 				this->allLedsOff();
 				this->writeLeds();
 			}
 			this->blinkOn = !this->blinkOn;
 			this->accNextDraw = 0;
 		}
-	}else{
-		if(this->accNextDraw>=1000){
+	} else {
+		if (this->accNextDraw >= 1000) {
 			this->draw();
 			this->accNextDraw = 0;
 		}
 	}
 }
 
-void Display::draw(){
-//FIXME blink
-//FIXME digitalDisplay
+void Display::draw() {
+	//FIXME blink
+	//FIXME digitalDisplay
 	this->displayWordTime();
 }
 
-void Display::displayWordTime(){
+void Display::displayWordTime() {
 	uint8_t hour, minute, second;
 	this->timeManager->getTime(&hour, &minute, &second);
 	this->allLedsOff();
 
-  this->debug("Heure : ");
-  this->debug(hour);
-  this->debug(":");
-  this->debug(minute);
-  this->debug(":");
-  this->debug(second);
-  this->debugln();
+	this->debug("Heure : ");
+	this->debug(hour);
+	this->debug(":");
+	this->debug(minute);
+	this->debug(":");
+	this->debug(second);
+	this->debugln();
 
 	this->layout->getLayout(hour, minute, second, this->displayBuffer);
-	this->addLedsOn(this->displayBuffer);
-
 	this->writeLeds();
 }
 
-void Display::displayDigitalTime(){
+void Display::displayDigitalTime() {
 	//TODO
 }
 
-void Display::setState(state_type state){
+void Display::setState(state_type state) {
 	this->currentState = state;
 	this->draw();
 }
 
-void Display::allLedsOff(){
-		//reset the memory
-		memset(&this->ledsOn, 0, DISPLAY_LEDS * sizeof(bool));
+void Display::allLedsOff() {
+	cRGB colorOff = {0, 0, 0};
+	for (int i = 0; i < DISPLAY_LEDS; i++) {
+		this->leds->set_crgb_at(i, colorOff);
+	}
 }
 
-void Display::addLedsOn(uint16_t* ptr){
+void Display::writeLeds() {
+	//this->displayWordTime(1, 0, 0);
+	if (this->isDebugEnabled()) {
+		this->displayDebug();
+	}
+	
+	cRGB colorOn = this->convert(config->getColor());
+	this->allLedsOff();
 	uint16_t v;
-	do{
+	uint16_t* ptr = this->displayBuffer;
+	do {
 		v = *ptr;
-		if(v!=-1){
-			this->ledsOn[v] = true;
+		if (v != -1) {
+			this->leds->set_crgb_at(v, colorOn);
 			ptr++;
 		}
-	}while(v!=-1);
+	} while (v != -1);
+	
+	this->leds->sync();
 }
 
-void Display::writeLeds(){
-		//this->displayWordTime(1, 0, 0);
-		if(this->isDebugEnabled()){
-			this->displayDebug();
-		}
-
-		cRGB colorOn = this->convert(config->getColor());
-		cRGB colorOff = {0,0,0};
-		for(int i=0; i<DISPLAY_LEDS; i++){
-			this->leds->set_crgb_at(i, ledsOn[i] ? colorOn : colorOff);
-		}
-		this->leds->sync();
-}
-
-void Display::displayDebug(){
+void Display::displayDebug() {
 	char* l = layout->getDebugLayout();
-	this->displayDebugLine(DISPLAY_COLUMNS*4+2);
-	for(int row=0; row<DISPLAY_ROWS; row++){
-		for(int col=0; col<DISPLAY_COLUMNS; col++){
+	this->displayDebugLine(DISPLAY_COLUMNS * 4 + 2);
+	for (int row = 0; row < DISPLAY_ROWS; row++) {
+		for (int col = 0; col < DISPLAY_COLUMNS; col++) {
 			this->debug(" | ");
-			if(this->isledOn(row, col)){
-				this->debug(l[row*DISPLAY_COLUMNS+col]);
-			}else{
+			if (this->isledOn(row, col)) {
+				this->debug(l[row * DISPLAY_COLUMNS + col]);
+			} else {
 				this->debug(" ");
 			}
 		}
 		this->debug(" | ");
 		this->debugln();
-		this->displayDebugLine(DISPLAY_COLUMNS*4+2);
+		this->displayDebugLine(DISPLAY_COLUMNS * 4 + 2);
 	}
 	this->debugln();
 }
 
-
-void Display::displayDebugLine(int nb){
-	for(int col=0; col<nb; col++){
+void Display::displayDebugLine(int nb) {
+	for (int col = 0; col < nb; col++) {
 		this->debug("-");
 	}
 	this->debugln();
 }
 
-bool Display::isledOn(int x, int y){
-	return this->ledsOn[this->getLedIndex(x,y)];
+bool Display::isledOn(int x, int y) {
+	uint16_t index = this->getLedIndex(x, y);
+	uint16_t v;
+	uint16_t* ptr = this->displayBuffer;
+	do {
+		v = *ptr;
+		if (v != -1) {
+			if (v == index) {
+				return true;
+			}
+		}
+	} while (v != -1);
+
+	return false;
 }
 
-int Display::getLedIndex(int x, int y){
+int Display::getLedIndex(int x, int y) {
 	int index = x*DISPLAY_COLUMNS;
-	if(x%2==0){
-		index+=y;
-	}else{
-		index+= DISPLAY_COLUMNS-y-1;
+	if (x % 2 == 0) {
+		index += y;
+	} else {
+		index += DISPLAY_COLUMNS - y - 1;
 	}
 	return index;
 }
 
-cRGB Display::convert(hsv_type hsv){
+cRGB Display::convert(hsv_type hsv) {
 	float r = 0, g = 0, b = 0;
 	float h = hsv.h, s = hsv.s, v = hsv.v;
 	s /= 100;
@@ -178,7 +185,7 @@ cRGB Display::convert(hsv_type hsv){
 	return
 	{
 		((r + m) * 255),
-		((g + m) * 255),
-		((b + m) * 255)
+				((g + m) * 255),
+				((b + m) * 255)
 	};
 }
