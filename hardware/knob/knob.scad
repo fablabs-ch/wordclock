@@ -8,7 +8,7 @@ Axis_Length=10;//[5:15]
 //Arrondis
 Rounded=2;//[1:3]
 //Ajustement
-Adjustment=0.5;//[0,0.1,0.2,0.3]
+Adjustment=0.3;//[0,0.1,0.2,0.3]
 /* [Hidden] */
 $fn=50;
 
