@@ -32,6 +32,8 @@
 #endif
 #endif
 
+#include "constants.h"
+
 struct cRGB { uint8_t g; uint8_t r; uint8_t b; };
 
 class WS2812 {
@@ -55,7 +57,7 @@ public:
 
 private:
 	uint16_t count_led;
-	uint8_t *pixels;
+	uint8_t pixels[DISPLAY_LEDS*3];
 	uint8_t offsetRed;
 	uint8_t offsetGreen;
 	uint8_t offsetBlue;

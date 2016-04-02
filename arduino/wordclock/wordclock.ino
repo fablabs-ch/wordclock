@@ -11,10 +11,11 @@
 #include "layout.h"
 
 
+WS2812 ws2812(DISPLAY_LEDS);
 Config config;
 Layout layout;
 TimeManager timeManager;
-Display display(&layout, &config, &timeManager);
+Display display(&layout, &config, &timeManager, &ws2812);
 StateManager stateManager(&timeManager, &display, &config);
 Input input(&stateManager);
 

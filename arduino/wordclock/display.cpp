@@ -2,8 +2,8 @@
 
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
-Display::Display(AbstractLayout* layout, Config* config, TimeManager* timeManager)
-	:layout(layout), config(config), timeManager(timeManager), leds(new WS2812(DISPLAY_LEDS)){
+Display::Display(AbstractLayout* layout, Config* config, TimeManager* timeManager, WS2812* ws2812)
+	:layout(layout), config(config), timeManager(timeManager), leds(ws2812){
 
 	this->leds->setOutput(PIN_LED_STRIP);
 	this->leds->setColorOrderRGB();

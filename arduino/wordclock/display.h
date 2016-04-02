@@ -1,6 +1,8 @@
 #ifndef _DISPLAY_H
 #define _DISPLAY_H
 
+#define DISPLAY_BUFFER_SIZE DISPLAY_LEDS/2
+
 #include "debugable.h"
 #include "types.h"
 #include "constants.h"
@@ -11,7 +13,7 @@
 
 class Display : public Debugable{
 public:
-	Display(AbstractLayout*, Config*, TimeManager*);
+	Display(AbstractLayout*, Config*, TimeManager*, WS2812*);
 
 	void init();
 
@@ -35,7 +37,7 @@ private:
 	TimeManager* timeManager;
 
 	bool ledsOn[DISPLAY_LEDS];
-	uint16_t displayBuffer[DISPLAY_LEDS];
+	uint16_t displayBuffer[DISPLAY_BUFFER_SIZE];
 	unsigned long accNextDraw;
 	bool blinkOn;
 	state_type currentState;
