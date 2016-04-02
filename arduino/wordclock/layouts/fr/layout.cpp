@@ -1,25 +1,37 @@
 #include "layout.h"
 
 /*
-| I | L |   | E | S | T |   | U | N | E |   |
-| T | R | O | I | S | Q | U | A | T | R | E |
-| C | I | N | Q | S | I | X | S | E | P | T |
-| H | U | I | T | N | E | U | F | D | I | X |
-|   | O | N | Z | E |   | D | O | U | Z | E |
-| D | E | U | X |   | H | E | U | R | E |   |
-| M | O | I | N | S | E | T |   | D | I | X |
-|   | V | I | N | G | T | - | C | I | N | Q |
-| Q | U | A | R | T |   | D | E | M | I |   |
 
-|000|   |   |   |   |   |   |   |   |   |010|
-|021|   |   |   |   |   |   |   |   |   |011|
-|022|   |   |   |   |   |   |   |   |   |032|
-|043|   |   |   |   |   |   |   |   |   |033|
-|044|   |   |   |   |   |   |   |   |   |054|
-|065|   |   |   |   |   |   |   |   |   |055|
-|066|   |   |   |   |   |   |   |   |   |076|
-|087|   |   |   |   |   |   |   |   |   |077|
-|088|   |   |   |   |   |   |   |   |   |098|
+| I | L |   |   | E | S | T |   |   | U | N | E |
+| T | R | O | I | S |   | Q | U | A | T | R | E |
+| C | I | N | Q | S | I | X |   | S | E | P | T |
+| H | U | I | T |   | N | E | U | F | D | I | X |
+|   | O | N | Z | E |   | D | O | U | Z | E |   |
+|   |   | D | E | U | X |   | H | E | U | R | E |
+| M | O | I | N | S |   | E | T |   | D | I | X |
+|   |   | V | I | N | G | T | - | C | I | N | Q |
+| Q | U | A | R | T |   | D | E | M | I |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   | * | * | * | * |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+
+|000|   |   |   |   |   |   |   |   |   |   |011|
+|023|   |   |   |   |   |   |   |   |   |   |012|
+|024|   |   |   |   |   |   |   |   |   |   |035|
+|047|   |   |   |   |   |   |   |   |   |   |036|
+|048|   |   |   |   |   |   |   |   |   |   |059|
+|071|   |   |   |   |   |   |   |   |   |   |060|
+|072|   |   |   |   |   |   |   |   |   |   |083|
+|095|   |   |   |   |   |   |   |   |   |   |084|
+|096|   |   |   |   |   |   |   |   |   |   |107|
+|119|   |   |   |   |   |   |   |   |   |   |108|
+|120|   |   |   |   |   |   |   |   |   |   |131|
+|143|   |   |   |   |   |   |   |   |   |   |132|
+
+Use the column in the following string to know a LED position:
+
+IL  EST  UNEERTAUQ SIORTCINQSIX SEPTXIDFUEN TIUH ONZE DOUZE ERUEH XUED  MOINS ET DIXQNIC-TGNIV  QUART DEMI                  ****                |||
+
 */
 
 Layout::Layout(){
@@ -35,108 +47,108 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint16_t* d
     }
   }
 
-  this->append(d, 0, 1);//il
-  this->append(d, 3, 4, 5);//est
+  this->append(d, 0, 1);                       // il
+  this->append(d, 4, 5, 6);                    // est
 
 	switch(hour){
 		case 1:
 		case 13:
-      this->append(d, 7, 8, 9);
+      this->append(d, 9, 10, 11);              // une
 			break;
 		case 2:
 		case 14:
-      this->append(d, 62, 63, 64, 65);
+      this->append(d, 66, 67, 68, 69);         // deux
 			break;
 		case 3:
 		case 15:
-      this->append(d, 17, 18, 19, 20, 21);
+      this->append(d, 19, 20, 21, 22, 23);     // trois
 			break;
 		case 4:
 		case 16:
-      this->append(d, 11, 12, 13, 14, 15, 16);
+      this->append(d, 12, 13, 14, 15, 16, 17); // quatre
 			break;
 		case 5:
 		case 17:
-      this->append(d, 22, 23, 24, 25);
+      this->append(d, 24, 25, 26, 27);         // cinq
 			break;
 		case 6:
 		case 18:
-      this->append(d, 26, 27, 28);
+      this->append(d, 28, 29, 30);             // six
 			break;
 		case 7:
 		case 19:
-      this->append(d, 29, 30, 31, 32);
+      this->append(d, 32, 33, 34, 35);         // sept
 			break;
 		case 8:
 		case 20:
-      this->append(d, 40, 41, 42, 43);
+      this->append(d, 44, 45, 46, 47);         // huit
 			break;
 		case 9:
 		case 21:
-      this->append(d, 36, 37, 38, 39);
+      this->append(d, 39, 40, 41, 42);         // neuf
 			break;
 		case 10:
 		case 22:
-      this->append(d, 33, 34, 35);
+      this->append(d, 36, 37, 38);             // dix
 			break;
 		case 11:
 		case 23:
-      this->append(d, 45, 46, 47, 48);
+      this->append(d, 49, 50, 51, 52);         // onze
 			break;
 		case 12:
   	case 0:
-      this->append(d, 50, 51, 52, 53, 54);
+      this->append(d, 54, 55, 56, 57, 58);     // douze
 			break;
 	}
 
-  //heure
-  this->append(d, 56, 57, 58, 59, 60);
+
+  this->append(d, 60, 61, 62, 63, 64);         //heure
 
 	minute /= 5;
 	switch(minute){
 		case 1:
-      this->append(d, 77, 78, 79, 80);//cinq
+      this->append(d, 84, 85, 86, 87);         // cinq
 			break;
 		case 2:
-      this->append(d, 74, 75, 76);//dix
+      this->append(d, 81, 82, 83);             // dix
 			break;
 		case 3:
-      this->append(d, 71, 72);//et
-      this->append(d, 88, 89, 90, 91, 92);//quart
+      this->append(d, 78, 79);                 // et
+      this->append(d, 96, 97, 98, 99, 100);    // quart
 			break;
 		case 4:
-      this->append(d, 82, 83, 84, 85, 86);//vingt
+      this->append(d, 89, 90, 91, 92, 93);     // vingt
 			break;
 		case 5:
-      this->append(d, 82, 83, 84, 85, 86);//vingt
-      this->append(d, 81);//-
-      this->append(d, 77, 78, 79, 80);//cinq
+      this->append(d, 89, 90, 91, 92, 93);     // vingt
+      this->append(d, 88);                     // -
+      this->append(d, 84, 85, 86, 87);         // cinq
 			break;
 		case 6:
-      this->append(d, 71, 72);//et
-      this->append(d, 94, 95, 96, 97);//demi
+      this->append(d, 78, 79);                 // et
+      this->append(d, 102, 103, 104, 105);     // demi
 			break;
 		case 7:
-      this->append(d, 66, 67, 68, 69, 70);//moins
-      this->append(d, 82, 83, 84, 85, 86);//vingt
-      this->append(d, 81);//-
-      this->append(d, 77, 78, 79, 80);//cinq
-			break;
+      this->append(d, 72, 73, 74, 75, 76);     // moins
+      this->append(d, 89, 90, 91, 92, 93);     // vingt
+      this->append(d, 88);                     // -
+      this->append(d, 84, 85, 86, 87);         // cinq
+      break;
 		case 8:
-      this->append(d, 66, 67, 68, 69, 70);//moins
-      this->append(d, 82, 83, 84, 85, 86);//vingt
-			break;
+      this->append(d, 72, 73, 74, 75, 76);     // moins
+      this->append(d, 89, 90, 91, 92, 93);     // vingt
+      break;
 		case 9:
-      this->append(d, 66, 67, 68, 69, 70);//moins
-      this->append(d, 88, 89, 90, 91, 92);//quart
-			break;
+      this->append(d, 72, 73, 74, 75, 76);     // moins
+      this->append(d, 96, 97, 98, 99, 100);    // quart
+      break;
 		case 10:
-      this->append(d, 66, 67, 68, 69, 70);//moins
-      this->append(d, 74, 75, 76);//dix
+      this->append(d, 72, 73, 74, 75, 76);     // moins
+      this->append(d, 81, 82, 83);             // dix
 			break;
 		case 11:
-      this->append(d, 66, 67, 68, 69, 70);//moins
-      this->append(d, 77, 78, 79, 80);//cinq
+      this->append(d, 72, 73, 74, 75, 76);     // moins
+      this->append(d, 84, 85, 86, 87);         // cinq
 			break;
 	}
 
@@ -144,5 +156,5 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint16_t* d
 }
 
 char* Layout::getDebugLayout(){
-  return "il est une troisquatrecinqsixsepthuitneufdix onze douzedeux heure moinset dix vingt-cinqquart demi ";
+  return "il  est  unetrois quatrecinqsix septhuit neufdix onze douze   deux heuremoins et dix  vingt-cinqquart demi                  ****                ";
 }
