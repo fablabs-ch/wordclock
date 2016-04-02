@@ -195,6 +195,9 @@ def parse_args():
     params.add_argument('--fw',
                         type=str, default="",
                         help='font weight of the letters')
+    params.add_argument('--output', '-o',
+                        type=str, default="out.svg",
+                        help='output file')
     # Positional arguments
     params.add_argument('filename', metavar="FILENAME",
                         help='name of the text file containing the layout')
@@ -248,7 +251,7 @@ def main():
     svg = generate_svg(width=num_x * args.hs + 2 * args.hm,
                        height=num_y * args.vs + 2 * args.vm,
                        content=frame + letters + rects)
-    with open("out.svg", 'w') as out:
+    with open(args.output, 'w') as out:
         print(svg, file=out)
 
 
