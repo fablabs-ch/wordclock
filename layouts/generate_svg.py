@@ -35,6 +35,7 @@ import argparse
 import csv
 import os
 import sys
+import random
 import tempfile
 
 from shlex import split
@@ -224,12 +225,15 @@ def main():
     num_y, num_x = len(grid), len(grid[0]) - 2  # Remove external "|"
     for y, row in enumerate(grid):
         for x, char in enumerate(row[1:-1]):
+            character = char.strip()
+            if not character:
+                character = chr(random.randint(0, 25) + 65)
             letters += generate_letter(
                 x=args.hm + args.hs / 2 + x * args.hs,
                 y=args.vm + args.vs / 2 + y * args.vs,
                 font_size=args.fs,
                 baseline_height=baseline_height,
-                letter=char.strip(),
+                letter=character,
                 font_family=args.ff, font_weight=args.fw,
                 fill="white", stroke="none", stroke_width=0)
             rects += generate_rect(x=args.hm + x * args.hs,
