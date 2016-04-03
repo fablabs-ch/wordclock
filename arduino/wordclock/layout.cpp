@@ -39,8 +39,9 @@ Layout::Layout() {
 
 void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint8_t* dest) {
 	uint8_t** d = &dest;
+  uint8_t minuteEtoile = minute;
 
-	if (minute > 30) {
+	if (minute >= 35) {
 		hour += 1;
 		if (hour >= 24) {
 			hour -= 24;
@@ -104,6 +105,34 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint8_t* de
 
 	this->append(d, 60, 61, 62, 63, 64); //heure
 
+  //Contrôle des étoiles by DylanCollaud
+  if(minuteEtoile <= 35)
+  {
+    minuteEtoile = minute % 5;
+  }
+  else
+  {
+    minuteEtoile = 4-((minute-1) % 5);
+  }
+    
+  switch(minuteEtoile)
+  {
+    case 1:
+      this->append(d, 124);
+      break;
+    case 2:
+      this->append(d, 124, 125);
+      break;
+    case 3:
+      this->append(d, 124, 125, 126);
+      break;
+    case 4:
+      this->append(d, 124, 125, 126, 127);
+      break;
+  }
+
+  if(minute > 35) { minute += 4;}  //Décalage dans le future pour faire correspondre les étoiles by Dylan Collaud
+
 	minute /= 5;
 	switch (minute) {
 		case 1:
@@ -150,6 +179,9 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint8_t* de
 			this->append(d, 72, 73, 74, 75, 76); // moins
 			this->append(d, 84, 85, 86, 87); // cinq
 			break;
+   case 12: //Ajout d'un moins pour être cohérent avec les étoiles by DylanCollaud
+      this->append(d, 72, 73, 74, 75, 76); // moins
+      break;
 	}
 
 	this->append(d, END_OF_LAYOUT);
