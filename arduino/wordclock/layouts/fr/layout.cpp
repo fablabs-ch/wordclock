@@ -7,7 +7,7 @@
 | C | I | N | Q | S | I | X |   | S | E | P | T |
 | H | U | I | T |   | N | E | U | F | D | I | X |
 |   | O | N | Z | E |   | D | O | U | Z | E |   |
-|   |   | D | E | U | X |   | H | E | U | R | E |
+|   | D | E | U | X |   | H | E | U | R | E | S |
 | M | O | I | N | S |   | E | T |   | D | I | X |
 |   |   | V | I | N | G | T | - | C | I | N | Q |
 | Q | U | A | R | T |   | D | E | M | I |   |   |
@@ -30,7 +30,7 @@
 
 Use the column in the following string to know a LED position:
 
-IL  EST  UNEERTAUQ SIORTCINQSIX SEPTXIDFUEN TIUH ONZE DOUZE ERUEH XUED  MOINS ET DIXQNIC-TGNIV  QUART DEMI                  ****                |||
+IL  EST  UNEERTAUQ SIORTCINQSIX SEPTXIDFUEN TIUH ONZE DOUZE SERUEH XUED MOINS ET DIXQNIC-TGNIV  QUART DEMI                  ****                |||
 
 */
 
@@ -57,7 +57,7 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint16_t* d
 			break;
 		case 2:
 		case 14:
-      this->append(d, 66, 67, 68, 69);         // deux
+      this->append(d, 67, 68, 69, 70);         // deux
 			break;
 		case 3:
 		case 15:
@@ -102,7 +102,11 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint16_t* d
 	}
 
 
-  this->append(d, 60, 61, 62, 63, 64);         //heure
+  this->append(d, 61, 62, 63, 64, 65);         // heure[ ]
+
+  if(hour>1){
+    this->append(60)                           // heure[S]
+  }
 
 	minute /= 5;
 	switch(minute){
@@ -156,5 +160,5 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint16_t* d
 }
 
 char* Layout::getDebugLayout(){
-  return "il  est  unetrois quatrecinqsix septhuit neufdix onze douze   deux heuremoins et dix  vingt-cinqquart demi                  ****                ";
+  return "il  est  unetrois quatrecinqsix septhuit neufdix onze douze  deux heuresmoins et dix  vingt-cinqquart demi                  ****                ";
 }
