@@ -39,7 +39,7 @@ below, and it's accessible in a [raw format](#raw-format) in the `raw/` folder.
 | **03** | C  | I  | N  | Q  | S  | I  | X  |    | S  | E  | P  | T  |
 | **04** | H  | U  | I  | T  |    | N  | E  | U  | F  | D  | I  | X  |
 | **05** |    | O  | N  | Z  | E  |    | D  | O  | U  | Z  | E  |    |
-| **06** |    |    | D  | E  | U  | X  |    | H  | E  | U  | R  | E  |
+| **06** |    | D  | E  | U  | X  |    | H  | E  | U  | R  | E  | S  |
 | **07** | M  | O  | I  | N  | S  |    | E  | T  |    | D  | I  | X  |
 | **08** |    |    | V  | I  | N  | G  | T  | -  | C  | I  | N  | Q  |
 | **09** | Q  | U  | A  | R  | T  |    | D  | E  | M  | I  |    |    |
