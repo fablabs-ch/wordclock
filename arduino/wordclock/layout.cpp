@@ -39,7 +39,7 @@ Layout::Layout() {
 
 void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint8_t* dest) {
 	uint8_t** d = &dest;
-  uint8_t minuteEtoile = minute;
+	uint8_t minuteEtoile = minute;
 
 	if (minute >= 35) {
 		hour += 1;
@@ -105,16 +105,13 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, uint8_t* de
 
 	this->append(d, 60, 61, 62, 63, 64); //heure
 
-  //Contrôle des étoiles by DylanCollaud
-  if(minuteEtoile <= 35)
-  {
-    minuteEtoile = minute % 5;
-  }
-  else
-  {
-    minuteEtoile = 4-((minute-1) % 5);
-  }
-    
+	//Contrôle des étoiles by DylanCollaud
+	if(minuteEtoile <= 35) {
+		minuteEtoile = minute % 5;
+	} else {
+		minuteEtoile = 4-((minute-1) % 5);
+	}
+
   switch(minuteEtoile)
   {
     case 1:
