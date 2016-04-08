@@ -1,7 +1,7 @@
 #ifndef _ABSTRACT_LAYOUT_H
 #define _ABSTRACT_LAYOUT_H
 
-#include "arduino.h"
+#include "Arduino.h"
 
 #define END_OF_LAYOUT 255
 
