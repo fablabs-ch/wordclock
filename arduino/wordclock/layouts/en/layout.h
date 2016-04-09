@@ -12,7 +12,7 @@ class Layout : public AbstractLayout{
 public:
 	Layout();
 
-  void getLayout(char hour, char min, char sec, short*);
+  void getLayout(char hour, char min, char sec, Display*);
 
   char* getDebugLayout();
 

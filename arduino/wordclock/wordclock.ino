@@ -38,6 +38,10 @@ void setup(){
   display.init();
   stateManager.init();
   input.init();
+  
+  if(input.isButtonPressed()){
+	  display.matrixTester();
+  }
 }
 
 void loop(){

@@ -14,5 +14,8 @@
 //Outputs
 #define PIN_LED_STRIP 8
 
+//will take a lot more memory and can cause bugs
+//#define ALLOW_DEBUG_DISPLAY
+
 
 #endif

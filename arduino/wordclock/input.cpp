@@ -38,6 +38,10 @@ void Input::loop(unsigned long dtMs){
 	}
 }
 
+bool Input::isButtonPressed(){
+	return digitalRead(PIN_ROTARY_BUTTON) == BUTTON_PRESSED_STATE;
+}
+
 void Input::readFromSerial(Stream* stream){
 		this->readStream = stream;
 }
@@ -79,7 +83,7 @@ void Input::updateEncoder(){
 }
 
 void Input::checkButtonLongPress(unsigned long dtMs){
-	this->buttonPressed = digitalRead(PIN_ROTARY_BUTTON) == LOW;
+	this->buttonPressed = digitalRead(PIN_ROTARY_BUTTON) == BUTTON_PRESSED_STATE;
 
 	if(this->buttonPressed && !this->ignoreNextRelease){
 		this->timeButtonDown += dtMs;

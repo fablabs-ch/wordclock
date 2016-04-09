@@ -1,6 +1,7 @@
 #ifndef _LAYOUT_H
 #define _LAYOUT_H
 
+#include "constants.h"
 #include "abstractlayout.h"
 
 #define DISPLAY_ROWS 12
@@ -20,7 +21,7 @@ public:
 	 * @param min the seconds [0,59]
 	 * @param destination array containing the list of leds to light
 	 */
-  void getLayout(uint8_t hour, uint8_t min, uint8_t sec, uint16_t*);
+  void getLayout(uint8_t hour, uint8_t min, uint8_t sec, Display*);
 
 	/**
 	 * Return a debug string containing all case in a simple string, no separator

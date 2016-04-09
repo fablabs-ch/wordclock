@@ -30,13 +30,16 @@ public:
 	 * Draw will occur at least each second
 	 */
 	void draw();
+	
+	void affectLed(uint8_t);
+	
+	void matrixTester();
 
 private:
 	AbstractLayout* layout;
 	Config* config;
 	TimeManager* timeManager;
 
-	uint8_t displayBuffer[DISPLAY_BUFFER_SIZE];
 	unsigned long accNextDraw;
 	bool blinkOn;
 	state_type currentState;
@@ -48,7 +51,6 @@ private:
 	void displayWordTime();
 	void displayDigitalTime();
 	void allLedsOff();
-	void addLedsOn();
 	void writeLeds();
 	void displayDebug();
 	void displayDebugLine(int);

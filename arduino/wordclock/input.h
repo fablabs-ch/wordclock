@@ -5,6 +5,8 @@
 #include "debugable.h"
 #include "statemanager.h"
 
+#define BUTTON_PRESSED_STATE LOW
+
 class Input : public Debugable {
 public:
 	Input(StateManager*);
@@ -25,6 +27,8 @@ public:
 	 * @param stream the stream to read from
 	 */
 	void readFromSerial(Stream* stream);
+	
+	bool isButtonPressed();
 
 private:
 	StateManager* stateManager;

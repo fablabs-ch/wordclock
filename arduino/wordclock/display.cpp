@@ -40,7 +40,6 @@ void Display::loop(unsigned long dtMs) {
 }
 
 void Display::draw() {
-	//FIXME blink
 	//FIXME digitalDisplay
 	this->displayWordTime();
 }
@@ -57,10 +56,30 @@ void Display::displayWordTime() {
 	this->debug(second);
 	this->debugln();
 
-	this->layout->getLayout(hour, minute, second, this->displayBuffer);
 	this->allLedsOff();
-	this->addLedsOn();
+	this->layout->getLayout(hour, minute, second, this);
 	this->writeLeds();
+}
+
+void Display::matrixTester() {
+	while (1) {
+		cRGB colorOn = {random(255), random(255), random(255)};
+		cRGB colorOff = {random(0, 15), random(0, 15), random(0, 15)};
+		for (int j = 0; j < DISPLAY_LEDS; j++) {
+
+
+			for (int i = 0; i < DISPLAY_LEDS; i++) {
+				this->leds->set_crgb_at(i, i == j ? colorOn : colorOff);
+			}
+			this->leds->sync();
+			delay(5);
+		}
+	}
+}
+
+void Display::affectLed(uint8_t led) {
+	cRGB colorOn = this->convert(config->getColor());
+	this->leds->set_crgb_at((int) led, colorOn);
 }
 
 void Display::displayDigitalTime() {
@@ -79,26 +98,12 @@ void Display::allLedsOff() {
 	}
 }
 
-void Display::addLedsOn(){
-	cRGB colorOn = this->convert(config->getColor());
-	this->allLedsOff();
-	int v;
-	uint8_t* ptr = this->displayBuffer;
-	do {
-		v = (int)(*ptr);
-		if (v != END_OF_LAYOUT) {
-			this->leds->set_crgb_at(v, colorOn);
-			ptr++;
-		}
-	} while (v != END_OF_LAYOUT);
-}
-
 void Display::writeLeds() {
 	//this->displayWordTime(1, 0, 0);
 	if (this->isDebugEnabled()) {
 		this->displayDebug();
 	}
-	
+
 	this->leds->sync();
 }
 
@@ -130,18 +135,9 @@ void Display::displayDebugLine(int nb) {
 
 bool Display::isledOn(int x, int y) {
 	uint16_t index = this->getLedIndex(x, y);
-	int v;
-	uint8_t* ptr = this->displayBuffer;
-	do {
-		v = (int)(*ptr);
-		if (v != END_OF_LAYOUT) {
-			if (v == index) {
-				return true;
-			}
-		}
-	} while (v != END_OF_LAYOUT);
 
-	return false;
+	cRGB rgb = this->leds->get_crgb_at(index);
+	return rgb.r != 0 || rgb.g != 0 || rgb.b != 0;
 }
 
 int Display::getLedIndex(int x, int y) {
