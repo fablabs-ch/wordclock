@@ -1,36 +1,5 @@
 #include "digitallayout.h"
 
-/*
-
-| I | L |   |   | E | S | T |   |   | U | N | E |
-| T | R | O | I | S |   | Q | U | A | T | R | E |
-| C | I | N | Q | S | I | X |   | S | E | P | T |
-| H | U | I | T |   | N | E | U | F | D | I | X |
-|   | O | N | Z | E |   | D | O | U | Z | E |   |
-|   | D | E | U | X |   | H | E | U | R | E | S |
-| M | O | I | N | S |   | E | T |   | D | I | X |
-|   |   | V | I | N | G | T | - | C | I | N | Q |
-| Q | U | A | R | T |   | D | E | M | I |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   | * | * | * | * |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-
-|000|   |   |   |   |   |   |   |   |   |   |011|
-|023|   |   |   |   |   |   |   |   |   |   |012|
-|024|   |   |   |   |   |   |   |   |   |   |035|
-|047|   |   |   |   |   |   |   |   |   |   |036|
-|048|   |   |   |   |   |   |   |   |   |   |059|
-|071|   |   |   |   |   |   |   |   |   |   |060|
-|072|   |   |   |   |   |   |   |   |   |   |083|
-|095|   |   |   |   |   |   |   |   |   |   |084|
-|096|   |   |   |   |   |   |   |   |   |   |107|
-|119|   |   |   |   |   |   |   |   |   |   |108|
-|120|   |   |   |   |   |   |   |   |   |   |131|
-|143|   |   |   |   |   |   |   |   |   |   |132|
-
-
- */
-
 DigitalLayout::DigitalLayout() {
 }
 
@@ -162,10 +131,5 @@ void DigitalLayout::displaySegment(Display* d, int x, int y, char segment){
 }
 
 char* DigitalLayout::getDebugLayout() {
-#ifdef ALLOW_DEBUG_DISPLAY
-	return "il  est  unetrois quatrecinqsix septhuit neufdix onze douze  deux heuresmoins et dix  vingt-cinqquart demi                   ****                ";
-#endif
-#ifndef ALLOW_DEBUG_DISPLAY
 	return "";
-#endif
 }

@@ -47,13 +47,10 @@ void TimeManager::getTime(uint8_t* hour, uint8_t* min, uint8_t* sec){
 }
 
 void TimeManager::enterEditionMode(){
-  this->debugln("Entering edition mode, stop clock update");
   this->editionMode = true;
 }
 
 void TimeManager::exitEditionMode(){
-  this->debugln("Exiting edition mode, saving time to external clock");
-
   //compute time
   RTCDateTime dt = this->externalClock.getDateTime();
 
@@ -73,7 +70,6 @@ void TimeManager::readFromExternalClock(){
     return;
   }
 
-  this->debugln("Start reading from external clock");
   RTCDateTime dt = this->externalClock.getDateTime();
   this->time = (uint32_t)dt.hour;
   this->time *= 60;

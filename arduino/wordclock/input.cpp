@@ -89,7 +89,7 @@ void Input::checkButtonLongPress(unsigned long dtMs){
 		this->timeButtonDown += dtMs;
 		if(this->timeButtonDown>=BUTTON_LONG_PRESS_MS){
 			this->ignoreNextRelease = true;
-			this->debugln("Button long pressed");
+			this->debugln("Btn long");
 			this->stateManager->buttonLongPressed();
 		}
 	}
@@ -98,15 +98,15 @@ void Input::checkButtonLongPress(unsigned long dtMs){
 void Input::checkButtonNormalPress(){
 	if(this->lastButtonPressed!=this->buttonPressed){
 		if(this->buttonPressed){
-			this->debugln("Button pressed");
+			this->debugln("Btn press");
 		}else{
-			this->debugln("Button released");
+			this->debugln("Btn rel");
 			if(!this->ignoreNextRelease){
 				if(antiReboundMs==0){
 					this->stateManager->buttonPressed();
 					this->antiReboundMs = ANTI_REBOUND_MS;
 				}else{
-					this->debugln("Button reboud detected");
+					this->debugln("Btn reboud");
 				}
 			}else{
 				this->ignoreNextRelease = false;
@@ -125,10 +125,10 @@ void Input::checkRotation(){
 	int delta = currEnc-lastEnc;
 	if(delta != 0){
 		if(delta<0){
-			this->debugln("Rotary increased");
+			this->debugln("Rot +");
 			this->stateManager->encoderIncrease();
 		}else{
-			this->debugln("Rotary decreased");
+			this->debugln("Rot -");
 			this->stateManager->encoderDecrease();
 		}
 		this->lastEncoderValue = this->encoderValue;

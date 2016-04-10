@@ -146,7 +146,7 @@ void StateManager::applyButtonLongPressed(){
 }
 
 void StateManager::debugState(){
-  this->debug("Current state : ");
+  this->debug("State : ");
   switch(this->currentState){
     case CLOCK_WORD:
       this->debug("CLOCK_WORD");

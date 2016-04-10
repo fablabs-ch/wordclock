@@ -29,16 +29,16 @@ void Config::setColor(hsv_type color){
 }
 
 void Config::read(){
-	this->debugln("Read config");
+	this->debugln("Read cfg");
 	EEPROM.get(CONFIG_EEPROM_ADDR, this->config);
 	if(this->config.version!=CONFIG_VERSION){
-		this->debugln("Config version is not the same, reset the config");
+		this->debugln("cfg version changed");
 		this->reset();
 	}
 }
 
 void Config::write(){
-	this->debugln("Write config");
+	this->debugln("Write cfg");
 	EEPROM.put(CONFIG_EEPROM_ADDR, this->config);
 }
 

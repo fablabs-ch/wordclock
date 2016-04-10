@@ -42,7 +42,6 @@ void Display::draw() {
 	uint8_t hour, minute, second;
 	this->timeManager->getTime(&hour, &minute, &second);
 
-	this->debug("Heure : ");
 	this->debug(hour);
 	this->debug(":");
 	this->debug(minute);

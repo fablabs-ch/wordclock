@@ -49,7 +49,7 @@ void AbstractLayout::append(Display* dest, uint8_t v1, uint8_t v2, uint8_t v3, u
 }
 
 char* AbstractLayout::getDebugLayout(){
-  return "todo";
+  return "";
 }
 
 int AbstractLayout::getLedIndex(int x, int y) {
@@ -61,13 +61,4 @@ int AbstractLayout::getLedIndex(int x, int y) {
 		index += DISPLAY_ROWS - x - 1;
 	}
 	return index;
-	
-	
-//	int index = x*DISPLAY_COLUMNS;
-//	if (x % 2 == 0) {
-//		index += y;
-//	} else {
-//		index += DISPLAY_COLUMNS - y - 1;
-//	}
-//	return index;
 }
