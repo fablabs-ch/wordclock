@@ -102,7 +102,8 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 	}
 
 
-	this->append(d, 60, 61, 62, 63, 64, 65); //heures
+	//this->append(d, 60, 61, 62, 63, 64, 65); //heures
+	this->append(d, 60, 61, 62, 63, 64); //heure
 
 	//Contrôle des étoiles by DylanCollaud
 	if (minuteEtoile <= 35) {
@@ -180,8 +181,6 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 			this->append(d, 72, 73, 74, 75, 76); // moins
 			break;
 	}
-
-	this->append(d, END_OF_LAYOUT);
 }
 
 char* Layout::getDebugLayout() {

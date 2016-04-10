@@ -13,7 +13,7 @@
 
 class Display : public Debugable{
 public:
-	Display(AbstractLayout*, Config*, TimeManager*, WS2812*);
+	Display(AbstractLayout*, AbstractLayout*, Config*, TimeManager*, WS2812*);
 
 	void init();
 
@@ -36,7 +36,8 @@ public:
 	void matrixTester();
 
 private:
-	AbstractLayout* layout;
+	AbstractLayout* wordLayout;
+	AbstractLayout* digitalLayout;
 	Config* config;
 	TimeManager* timeManager;
 
@@ -48,14 +49,11 @@ private:
 
 	cRGB lastColor = {255, 255, 255};
 
-	void displayWordTime();
-	void displayDigitalTime();
 	void allLedsOff();
 	void writeLeds();
 	void displayDebug();
 	void displayDebugLine(int);
 	bool isledOn(int row, int colum);
-	int getLedIndex(int x, int y);
 
 	cRGB convert(hsv_type);
 

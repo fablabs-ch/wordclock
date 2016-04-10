@@ -1,7 +1,9 @@
 #ifndef _CONSTANTS_H
 #define _CONSTANTS_H
 
-#include "layout.h"
+#define DISPLAY_ROWS 12
+#define DISPLAY_COLUMNS 12
+#define DISPLAY_LEDS DISPLAY_ROWS*DISPLAY_COLUMNS
 
 //Inputs
 #define PIN_ROTARY_BUTTON 4

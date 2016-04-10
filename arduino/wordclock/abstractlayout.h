@@ -3,8 +3,6 @@
 
 #include "Arduino.h"
 
-#define END_OF_LAYOUT 255
-
 class Display;
 
 class AbstractLayout{
@@ -14,6 +12,8 @@ public:
   virtual void getLayout(uint8_t hour, uint8_t min, uint8_t sec, Display*);
 
   virtual char* getDebugLayout();
+  
+  int getLedIndex(int x, int y);
 
 protected:
 
@@ -25,7 +25,6 @@ protected:
   void append(Display*, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
   void append(Display*, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
   void append(Display*, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
-
 
 
 };

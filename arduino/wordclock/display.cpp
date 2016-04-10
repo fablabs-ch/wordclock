@@ -2,16 +2,15 @@
 
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
-Display::Display(AbstractLayout* layout, Config* config, TimeManager* timeManager, WS2812* ws2812)
-: layout(layout), config(config), timeManager(timeManager), leds(ws2812) {
+Display::Display(AbstractLayout* wordLayout, AbstractLayout* digitalLayout, Config* config, TimeManager* timeManager, WS2812* ws2812)
+: wordLayout(wordLayout), digitalLayout(digitalLayout), config(config), timeManager(timeManager), leds(ws2812) {
 
 	this->leds->setOutput(PIN_LED_STRIP);
 	this->leds->setColorOrderRGB();
 }
 
 void Display::init() {
-	this->allLedsOff();
-	this->displayWordTime();
+	this->draw();
 	this->accNextDraw = 0;
 }
 
@@ -40,11 +39,6 @@ void Display::loop(unsigned long dtMs) {
 }
 
 void Display::draw() {
-	//FIXME digitalDisplay
-	this->displayWordTime();
-}
-
-void Display::displayWordTime() {
 	uint8_t hour, minute, second;
 	this->timeManager->getTime(&hour, &minute, &second);
 
@@ -55,9 +49,11 @@ void Display::displayWordTime() {
 	this->debug(":");
 	this->debug(second);
 	this->debugln();
-
+	
+	
 	this->allLedsOff();
-	this->layout->getLayout(hour, minute, second, this);
+	//this->wordLayout->getLayout(hour, minute, second, this);
+	this->digitalLayout->getLayout(hour, minute, second, this);
 	this->writeLeds();
 }
 
@@ -82,10 +78,6 @@ void Display::affectLed(uint8_t led) {
 	this->leds->set_crgb_at((int) led, colorOn);
 }
 
-void Display::displayDigitalTime() {
-	//TODO
-}
-
 void Display::setState(state_type state) {
 	this->currentState = state;
 	this->draw();
@@ -108,7 +100,7 @@ void Display::writeLeds() {
 }
 
 void Display::displayDebug() {
-	char* l = layout->getDebugLayout();
+	char* l = wordLayout->getDebugLayout();
 	this->displayDebugLine(DISPLAY_COLUMNS * 4 + 2);
 	for (int row = 0; row < DISPLAY_ROWS; row++) {
 		for (int col = 0; col < DISPLAY_COLUMNS; col++) {
@@ -134,20 +126,10 @@ void Display::displayDebugLine(int nb) {
 }
 
 bool Display::isledOn(int x, int y) {
-	uint16_t index = this->getLedIndex(x, y);
+	uint16_t index = this->digitalLayout->getLedIndex(x, y);
 
 	cRGB rgb = this->leds->get_crgb_at(index);
 	return rgb.r != 0 || rgb.g != 0 || rgb.b != 0;
-}
-
-int Display::getLedIndex(int x, int y) {
-	int index = x*DISPLAY_COLUMNS;
-	if (x % 2 == 0) {
-		index += y;
-	} else {
-		index += DISPLAY_COLUMNS - y - 1;
-	}
-	return index;
 }
 
 cRGB Display::convert(hsv_type hsv) {
