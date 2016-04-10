@@ -104,8 +104,7 @@ void StateManager::applyEncoderDeltaChangeMinute(int delta){
 void StateManager::applyButtonPressed(){
   switch(this->currentState){
     case CLOCK_WORD:
-      this->currentState = CHANGE_HUE;
-      // this->currentState = CLOCK_DIGITAL;
+      this->currentState = CLOCK_DIGITAL;
       break;
     case CLOCK_DIGITAL:
       this->currentState = CHANGE_HUE;
