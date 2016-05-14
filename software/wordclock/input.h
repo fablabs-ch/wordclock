@@ -1,5 +1,5 @@
-#ifndef _PID_H
-#define _PID_H
+#ifndef _INPUT_H
+#define _INPUT_H
 
 #include "constants.h"
 #include "debugable.h"

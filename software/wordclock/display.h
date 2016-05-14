@@ -10,10 +10,11 @@
 #include "WS2812.h"
 #include "config.h"
 #include "timemanager.h"
+#include "sensors.h"
 
 class Display : public Debugable{
 public:
-	Display(AbstractLayout*, AbstractLayout*, Config*, TimeManager*, WS2812*);
+	Display(AbstractLayout*, AbstractLayout*, Config*, TimeManager*, WS2812*, Sensors*);
 
 	void init();
 
@@ -40,10 +41,12 @@ private:
 	AbstractLayout* digitalLayout;
 	Config* config;
 	TimeManager* timeManager;
+	Sensors* sensors;
 
 	unsigned long accNextDraw;
 	bool blinkOn;
 	state_type currentState;
+	cRGB colorOn;
 
 	WS2812* leds;
 
@@ -54,6 +57,7 @@ private:
 	void displayDebug();
 	void displayDebugLine(int);
 	bool isledOn(int row, int colum);
+	void computeColorOn();
 
 	cRGB convert(hsv_type);
 

@@ -2,8 +2,8 @@
 
 // #define ADD_LED(name) {int leds[] = {name};	this->addLedsOn(leds);}
 
-Display::Display(AbstractLayout* wordLayout, AbstractLayout* digitalLayout, Config* config, TimeManager* timeManager, WS2812* ws2812)
-: wordLayout(wordLayout), digitalLayout(digitalLayout), config(config), timeManager(timeManager), leds(ws2812) {
+Display::Display(AbstractLayout* wordLayout, AbstractLayout* digitalLayout, Config* config, TimeManager* timeManager, WS2812* ws2812, Sensors* sensors)
+: wordLayout(wordLayout), digitalLayout(digitalLayout), config(config), timeManager(timeManager), leds(ws2812), sensors(sensors) {
 
 	this->leds->setOutput(PIN_LED_STRIP);
 	this->leds->setColorOrderRGB();
@@ -31,7 +31,7 @@ void Display::loop(unsigned long dtMs) {
 			this->accNextDraw = 0;
 		}
 	} else {
-		if (this->accNextDraw >= 1000) {
+		if (this->accNextDraw >= 100) {
 			this->draw();
 			this->accNextDraw = 0;
 		}
@@ -48,7 +48,8 @@ void Display::draw() {
 	this->debug(":");
 	this->debug(second);
 	this->debugln();
-	
+
+    this->computeColorOn();
 	
 	this->allLedsOff();
 	if(this->currentState==CLOCK_DIGITAL){
@@ -57,6 +58,15 @@ void Display::draw() {
 		this->wordLayout->getLayout(hour, minute, second, this);
 	}
 	this->writeLeds();
+}
+
+void Display::computeColorOn(){
+    hsv_type hsv = config->getColor();
+    if(hsv.v==0){
+        //take from sensor
+        hsv.v = map(this->sensors->getLightIntensity(), 0, 255, 5, 100);
+    }
+	this->colorOn = this->convert(hsv);
 }
 
 void Display::matrixTester() {
@@ -76,8 +86,7 @@ void Display::matrixTester() {
 }
 
 void Display::affectLed(uint8_t led) {
-	cRGB colorOn = this->convert(config->getColor());
-	this->leds->set_crgb_at((int) led, colorOn);
+	this->leds->set_crgb_at((int) led, this->colorOn);
 }
 
 void Display::setState(state_type state) {

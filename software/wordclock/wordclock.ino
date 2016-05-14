@@ -10,6 +10,7 @@
 #include "display.h"
 #include "layout.h"
 #include "digitallayout.h"
+#include "sensors.h"
 
 
 WS2812 ws2812(DISPLAY_LEDS);
@@ -17,7 +18,8 @@ Config config;
 Layout wordLayout;
 DigitalLayout digitalLayout;
 TimeManager timeManager;
-Display display(&wordLayout, &digitalLayout, &config, &timeManager, &ws2812);
+Sensors sensors;
+Display display(&wordLayout, &digitalLayout, &config, &timeManager, &ws2812, &sensors);
 StateManager stateManager(&timeManager, &display, &config);
 Input input(&stateManager);
 
@@ -32,9 +34,11 @@ void setup() {
 	input.debug(&Serial);
 	stateManager.debug(&Serial);
 	timeManager.debug(&Serial);
+	//sensors.debug(&Serial);
 
 	input.readFromSerial(&Serial);
 
+    sensors.init();
 	config.init();
 	timeManager.init();
 	display.init();
@@ -54,6 +58,7 @@ void loop() {
 		dtMs = now - lastLoop;
 	}
 
+    sensors.loop(dtMs);
 	input.loop(dtMs);
 	config.loop(dtMs);
 	timeManager.loop(dtMs);
