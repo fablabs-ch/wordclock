@@ -2,7 +2,7 @@
 #define _TIME_MANAGER_H
 
 #include "debugable.h"
-#include <DS3231.h>// https://github.com/jarzebski/Arduino-DS3231.git
+#include <DS3231.h>
 
 
 #define SEC_IN_DAYS 86400
