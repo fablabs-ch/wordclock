@@ -52,7 +52,7 @@ void Display::draw() {
     this->computeColorOn();
 	
 	this->allLedsOff();
-	if(this->currentState==CLOCK_DIGITAL){
+	if(this->currentState==CLOCK_DIGITAL || this->currentState==SET_HOUR || this->currentState==SET_MINUTE){
 		this->digitalLayout->getLayout(hour, minute, second, this);
 	}else{
 		this->wordLayout->getLayout(hour, minute, second, this);

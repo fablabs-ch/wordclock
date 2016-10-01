@@ -57,7 +57,6 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 			break;
 		case 2:
 		case 14:
-			//FIXME heures
 			//this->append(d, 67, 68, 69, 70); // deux
 			this->append(d, 66, 67, 68, 69); // deux
 			break;
@@ -104,8 +103,8 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 	}
 
 	//FIXME heures
-	//this->append(d, 60, 61, 62, 63, 64, 65); //heures
-	this->append(d, 60, 61, 62, 63, 64); //heure
+	this->append(d, 60, 61, 62, 63, 64, 65); //heures
+	//this->append(d, 60, 61, 62, 63, 64); //heure
 
 	//Contrôle des étoiles by DylanCollaud
 	if (minuteEtoile <= 35) {
