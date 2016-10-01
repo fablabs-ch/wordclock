@@ -15,8 +15,8 @@
 
 //Sensors
 #define SENSOR_LIGHT_PIN A0
-#define SENSOR_LIGHT_MIN 850
-#define SENSOR_LIGHT_MAX 1000
+#define SENSOR_LIGHT_MIN 730
+#define SENSOR_LIGHT_MAX 980
 
 //Outputs
 #define PIN_LED_STRIP 8

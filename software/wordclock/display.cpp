@@ -31,7 +31,7 @@ void Display::loop(unsigned long dtMs) {
 			this->accNextDraw = 0;
 		}
 	} else {
-		if (this->accNextDraw >= 100) {
+		if (this->accNextDraw >= DISPLAY_REFRESH_MS || this->sensors->bigChangeOccurs()) {
 			this->draw();
 			this->accNextDraw = 0;
 		}

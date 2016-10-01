@@ -3,6 +3,8 @@
 
 #define DISPLAY_BUFFER_SIZE DISPLAY_LEDS/2
 
+#define DISPLAY_REFRESH_MS 10000
+
 #include "debugable.h"
 #include "types.h"
 #include "constants.h"

@@ -31,7 +31,7 @@ void setup() {
 	//!\ WARNING debug display can introduce bug on input reading (due to latency of the loop)
 	//display.debug(&Serial);
 	config.debug(&Serial);
-	input.debug(&Serial);
+	//input.debug(&Serial);
 	stateManager.debug(&Serial);
 	timeManager.debug(&Serial);
 	//sensors.debug(&Serial);
@@ -48,6 +48,7 @@ void setup() {
 	if (input.isButtonPressed()) {
 		display.matrixTester();
 	}
+
 }
 
 void loop() {
