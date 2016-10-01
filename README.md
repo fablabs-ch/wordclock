@@ -2,7 +2,7 @@
 
 This is our adaptation of the [Javelin's Word Clock][javelin-word-clock].
 
-[<img src="images/wordclockUpdatedFrench.jpg" height="500px">](https://github.com/fablabs-ch/wordclock/blob/master/images/wordclockUpdatedFrench.jpg)
+<img src="images/wordclockUpdatedFrench.jpg" alt="Swiss FabLabs WordClock" height="500px">
 
 ## Documentation
 
