@@ -6,7 +6,9 @@ This is our adaptation of the [Javelin's Word Clock][javelin-word-clock].
 
 ## Documentation
 
-- [Layouts][layouts-doc]
+You can find all the documentation in the [Wiki][wiki]
+
+* [User manual][user-manual]
 
 ## Initial development
 
@@ -27,7 +29,8 @@ for which Creative Commons licenses are not well suited.
 
 
 [javelin-word-clock]: http://www.instructables.com/id/Javelins-Word-Clock/
-[layouts-doc]: ./layouts
+[wiki]: https://github.com/fablabs-ch/wordclock/wiki
+[user-manual]: https://github.com/fablabs-ch/wordclock/wiki/User-manual
 [trello-fablabs-ch]: https://trello.com/fablabsuisses
 [slack-fab-jam]: https://fablabs-ch.slack.com/messages/fab-jam_make-athon/details/
 [by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
