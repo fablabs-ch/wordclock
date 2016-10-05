@@ -107,11 +107,15 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 	//this->append(d, 60, 61, 62, 63, 64); //heure
 
 	//Contrôle des étoiles by DylanCollaud
-	if (minuteEtoile <= 35) {
+	#if MINUTES_REVERSE
+        if (minuteEtoile <= 35) {
+            minuteEtoile = minute % 5;
+        } else {
+            minuteEtoile = 4 - ((minute - 1) % 5);
+        }
+	#else
 		minuteEtoile = minute % 5;
-	} else {
-		minuteEtoile = 4 - ((minute - 1) % 5);
-	}
+	#endif
 
 	switch (minuteEtoile) {
 		case 1:

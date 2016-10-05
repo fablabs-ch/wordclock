@@ -26,45 +26,45 @@ Input input(&stateManager);
 unsigned long lastLoop = 0;
 
 void setup() {
-	Serial.begin(115200);
+    Serial.begin(115200);
 
-	//!\ WARNING debug display can introduce bug on input reading (due to latency of the loop)
-	//display.debug(&Serial);
-	config.debug(&Serial);
-	//input.debug(&Serial);
-	stateManager.debug(&Serial);
-	timeManager.debug(&Serial);
-	//sensors.debug(&Serial);
+    //!\ WARNING debug display can introduce bug on input reading (due to latency of the loop)
+    //display.debug(&Serial);
+    config.debug(&Serial);
+    //input.debug(&Serial);
+    stateManager.debug(&Serial);
+    timeManager.debug(&Serial);
+    //sensors.debug(&Serial);
 
-	input.readFromSerial(&Serial);
+    input.readFromSerial(&Serial);
 
     sensors.init();
-	config.init();
-	timeManager.init();
-	display.init();
-	stateManager.init();
-	input.init();
+    config.init();
+    timeManager.init();
+    display.init();
+    stateManager.init();
+    input.init();
 
-	if (input.isButtonPressed()) {
-		display.matrixTester();
-	}
-
+    //Matrix tester mode if button is pressed when powered on
+    if (input.isButtonPressed()) {
+        display.matrixTester();
+    }
 }
 
 void loop() {
-	unsigned long now = millis();
-	unsigned long dtMs = 0;
-	if (lastLoop < now) {
-		//or else overflow, keep one as delta
-		dtMs = now - lastLoop;
-	}
+    unsigned long now = millis();
+    unsigned long dtMs = 0;
+    if (lastLoop < now) {
+        //or else overflow, keep one as delta
+        dtMs = now - lastLoop;
+    }
 
     sensors.loop(dtMs);
-	input.loop(dtMs);
-	config.loop(dtMs);
-	timeManager.loop(dtMs);
-	stateManager.loop(dtMs);
-	display.loop(dtMs);
+    input.loop(dtMs);
+    config.loop(dtMs);
+    timeManager.loop(dtMs);
+    stateManager.loop(dtMs);
+    display.loop(dtMs);
 
-	lastLoop = now;
+    lastLoop = now;
 }
