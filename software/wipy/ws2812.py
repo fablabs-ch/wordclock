@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
-# Based on https://github.com/JanBednarik/micropython-ws2812
+# pylint: disable=import-error
+"""Driver for WS2812 RGB LEDs.
+
+Taken from:
+
+- https://github.com/Oliv4945/wipy-WS2812
+
+which is based on:
+
+- https://github.com/JanBednarik/micropython-ws2812
+
+"""
 
 import gc
 from machine import SPI
@@ -15,7 +26,7 @@ class WS2812:
 
     Example of use:
 
-        chain = WS2812(ledNumber=4)
+        chain = WS2812(leds_number=4)
         data = [
             (255, 0, 0),    # red
             (0, 255, 0),    # green
@@ -29,22 +40,26 @@ class WS2812:
     # Values to put inside SPi register for each color's bit
     buf_bytes = (0xE0E0, 0xFCE0, 0xE0FC, 0xFCFC)
 
-    def __init__(self, ledNumber=1, brightness=100):
-        """
+    def __init__(self, leds_number=1, brightness=100):
+        """Create a WS2812 driver.
+
         Params:
-        * ledNumber = count of LEDs
+        * leds_number = count of LEDs
         * brightness = light brightness (integer : 0 to 100%)
+
         """
-        self.ledNumber = ledNumber
+        self.leds_number = leds_number
         self.brightness = brightness
 
         # Prepare SPI data buffer (8 bytes for each color)
-        self.buf_length = self.ledNumber * 3 * 8
+        self.buf_length = self.leds_number * 3 * 8
         self.buf = bytearray(self.buf_length)
 
         # SPI init
-        # Bus 0, 8MHz => 125 ns by bit, 8 clock cycle when bit transfert+2 clock cycle between each transfert
-        # => 125*10=1.25 us required by WS2812
+
+        # Bus 0, 8MHz => 125 ns by bit, 8 clock cycle when bit transfert+
+        # 2 clock cycle between each transfert => 125*10=1.25 us
+        # required by WS2812
         self.spi = SPI(0, SPI.MASTER, baudrate=8000000, polarity=0, phase=1)
         # Enable pull down
         Pin('GP16', mode=Pin.ALT, pull=Pin.PULL_DOWN)
@@ -53,26 +68,25 @@ class WS2812:
         self.show([])
 
     def show(self, data):
-        """
-        Show RGB data on LEDs. Expected data = [(R, G, B), ...] where R, G and B
-        are intensities of colors in range from 0 to 255. One RGB tuple for each
-        LED. Count of tuples may be less than count of connected LEDs.
+        """Show RGB data on LEDs.
+
+        Expected data = [(R, G, B), ...] where R, G and B are intensities of
+        colors in range from 0 to 255. One RGB tuple for each LED. Count of
+        tuples may be less than count of connected LEDs.
+
         """
         self.fill_buf(data)
         self.send_buf()
 
     def send_buf(self):
-        """
-        Send buffer over SPI.
-        """
+        """Send buffer over SPI."""
         disable_irq()
         self.spi.write(self.buf)
         enable_irq()
         gc.collect()
 
     def update_buf(self, data, start=0):
-        """
-        Fill a part of the buffer with RGB data.
+        """Fill a part of the buffer with RGB data.
 
         Order of colors in buffer is changed from RGB to GRB because WS2812 LED
         has GRB order of colors. Each color is represented by 4 bytes in buffer
@@ -82,6 +96,7 @@ class WS2812:
 
         Note: If you find this function ugly, it's because speed optimisations
         beated purity of code.
+
         """
 
         buf = self.buf
@@ -114,10 +129,10 @@ class WS2812:
         return index // 24
 
     def fill_buf(self, data):
-        """
-        Fill buffer with RGB data.
+        """Fill buffer with RGB data.
 
         All LEDs after the data are turned off.
+
         """
         end = self.update_buf(data)
 
@@ -129,7 +144,5 @@ class WS2812:
             index += 2
 
     def set_brightness(self, brightness):
-        """
-        Set brighness of all leds
-        """
+        """Set brighness of all leds."""
         self.brightness = brightness
