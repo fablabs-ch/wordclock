@@ -157,6 +157,39 @@ class Grid():
                 self.set_pixel(x, y + ry + 1, border)
                 self.set_pixel(x + h - 1, y + ry + 1, border)
 
+    def draw_circle(self, x0, y0, radius, fill=None, border=None):
+        """Draw a circle at position <x,y> of radius <w,h>  the color <rgb>.
+
+        Algorithm from:
+        https://en.wikipedia.org/wiki/Midpoint_circle_algorithm#C_Example
+
+        Args:
+          x (int): the x position of the center of the circle.
+          y (int): the y position of the center of the circle.
+          radius (int): the radius of the circle.
+          fill ((int,int,int)): the color of the circle.
+          border ((int,int,int)): the color of the border of the circle.
+
+        """
+        # TODO Implement fill method
+        x = radius
+        y = 0
+        err = 0
+        while x >= y:
+            self.set_pixel(x0 + x, y0 + y, border)
+            self.set_pixel(x0 + y, y0 + x, border)
+            self.set_pixel(x0 - y, y0 + x, border)
+            self.set_pixel(x0 - x, y0 + y, border)
+            self.set_pixel(x0 - x, y0 - y, border)
+            self.set_pixel(x0 - y, y0 - x, border)
+            self.set_pixel(x0 + y, y0 - x, border)
+            self.set_pixel(x0 + x, y0 - y, border)
+            y += 1
+            err += 1 + 2 * y
+            if 2 * (err - x) + 1 > 0:
+                x -= 1
+                err += 1 - 2 * x
+
 
 def demo():
     """Demo of the module."""
