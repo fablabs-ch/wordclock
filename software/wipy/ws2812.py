@@ -12,7 +12,9 @@ class WS2812:
     """
     Driver for WS2812 RGB LEDs. May be used for controlling single LED or chain
     of LEDs.
+
     Example of use:
+
         chain = WS2812(ledNumber=4)
         data = [
             (255, 0, 0),    # red
@@ -21,6 +23,7 @@ class WS2812:
             (85, 85, 85),   # white
         ]
         chain.show(data)
+
     Version: 1.0
     """
     # Values to put inside SPi register for each color's bit
@@ -70,10 +73,13 @@ class WS2812:
     def update_buf(self, data, start=0):
         """
         Fill a part of the buffer with RGB data.
+
         Order of colors in buffer is changed from RGB to GRB because WS2812 LED
         has GRB order of colors. Each color is represented by 4 bytes in buffer
         (1 byte for each 2 bits).
+
         Returns the index of the first unfilled LED
+
         Note: If you find this function ugly, it's because speed optimisations
         beated purity of code.
         """
@@ -110,6 +116,7 @@ class WS2812:
     def fill_buf(self, data):
         """
         Fill buffer with RGB data.
+
         All LEDs after the data are turned off.
         """
         end = self.update_buf(data)
