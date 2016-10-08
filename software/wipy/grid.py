@@ -1,7 +1,17 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=invalid-name,too-many-arguments
 """Module to control a NeoPixels grid."""
 
-from ws2812 import WS2812
+try:
+    from ws2812 import WS2812
+except ImportError:
+    pass
+
+try:
+    from xtermcolor import colorize
+    from xtermcolor.ColorMap import XTermColorMap
+except ImportError:
+    pass
 
 
 class Grid():
@@ -55,15 +65,34 @@ class Grid():
             for rx, _ in enumerate(rgbs[ry]):
                 self.set_pixel(x + rx, y + ry, rgbs[ry][rx])
 
-    def set_square(self, x, y, w, h, rgb):
+    def draw_square(self, x, y, w, h, rgb):
         """Set pixels in the square at (x,y) of size (w,h) to <rgb>."""
         for rx in range(h):
             for ry in range(w):
                 self.set_pixel(x + rx, y + ry, rgb)
 
+    def __str__(self):
+        result = ""
+        for x in range(self._height):
+            for y in range(self._width):
+                pixel = self._grid[self.at(x, y)]
+                rgb = int("0x{0[0]:02X}{0[1]:02X}{0[2]:02X}".format(pixel), 0)
+                bg = XTermColorMap().convert(rgb)[0]
+                result += colorize("  ", ansi=10, ansi_bg=bg)
+                # result += "[{0[0]:3} {0[1]:3} {0[2]:3}]\t".format(pixel)
+            result += "\n"
+        return result
 
-g = Grid(12,12)
-g.set_square(0,0,12,12,(255, 0, 0))
-g.set_square(1,4,4,10,(255, 255, 255))
-g.set_square(4,1,10,4,(255, 255, 255))
-g.display()
+
+# Swiss flag
+g = Grid(12, 12)
+g.draw_square(0, 0, 12, 12, (255, 0, 0))
+g.draw_square(1, 4, 4, 10, (255, 255, 255))
+g.draw_square(4, 1, 10, 4, (255, 255, 255))
+print(g)
+
+# Netherlands flag
+g.draw_square(0, 0, 12, 4, (255, 0, 0))
+g.draw_square(4, 0, 12, 4, (255, 255, 255))
+g.draw_square(8, 0, 12, 4, (0, 0, 255))
+print(g)
