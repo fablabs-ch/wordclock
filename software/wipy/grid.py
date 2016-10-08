@@ -133,15 +133,16 @@ class Grid():
                 self.set_pixel(x + rx, y + ry, rgbs[ry][rx])
 
     # pylint: disable=too-many-arguments,invalid-name
-    def draw_square(self, x, y, w, h, fill=None, border=None):
-        """Draw a square at position <x,y> of size <w,h> to the color <rgb>.
+    def draw_rectangle(self, x, y, w, h, fill=None, border=None):
+        """Draw a square at position <x,y> of size <w,h> with specified colors.
 
         Args:
           x (int): the x position of the top left pixel of the rectangle.
           y (int): the y position of the top left pixel of the rectangle.
           w (int): the width of the rectangle.
           h (int): the height of the rectangle.
-          rgb ((int,int,int)): the color of the rectangle.
+          fill ((int,int,int)): the color of the rectangle.
+          border ((int,int,int)): the color of the border of the rectangle.
 
         """
         if fill:
@@ -161,9 +162,10 @@ def demo():
     """Demo of the module."""
     # Show a swiss flag on a 12x12 grid.
     g = Grid(12, 12)
-    g.draw_square(0, 0, 12, 12, fill=(255, 0, 0))
-    g.draw_square(1, 4, 4, 10, fill=(255, 255, 255))
-    g.draw_square(4, 1, 10, 4, fill=(255, 255, 255))
+    g.draw_rectangle(0, 0, 12, 12, fill=(255, 0, 0))
+    g.draw_rectangle(1, 4, 4, 10, fill=(255, 255, 255))
+    g.draw_rectangle(4, 1, 10, 4, fill=(255, 255, 255))
+    g.draw_circle(6, 6, 4, border=(0, 0, 0))
     g.show()
 
 if __name__ == '__main__':
