@@ -96,8 +96,7 @@ class Grid():
             rgbs = (int("0x{0[0]:02X}{0[1]:02X}{0[2]:02X}".format(pixel), 0)
                     for pixel in self._grid)
             # Transform rgb integers to ansi color codes
-            ansi = [XTermColorMap().convert(p)[0]
-                    for p in rgbs]
+            ansi = [XTermColorMap().convert(rgb)[0] for rgb in rgbs]
             # Print the grid in the terminal
             for x in range(self._height):
                 for y in range(self._width):
@@ -134,7 +133,7 @@ class Grid():
                 self.set_pixel(x + rx, y + ry, rgbs[ry][rx])
 
     # pylint: disable=too-many-arguments,invalid-name
-    def draw_square(self, x, y, w, h, rgb):
+    def draw_square(self, x, y, w, h, fill=None, border=None):
         """Draw a square at position <x,y> of size <w,h> to the color <rgb>.
 
         Args:
@@ -145,18 +144,26 @@ class Grid():
           rgb ((int,int,int)): the color of the rectangle.
 
         """
-        for rx in range(h):
-            for ry in range(w):
-                self.set_pixel(x + rx, y + ry, rgb)
+        if fill:
+            for rx in range(h):
+                for ry in range(w):
+                    self.set_pixel(x + rx, y + ry, fill)
+        if border:
+            for rx in range(h):
+                self.set_pixel(x + rx, y, border)
+                self.set_pixel(x + rx, y + w - 1, border)
+            for ry in range(w - 2):
+                self.set_pixel(x, y + ry + 1, border)
+                self.set_pixel(x + h - 1, y + ry + 1, border)
 
 
 def demo():
     """Demo of the module."""
     # Show a swiss flag on a 12x12 grid.
     g = Grid(12, 12)
-    g.draw_square(0, 0, 12, 12, (255, 0, 0))
-    g.draw_square(1, 4, 4, 10, (255, 255, 255))
-    g.draw_square(4, 1, 10, 4, (255, 255, 255))
+    g.draw_square(0, 0, 12, 12, fill=(255, 0, 0))
+    g.draw_square(1, 4, 4, 10, fill=(255, 255, 255))
+    g.draw_square(4, 1, 10, 4, fill=(255, 255, 255))
     g.show()
 
 if __name__ == '__main__':
