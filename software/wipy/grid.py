@@ -170,7 +170,7 @@ class Grid():
         """
         for x, _ in enumerate(subgrid):
             for y, _ in enumerate(subgrid[x]):
-                if subgrid[x][y] and mask[x][y]:
+                if subgrid[x][y] and (not mask or mask[x][y]):
                     self.draw_point(x0 + x, y0 + y, subgrid[x][y])
 
     def draw_line(self, x0, y0, x1, y1, fill=None):
