@@ -8,7 +8,7 @@
 #include "debugable.h"
 #include "types.h"
 #include "constants.h"
-#include "abstractlayout.h"
+#include "layouts/abstractlayout.h"
 #include "WS2812.h"
 #include "config.h"
 #include "timemanager.h"
@@ -56,8 +56,6 @@ private:
 
 	void allLedsOff();
 	void writeLeds();
-	void displayDebug();
-	void displayDebugLine(int);
 	bool isledOn(int row, int colum);
 	void computeColorOn();
 

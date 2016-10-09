@@ -1,4 +1,5 @@
 #include "layout.h"
+#ifdef LAYOUT_FR
 
 /*
 
@@ -15,22 +16,18 @@
 |   |   |   |   | * | * | * | * |   |   |   |   |
 |   |   |   |   |   |   |   |   |   |   |   |   |
 
-|000|   |   |   |   |   |   |   |   |   |   |011|
-|023|   |   |   |   |   |   |   |   |   |   |012|
-|024|   |   |   |   |   |   |   |   |   |   |035|
-|047|   |   |   |   |   |   |   |   |   |   |036|
-|048|   |   |   |   |   |   |   |   |   |   |059|
-|071|   |   |   |   |   |   |   |   |   |   |060|
-|072|   |   |   |   |   |   |   |   |   |   |083|
-|095|   |   |   |   |   |   |   |   |   |   |084|
-|096|   |   |   |   |   |   |   |   |   |   |107|
-|119|   |   |   |   |   |   |   |   |   |   |108|
-|120|   |   |   |   |   |   |   |   |   |   |131|
-|143|   |   |   |   |   |   |   |   |   |   |132|
-
-Use the column in the following string to know a LED position:
-
-IL  EST  UNEERTAUQ SIORTCINQSIX SEPTXIDFUEN TIUH ONZE DOUZE SERUEH XUED MOINS ET DIXQNIC-TGNIV  QUART DEMI                  ****                |||
+|000|001|002|003|004|005|006|007|008|009|010|011|
+|023|022|021|020|019|018|017|016|015|014|013|012|
+|024|025|026|027|028|029|030|031|032|033|034|035|
+|047|046|045|044|043|042|041|040|039|038|037|036|
+|048|049|050|051|052|053|054|055|056|057|058|059|
+|071|070|069|068|067|066|065|064|063|062|061|060|
+|072|073|074|075|076|077|078|079|080|081|082|083|
+|095|094|093|092|091|090|089|088|087|086|085|084|
+|096|097|098|099|100|101|102|103|104|105|106|107|
+|119|118|117|116|115|114|113|112|111|110|109|108|
+|120|121|122|123|124|125|126|127|128|129|130|131|
+|143|142|141|140|139|138|137|136|135|134|133|132|
 
  */
 
@@ -38,7 +35,6 @@ Layout::Layout() {
 }
 
 void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d) {
-	uint8_t minuteEtoile = minute;
 
 	if (minute >= 35) {
 		hour += 1;
@@ -102,35 +98,13 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 			break;
 	}
 
-	//FIXME heures
-	this->append(d, 60, 61, 62, 63, 64, 65); //heures
-	//this->append(d, 60, 61, 62, 63, 64); //heure
-
-	//Contrôle des étoiles by DylanCollaud
-	if (minuteEtoile <= 35) {
-		minuteEtoile = minute % 5;
-	} else {
-		minuteEtoile = 4 - ((minute - 1) % 5);
+	this->append(d, 60, 61, 62, 63, 64); //heure
+	if(hour>1){
+	    // heures avec s
+	    this->append(d, 65);
 	}
 
-	switch (minuteEtoile) {
-		case 1:
-			this->append(d, 124);
-			break;
-		case 2:
-			this->append(d, 124, 125);
-			break;
-		case 3:
-			this->append(d, 124, 125, 126);
-			break;
-		case 4:
-			this->append(d, 124, 125, 126, 127);
-			break;
-	}
-
-	if (minute > 35) {
-		minute += 4;
-	} //Décalage dans le future pour faire correspondre les étoiles by Dylan Collaud
+    this->minuteStars(d, &minute, 124, 125, 126, 127);
 
 	minute /= 5;
 	switch (minute) {
@@ -184,11 +158,4 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 	}
 }
 
-char* Layout::getDebugLayout() {
-#ifdef ALLOW_DEBUG_DISPLAY
-	return "il  est  unetrois quatrecinqsix septhuit neufdix onze douze  deux heuresmoins et dix  vingt-cinqquart demi                   ****                ";
 #endif
-#ifndef ALLOW_DEBUG_DISPLAY
-	return "";
-#endif
-}

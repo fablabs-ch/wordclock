@@ -1,6 +1,15 @@
 #ifndef _CONSTANTS_H
 #define _CONSTANTS_H
 
+
+//Language
+#define LAYOUT_FR
+//#define LAYOUT_EN
+
+//Define if you want to substract the minute when after half an hour
+#define MINUTES_REVERSE false
+
+//matrix
 #define DISPLAY_ROWS 12
 #define DISPLAY_COLUMNS 12
 #define DISPLAY_LEDS DISPLAY_ROWS*DISPLAY_COLUMNS
@@ -20,12 +29,6 @@
 
 //Outputs
 #define PIN_LED_STRIP 8
-
-//Define if you want to substract the minute when after half an hour
-#define MINUTES_REVERSE false
-
-//will take a lot more memory and can cause bugs
-//#define ALLOW_DEBUG_DISPLAY
 
 
 #endif

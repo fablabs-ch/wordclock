@@ -8,9 +8,16 @@
 #include "timemanager.h"
 #include "input.h"
 #include "display.h"
-#include "layout.h"
-#include "digitallayout.h"
 #include "sensors.h"
+
+
+#include "layouts/digitallayout.h"
+#include "layouts/digitallayout.cpp"
+#include "layouts/abstractlayout.h"
+#include "layouts/abstractlayout.cpp"
+#include "layouts/layout.h"
+#include "layouts/layout.fr.cpp"
+#include "layouts/layout.en.cpp"
 
 
 WS2812 ws2812(DISPLAY_LEDS);

@@ -102,38 +102,7 @@ void Display::allLedsOff() {
 }
 
 void Display::writeLeds() {
-	//this->displayWordTime(1, 0, 0);
-	if (this->isDebugEnabled()) {
-		this->displayDebug();
-	}
-
 	this->leds->sync();
-}
-
-void Display::displayDebug() {
-	char* l = wordLayout->getDebugLayout();
-	this->displayDebugLine(DISPLAY_COLUMNS * 4 + 2);
-	for (int row = 0; row < DISPLAY_ROWS; row++) {
-		for (int col = 0; col < DISPLAY_COLUMNS; col++) {
-			this->debug(" | ");
-			if (this->isledOn(row, col)) {
-				this->debug(l[row * DISPLAY_COLUMNS + col]);
-			} else {
-				this->debug(" ");
-			}
-		}
-		this->debug(" | ");
-		this->debugln();
-		this->displayDebugLine(DISPLAY_COLUMNS * 4 + 2);
-	}
-	this->debugln();
-}
-
-void Display::displayDebugLine(int nb) {
-	for (int col = 0; col < nb; col++) {
-		this->debug("-");
-	}
-	this->debugln();
 }
 
 bool Display::isledOn(int x, int y) {

@@ -1,4 +1,5 @@
 #include "layout.h"
+#ifdef LAYOUT_EN
 
 /*
 
@@ -15,22 +16,19 @@
 |   |   |   |   | * | * | * | * |   |   |   |   |
 |   |   |   |   |   |   |   |   |   |   |   |   |
 
-|000|   |   |   |   |   |   |   |   |   |   |011|
-|023|   |   |   |   |   |   |   |   |   |   |012|
-|024|   |   |   |   |   |   |   |   |   |   |035|
-|047|   |   |   |   |   |   |   |   |   |   |036|
-|048|   |   |   |   |   |   |   |   |   |   |059|
-|071|   |   |   |   |   |   |   |   |   |   |060|
-|072|   |   |   |   |   |   |   |   |   |   |083|
-|095|   |   |   |   |   |   |   |   |   |   |084|
-|096|   |   |   |   |   |   |   |   |   |   |107|
-|119|   |   |   |   |   |   |   |   |   |   |108|
-|120|   |   |   |   |   |   |   |   |   |   |131|
-|143|   |   |   |   |   |   |   |   |   |   |132|
+|000|001|002|003|004|005|006|007|008|009|010|011|
+|023|022|021|020|019|018|017|016|015|014|013|012|
+|024|025|026|027|028|029|030|031|032|033|034|035|
+|047|046|045|044|043|042|041|040|039|038|037|036|
+|048|049|050|051|052|053|054|055|056|057|058|059|
+|071|070|069|068|067|066|065|064|063|062|061|060|
+|072|073|074|075|076|077|078|079|080|081|082|083|
+|095|094|093|092|091|090|089|088|087|086|085|084|
+|096|097|098|099|100|101|102|103|104|105|106|107|
+|119|118|117|116|115|114|113|112|111|110|109|108|
+|120|121|122|123|124|125|126|127|128|129|130|131|
+|143|142|141|140|139|138|137|136|135|134|133|132|
 
-Use the column in the following string to know a LED position:
-
- IT IS HALF RETRAUQ ANET TWENTY-FIVE ENO OT TSAPTWOTHREEFOURNEVESXISEVIFEIGHTNINETENEVLEWTNEVELE   OCLOCK                   ****                |||
 
  */
 
@@ -99,6 +97,8 @@ void Layout::getLayout(char hour, char minute, char sec, Display* d) {
 			break;
 	}
 
+    this->minuteStars(d, &minute, 124, 125, 126, 127);
+
 	minute /= 5;
 
 	switch (minute) {
@@ -160,11 +160,4 @@ void Layout::getLayout(char hour, char minute, char sec, Display* d) {
 	this->append(d, -1);
 }
 
-char* Layout::getDebugLayout() {
-#ifdef ALLOW_DEBUG_DISPLAY
-	return " it is half tena quarter twenty-fivepast to one twothreefourfivesixseveneightnineteneleventwelve   oclock                   ****                ";
 #endif
-#ifndef ALLOW_DEBUG_DISPLAY
-	return "";
-#endif
-}
