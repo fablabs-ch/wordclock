@@ -89,10 +89,10 @@ class Grid():
         # Translate the <x,y> position to the grid array index.
         return y + (x * self._height)
 
-    def reset(self):
+    def reset(self, fill=(0, 0, 0)):
         """Reset the grid by setting off all neopixels."""
         for i in range(len(self._grid)):
-            self._grid[i] = (0, 0, 0)
+            self._grid[i] = fill
 
     def show(self):
         """Show the grid.
