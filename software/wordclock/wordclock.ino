@@ -1,16 +1,20 @@
-
+//libs
 #include <EEPROM.h>
 #include <Wire.h>
-#include <TimerOne.h> // https://github.com/PaulStoffregen/TimerOne.git
-#include <DS3231.h>
+#include "libs/DS3231.h"
+#include "libs/DS3231.cpp"
+#include "libs/WS2812.h"
+#include "libs/light_ws2812.cpp"
+#include "libs/WS2812.cpp"
 
+//components
 #include "statemanager.h"
 #include "timemanager.h"
 #include "input.h"
 #include "display.h"
 #include "sensors.h"
 
-
+//layouts
 #include "layouts/digitallayout.h"
 #include "layouts/digitallayout.cpp"
 #include "layouts/abstractlayout.h"

@@ -32,7 +32,7 @@
 #endif
 #endif
 
-#include "constants.h"
+#include "../constants.h"
 
 struct cRGB { uint8_t g; uint8_t r; uint8_t b; };
 

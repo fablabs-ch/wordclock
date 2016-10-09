@@ -9,7 +9,7 @@
 #include "types.h"
 #include "constants.h"
 #include "layouts/abstractlayout.h"
-#include "WS2812.h"
+#include "libs/WS2812.h"
 #include "config.h"
 #include "timemanager.h"
 #include "sensors.h"
