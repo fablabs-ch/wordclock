@@ -356,13 +356,6 @@ def demo():
     g.draw_char(7, 8, '7', (100, 100, 255))
     g.show()
 
-    # Letters
-    g = Grid(12, 12)
-    for l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        g.draw_rectangle(0, 0, 11, 11, fill=(100, 100, 100))
-        g.draw_char(3, 4, l, (100, 100, 255))
-        g.show()
-
 
 if __name__ == '__main__':
     demo()
