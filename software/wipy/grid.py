@@ -200,7 +200,7 @@ class Grid():
         sx = -1 if x0 > x1 else 1
         sy = -1 if y0 > y1 else 1
         if dx > dy:
-            err = dx / 2.0
+            err = dx // 2
             while x != x1:
                 self.draw_point(x, y, fill)
                 err -= dy
@@ -209,7 +209,7 @@ class Grid():
                     err += dx
                 x += sx
         else:
-            err = dy / 2.0
+            err = dy // 2
             while y != y1:
                 self.draw_point(x, y, fill)
                 err -= dx
