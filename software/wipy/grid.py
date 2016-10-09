@@ -297,8 +297,7 @@ class Grid():
 
         """
         char = char[0].upper()
-        grid = [[fill]  * 3] * 5
-
+        grid = [[fill] * 3] * 5
         self.draw_subgrid(x0, y0, grid, mask=chars[char])
 
 
