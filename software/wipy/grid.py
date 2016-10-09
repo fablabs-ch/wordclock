@@ -19,6 +19,8 @@ Authors: Fabien Dubosson <fabien.dubosson@gmail.com>
 
 """
 
+from chars import chars
+
 # Try to import the ws2812 module.
 # If it is not supported, disable related functionalities
 try:
@@ -135,6 +137,8 @@ class Grid():
           fill ((int,int,int)): the color of the neopixel.
 
         """
+        if x < 0 or y < 0 or x >= self._height or y >= self._width:
+            return
         self._grid[self._at(x, y)] = fill
 
     def draw_points(self, xs, ys, fills):
@@ -283,7 +287,7 @@ class Grid():
                 err += 1 - 2 * x
 
     def draw_char(self, x0, y0, char, fill):
-        """Draw a char at position <x0,y0>.
+        """Draw a 3x5 char at position <x0,y0>.
 
         Args:
           x0 (int): the x position of the center of the circle.
@@ -293,229 +297,9 @@ class Grid():
 
         """
         char = char[0].upper()
-        grid = list()
-        for x in range(5):
-            grid.append(list())
-            for _ in range(3):
-                grid[x].append(fill)
+        grid = [[fill]  * 3] * 5
 
-        if char == '0':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == '1':
-            mask = [[0, 0, 1],
-                    [0, 1, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [0, 0, 1]]
-        elif char == '2':
-            mask = [[1, 1, 1],
-                    [0, 0, 1],
-                    [1, 1, 1],
-                    [1, 0, 0],
-                    [1, 1, 1]]
-        elif char == '3':
-            mask = [[1, 1, 1],
-                    [0, 0, 1],
-                    [0, 1, 1],
-                    [0, 0, 1],
-                    [1, 1, 1]]
-        elif char == '4':
-            mask = [[0, 1, 0],
-                    [1, 0, 0],
-                    [1, 1, 1],
-                    [0, 0, 1],
-                    [0, 0, 1]]
-        elif char == '5':
-            mask = [[1, 1, 1],
-                    [1, 0, 0],
-                    [1, 1, 1],
-                    [0, 0, 1],
-                    [1, 1, 1]]
-        elif char == '6':
-            mask = [[1, 1, 1],
-                    [1, 0, 0],
-                    [1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == '7':
-            mask = [[1, 1, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [0, 0, 1]]
-        elif char == '8':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == '9':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 1],
-                    [0, 0, 1],
-                    [1, 1, 1]]
-        elif char == 'A':
-            mask = [[0, 1, 0],
-                    [1, 0, 1],
-                    [1, 1, 1],
-                    [1, 0, 1],
-                    [1, 0, 1]]
-        elif char == 'B':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 0],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == 'C':
-            mask = [[1, 1, 1],
-                    [1, 0, 0],
-                    [1, 0, 0],
-                    [1, 0, 0],
-                    [1, 1, 1]]
-        elif char == 'D':
-            mask = [[1, 1, 0],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 0]]
-        elif char == 'E':
-            mask = [[1, 1, 1],
-                    [1, 0, 0],
-                    [1, 1, 0],
-                    [1, 0, 0],
-                    [1, 1, 1]]
-        elif char == 'F':
-            mask = [[1, 1, 1],
-                    [1, 0, 0],
-                    [1, 1, 0],
-                    [1, 0, 0],
-                    [1, 0, 0]]
-        elif char == 'G':
-            mask = [[1, 1, 1],
-                    [1, 0, 0],
-                    [1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == 'H':
-            mask = [[1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 1],
-                    [1, 0, 1],
-                    [1, 0, 1]]
-        elif char == 'I':
-            mask = [[0, 1, 0],
-                    [0, 1, 0],
-                    [0, 1, 0],
-                    [0, 1, 0],
-                    [0, 1, 0]]
-        elif char == 'J':
-            mask = [[1, 1, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == 'K':
-            mask = [[1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 0],
-                    [1, 0, 1],
-                    [1, 0, 1]]
-        elif char == 'L':
-            mask = [[1, 0, 0],
-                    [1, 0, 0],
-                    [1, 0, 0],
-                    [1, 0, 0],
-                    [1, 1, 1]]
-        elif char == 'M':
-            mask = [[1, 0, 1],
-                    [1, 1, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1]]
-        elif char == 'N':
-            mask = [[1, 0, 0],
-                    [1, 1, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1]]
-        elif char == 'O':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == 'P':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 1],
-                    [1, 0, 0],
-                    [1, 0, 0]]
-        elif char == 'Q':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 1],
-                    [0, 1, 0]]
-        elif char == 'R':
-            mask = [[1, 1, 1],
-                    [1, 0, 1],
-                    [1, 1, 0],
-                    [1, 0, 1],
-                    [1, 0, 1]]
-        elif char == 'S':
-            mask = [[1, 1, 1],
-                    [1, 0, 0],
-                    [1, 1, 1],
-                    [0, 0, 1],
-                    [1, 1, 1]]
-        elif char == 'T':
-            mask = [[1, 1, 1],
-                    [0, 1, 0],
-                    [0, 1, 0],
-                    [0, 1, 0],
-                    [0, 1, 0]]
-        elif char == 'U':
-            mask = [[1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 1]]
-        elif char == 'V':
-            mask = [[1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [0, 1, 0]]
-        elif char == 'W':
-            mask = [[1, 0, 1],
-                    [1, 0, 1],
-                    [1, 0, 1],
-                    [1, 1, 1],
-                    [1, 0, 1]]
-        elif char == 'X':
-            mask = [[1, 0, 1],
-                    [1, 0, 1],
-                    [0, 1, 0],
-                    [1, 0, 1],
-                    [1, 0, 1]]
-        elif char == 'Y':
-            mask = [[1, 0, 1],
-                    [1, 0, 1],
-                    [0, 1, 0],
-                    [0, 1, 0],
-                    [0, 1, 0]]
-        elif char == 'Z':
-            mask = [[1, 1, 1],
-                    [0, 0, 1],
-                    [0, 1, 0],
-                    [1, 0, 0],
-                    [1, 1, 1]]
-        self.draw_subgrid(x0, y0, grid, mask=mask)
+        self.draw_subgrid(x0, y0, grid, mask=chars[char])
 
 
 def demo():
@@ -573,13 +357,12 @@ def demo():
     g.draw_char(7, 8, '7', (100, 100, 255))
     g.show()
 
-    import time
+    # Letters
     g = Grid(12, 12)
     for l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
         g.draw_rectangle(0, 0, 11, 11, fill=(100, 100, 100))
         g.draw_char(3, 4, l, (100, 100, 255))
         g.show()
-        time.sleep(0.3)
 
 
 if __name__ == '__main__':
