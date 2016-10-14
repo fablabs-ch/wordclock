@@ -2,7 +2,6 @@
 """Meteo application."""
 
 import app
-import grid
 
 # Colors abbreviation in 4 letters, for ICONS definitions alignment
 YELL = (255, 200, 100)
@@ -159,13 +158,9 @@ class Meteo(app.BaseApplication):
 
 def demo():
     """Demo of the module."""
-    g = grid.Grid(12, 12)
-    for tpe in ICONS:
-        g.draw_rectangle(0, 0, 11, 11, fill=(50, 50, 50))
-        g.draw_subgrid(1, 1, ICONS[tpe])
-        g.show()
+    Meteo().show_temp(-12)
+    Meteo().show_icon('sunny')
 
-    Meteo().show_temp()
 
 if __name__ == '__main__':
     demo()
