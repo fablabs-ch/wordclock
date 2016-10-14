@@ -14,92 +14,101 @@ WHIT = (255, 255, 255)
 ICONS = dict()
 
 # Sunny
-ICONS['sunny'] = [[None, None, None, None, YELL, None, None, None, None],
-                  [None, YELL, None, None, YELL, None, None, YELL, None],
-                  [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
-                  [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
-                  [YELL, YELL, YELL, YELL, YELL, YELL, YELL, YELL, YELL],
-                  [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
-                  [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
-                  [None, YELL, None, None, YELL, None, None, YELL, None],
-                  [None, None, None, None, YELL, None, None, None, None]]
+ICONS['sunny'] = [
+    [None, None, None, None, YELL, None, None, None, None],
+    [None, YELL, None, None, YELL, None, None, YELL, None],
+    [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
+    [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
+    [YELL, YELL, YELL, YELL, YELL, YELL, YELL, YELL, YELL],
+    [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
+    [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
+    [None, YELL, None, None, YELL, None, None, YELL, None],
+    [None, None, None, None, YELL, None, None, None, None]]
+
 # Mostly sunny
-ICONS['mostly'] = [[None, None, None, None, YELL, None, None, None, None],
-                   [None, YELL, None, None, YELL, None, None, None, None],
-                   [None, None, YELL, YELL, YELL, YELL, GREY, None, None],
-                   [None, None, YELL, YELL, YELL, GREY, GREY, GREY, None],
-                   [YELL, YELL, YELL, GREY, YELL, GREY, GREY, GREY, None],
-                   [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                   [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                   [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
-                   [None, GREY, None, GREY, None, None, None, GREY, None]]
+ICONS['mostly'] = [
+    [None, None, None, None, YELL, None, None, None, None],
+    [None, YELL, None, None, YELL, None, None, None, None],
+    [None, None, YELL, YELL, YELL, YELL, GREY, None, None],
+    [None, None, YELL, YELL, YELL, GREY, GREY, GREY, None],
+    [YELL, YELL, YELL, GREY, YELL, GREY, GREY, GREY, None],
+    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
+    [None, GREY, None, GREY, None, None, None, GREY, None]]
 
 
 # Partially sunny
-ICONS['partly'] = [[None, None, None, None, YELL, None, None, None, None],
-                   [None, YELL, None, None, YELL, None, None, YELL, None],
-                   [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
-                   [None, None, YELL, YELL, YELL, YELL, YELL, GREY, None],
-                   [YELL, YELL, YELL, YELL, YELL, YELL, GREY, GREY, None],
-                   [None, None, YELL, YELL, YELL, GREY, GREY, GREY, GREY],
-                   [None, None, YELL, YELL, YELL, GREY, GREY, GREY, GREY],
-                   [None, YELL, None, None, GREY, None, GREY, GREY, GREY],
-                   [None, None, None, None, None, None, None, GREY, None]]
+ICONS['partly'] = [
+    [None, None, None, None, YELL, None, None, None, None],
+    [None, YELL, None, None, YELL, None, None, YELL, None],
+    [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
+    [None, None, YELL, YELL, YELL, YELL, YELL, GREY, None],
+    [YELL, YELL, YELL, YELL, YELL, YELL, GREY, GREY, None],
+    [None, None, YELL, YELL, YELL, GREY, GREY, GREY, GREY],
+    [None, None, YELL, YELL, YELL, GREY, GREY, GREY, GREY],
+    [None, YELL, None, None, GREY, None, GREY, GREY, GREY],
+    [None, None, None, None, None, None, None, GREY, None]]
 
 # Cloudy
-ICONS['cloud'] = [[None, None, None, None, None, None, None, None, None],
-                  [None, None, None, None, None, None, GREY, None, None],
-                  [None, None, None, None, None, GREY, GREY, GREY, None],
-                  [None, None, None, GREY, None, GREY, GREY, GREY, None],
-                  [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                  [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                  [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
-                  [None, GREY, None, GREY, None, None, None, GREY, None],
-                  [None, None, None, None, None, None, None, None, None]]
+ICONS['cloud'] = [
+    [None, None, None, None, None, None, None, None, None],
+    [None, None, None, None, None, None, GREY, None, None],
+    [None, None, None, None, None, GREY, GREY, GREY, None],
+    [None, None, None, GREY, None, GREY, GREY, GREY, None],
+    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
+    [None, GREY, None, GREY, None, None, None, GREY, None],
+    [None, None, None, None, None, None, None, None, None]]
 
 # Light rain
-ICONS['light_r'] = [[None, None, None, None, None, None, GREY, None, None],
-                    [None, None, None, None, None, GREY, GREY, GREY, None],
-                    [None, None, None, GREY, None, GREY, GREY, GREY, None],
-                    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
-                    [None, GREY, None, GREY, None, None, None, GREY, None],
-                    [BLUE, None, None, None, None, BLUE, None, None, None],
-                    [None, None, None, BLUE, None, None, None, None, BLUE]]
+ICONS['light_r'] = [
+    [None, None, None, None, None, None, GREY, None, None],
+    [None, None, None, None, None, GREY, GREY, GREY, None],
+    [None, None, None, GREY, None, GREY, GREY, GREY, None],
+    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
+    [None, GREY, None, GREY, None, None, None, GREY, None],
+    [BLUE, None, None, None, None, BLUE, None, None, None],
+    [None, None, None, BLUE, None, None, None, None, BLUE]]
 
 # Heavy rain
-ICONS['heavy_r'] = [[None, None, None, None, None, None, GREY, None, None],
-                    [None, None, None, None, None, GREY, GREY, GREY, None],
-                    [None, None, None, GREY, None, GREY, GREY, GREY, None],
-                    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, BLUE, GREY, GREY, GREY],
-                    [None, GREY, BLUE, GREY, BLUE, None, None, GREY, BLUE],
-                    [BLUE, None, None, None, None, BLUE, None, None, None],
-                    [None, BLUE, None, BLUE, None, None, BLUE, None, BLUE]]
+ICONS['heavy_r'] = [
+    [None, None, None, None, None, None, GREY, None, None],
+    [None, None, None, None, None, GREY, GREY, GREY, None],
+    [None, None, None, GREY, None, GREY, GREY, GREY, None],
+    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, BLUE, GREY, GREY, GREY],
+    [None, GREY, BLUE, GREY, BLUE, None, None, GREY, BLUE],
+    [BLUE, None, None, None, None, BLUE, None, None, None],
+    [None, BLUE, None, BLUE, None, None, BLUE, None, BLUE]]
 
 # Light snow
-ICONS['light_s'] = [[None, None, None, None, None, None, GREY, None, None],
-                    [None, None, None, None, None, GREY, GREY, GREY, None],
-                    [None, None, None, GREY, None, GREY, GREY, GREY, None],
-                    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
-                    [None, GREY, None, GREY, None, None, None, GREY, None],
-                    [WHIT, None, None, None, None, WHIT, None, None, None],
-                    [None, None, None, WHIT, None, None, None, None, WHIT]]
+ICONS['light_s'] = [
+    [None, None, None, None, None, None, GREY, None, None],
+    [None, None, None, None, None, GREY, GREY, GREY, None],
+    [None, None, None, GREY, None, GREY, GREY, GREY, None],
+    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, None, GREY, GREY, GREY],
+    [None, GREY, None, GREY, None, None, None, GREY, None],
+    [WHIT, None, None, None, None, WHIT, None, None, None],
+    [None, None, None, WHIT, None, None, None, None, WHIT]]
 
 # Snow
-ICONS['heavy_s'] = [[None, None, None, None, None, None, GREY, None, None],
-                    [None, None, None, None, None, GREY, GREY, GREY, None],
-                    [None, None, None, GREY, None, GREY, GREY, GREY, None],
-                    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
-                    [GREY, GREY, GREY, GREY, GREY, WHIT, GREY, GREY, GREY],
-                    [None, GREY, WHIT, GREY, WHIT, None, None, GREY, WHIT],
-                    [WHIT, None, None, None, None, WHIT, None, None, None],
-                    [None, WHIT, None, WHIT, None, None, WHIT, None, WHIT]]
+ICONS['heavy_s'] = [
+    [None, None, None, None, None, None, GREY, None, None],
+    [None, None, None, None, None, GREY, GREY, GREY, None],
+    [None, None, None, GREY, None, GREY, GREY, GREY, None],
+    [None, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY, GREY],
+    [GREY, GREY, GREY, GREY, GREY, WHIT, GREY, GREY, GREY],
+    [None, GREY, WHIT, GREY, WHIT, None, None, GREY, WHIT],
+    [WHIT, None, None, None, None, WHIT, None, None, None],
+    [None, WHIT, None, WHIT, None, None, WHIT, None, WHIT]]
 
 
 class Meteo(app.BaseApplication):
