@@ -12,7 +12,6 @@ WHIT = (255, 255, 255)
 # Meteo icons
 ICONS = dict()
 
-# Sunny
 ICONS['sunny'] = [
     [None, None, None, None, YELL, None, None, None, None],
     [None, YELL, None, None, YELL, None, None, YELL, None],
@@ -24,8 +23,7 @@ ICONS['sunny'] = [
     [None, YELL, None, None, YELL, None, None, YELL, None],
     [None, None, None, None, YELL, None, None, None, None]]
 
-# Mostly sunny
-ICONS['mostly'] = [
+ICONS['mostly_sunny'] = [
     [None, None, None, None, YELL, None, None, None, None],
     [None, YELL, None, None, YELL, None, None, None, None],
     [None, None, YELL, YELL, YELL, YELL, GREY, None, None],
@@ -37,8 +35,7 @@ ICONS['mostly'] = [
     [None, GREY, None, GREY, None, None, None, GREY, None]]
 
 
-# Partially sunny
-ICONS['partly'] = [
+ICONS['partial_sunny'] = [
     [None, None, None, None, YELL, None, None, None, None],
     [None, YELL, None, None, YELL, None, None, YELL, None],
     [None, None, YELL, YELL, YELL, YELL, YELL, None, None],
@@ -49,8 +46,7 @@ ICONS['partly'] = [
     [None, YELL, None, None, GREY, None, GREY, GREY, GREY],
     [None, None, None, None, None, None, None, GREY, None]]
 
-# Cloudy
-ICONS['cloud'] = [
+ICONS['cloudy'] = [
     [None, None, None, None, None, None, None, None, None],
     [None, None, None, None, None, None, GREY, None, None],
     [None, None, None, None, None, GREY, GREY, GREY, None],
@@ -61,8 +57,7 @@ ICONS['cloud'] = [
     [None, GREY, None, GREY, None, None, None, GREY, None],
     [None, None, None, None, None, None, None, None, None]]
 
-# Light rain
-ICONS['light_r'] = [
+ICONS['light_rain'] = [
     [None, None, None, None, None, None, GREY, None, None],
     [None, None, None, None, None, GREY, GREY, GREY, None],
     [None, None, None, GREY, None, GREY, GREY, GREY, None],
@@ -73,8 +68,7 @@ ICONS['light_r'] = [
     [BLUE, None, None, None, None, BLUE, None, None, None],
     [None, None, None, BLUE, None, None, None, None, BLUE]]
 
-# Heavy rain
-ICONS['heavy_r'] = [
+ICONS['heavy_rain'] = [
     [None, None, None, None, None, None, GREY, None, None],
     [None, None, None, None, None, GREY, GREY, GREY, None],
     [None, None, None, GREY, None, GREY, GREY, GREY, None],
@@ -85,8 +79,7 @@ ICONS['heavy_r'] = [
     [BLUE, None, None, None, None, BLUE, None, None, None],
     [None, BLUE, None, BLUE, None, None, BLUE, None, BLUE]]
 
-# Light snow
-ICONS['light_s'] = [
+ICONS['light_snow'] = [
     [None, None, None, None, None, None, GREY, None, None],
     [None, None, None, None, None, GREY, GREY, GREY, None],
     [None, None, None, GREY, None, GREY, GREY, GREY, None],
@@ -97,8 +90,7 @@ ICONS['light_s'] = [
     [WHIT, None, None, None, None, WHIT, None, None, None],
     [None, None, None, WHIT, None, None, None, None, WHIT]]
 
-# Snow
-ICONS['heavy_s'] = [
+ICONS['heavy_snow'] = [
     [None, None, None, None, None, None, GREY, None, None],
     [None, None, None, None, None, GREY, GREY, GREY, None],
     [None, None, None, GREY, None, GREY, GREY, GREY, None],
