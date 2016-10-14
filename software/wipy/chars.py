@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Represention of characters in 3x5 bitmaps."""
-
 # pylint: disable=invalid-name
+"""Represention of characters in 5x3 bitmaps."""
 
 chars = dict()
 
@@ -29,8 +28,8 @@ chars['3'] = [[1, 1, 1],
               [0, 0, 1],
               [1, 1, 1]]
 
-chars['4'] = [[0, 1, 0],
-              [1, 0, 0],
+chars['4'] = [[0, 1, 1],
+              [1, 0, 1],
               [1, 1, 1],
               [0, 0, 1],
               [0, 0, 1]]
