@@ -141,9 +141,11 @@ class Meteo(app.BaseApplication):
         # Show it
         self._grid.show()
 
-    def show_icon(self):
-        """Show the icon."""
-        self._grid.draw_subgrid(1, 1, ICONS['sunny'])
+    def show_icon(self, weather):
+        """Show the weather icon."""
+        self._grid.draw_subgrid(1, 1, ICONS[weather])
+        # Show it
+        self._grid.show()
 
 
 def demo():
