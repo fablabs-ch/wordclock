@@ -101,14 +101,44 @@ ICONS['heavy_s'] = [[None, None, None, None, None, None, GREY, None, None],
                     [WHIT, None, None, None, None, WHIT, None, None, None],
                     [None, WHIT, None, WHIT, None, None, WHIT, None, WHIT]]
 
+
 class Meteo(app.BaseApplication):
     """Class for displaying meteo informations."""
 
     def show_temp(self, temp):
         """Show the temperature."""
-        self._grid.draw_char(4, 2, temp[0], (100, 100, 255))
-        self._grid.draw_char(4, 6, temp[1], (100, 100, 255))
-        self._grid.draw_point(3, 10, (100, 100, 255))
+        # Initialize variables
+        shift = 0
+        neg = False
+        # Check if temperature is negative
+        if temp < 0:
+            neg = True
+            temp = abs(temp)
+        # Transform temprature to int
+        digits = str(temp)
+        if len(digits) == 1:
+            if neg:
+                # Draw the minus signe before
+                self._grid.draw_char(4, 2, '-', (100, 100, 255))
+                shift += 1
+            # Draw the first character
+            self._grid.draw_char(4, 5, digits[0], (100, 100, 255))
+            # Draw the degree square
+            self._grid.draw_point(3, 9, (100, 100, 255))
+        else:
+            if neg:
+                # Draw the minus signe before
+                self._grid.draw_char(4, 0, '-', (100, 100, 255))
+                shift += 1
+            # Draw the first character
+            self._grid.draw_char(4, 2 + shift, digits[0], (100, 100, 255))
+            # Draw the second if existing
+            self._grid.draw_char(4, 6 + shift, digits[1], (100, 100, 255))
+            # Draw the degree square
+            self._grid.draw_point(3, 10 + shift, (100, 100, 255))
+            # Draw the degree square
+            self._grid.draw_point(3, 10 + shift, (100, 100, 255))
+        # Show it
         self._grid.show()
 
     def show_icon(self):
