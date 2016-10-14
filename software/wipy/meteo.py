@@ -105,6 +105,13 @@ ICONS['heavy_snow'] = [
 class Meteo(app.BaseApplication):
     """Class for displaying meteo informations."""
 
+    def run(self):
+        """Coroutine that run the application."""
+        self.show_icon('mostly_sunny')
+        yield
+        self.show_temp(-12)
+        yield
+
     def show_temp(self, temp):
         """Show the temperature."""
         # Reset grid

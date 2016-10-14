@@ -10,3 +10,7 @@ class BaseApplication():
     def __init__(self):
         """Create a base application."""
         self._grid = Grid(12, 12)
+
+    def run(self):
+        """Coroutine that run application."""
+        raise NotImplementedError()
