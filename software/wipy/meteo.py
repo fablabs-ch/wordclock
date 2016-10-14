@@ -107,6 +107,8 @@ class Meteo(app.BaseApplication):
 
     def show_temp(self, temp):
         """Show the temperature."""
+        # Reset grid
+        self._grid.reset()
         # Initialize variables
         shift = 0
         neg = False
@@ -143,6 +145,9 @@ class Meteo(app.BaseApplication):
 
     def show_icon(self, weather):
         """Show the weather icon."""
+        # Reset grid
+        self._grid.reset()
+        # Draw the icon
         self._grid.draw_subgrid(1, 1, ICONS[weather])
         # Show it
         self._grid.show()
