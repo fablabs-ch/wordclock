@@ -40,7 +40,7 @@ class Grid():
         self._width = width
         self._height = height
         self._one_indexed = one_indexed
-        self._overlay = overlay
+        self.overlay = overlay
         # Create the grid of neopixels.
         self._grid = [(0, 0, 0)] * (width * height)
         # The controller of the neopixels
@@ -71,7 +71,7 @@ class Grid():
 
     def show(self, transition=None):
         """Show the grid."""
-        self._controller.show(self._grid, transition, self._overlay)
+        self._controller.show(self._grid, transition, self.overlay)
 
     def reset(self, fill=(0, 0, 0)):
         """Reset the grid by setting off all neopixels."""
