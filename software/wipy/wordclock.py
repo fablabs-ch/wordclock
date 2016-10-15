@@ -2,36 +2,53 @@
 """Main application module."""
 
 import time
+
+import untplib
 from app import BaseApplication
 
 
 class WordClock(BaseApplication):
     """Class for displaying wordclock time."""
 
+    # TODO: conf.lang
     def __init__(self, language, *args, **kwargs):
         """Initialize the wordclock."""
         super(WordClock, self).__init__(*args, **kwargs)
+        # TODO: IS WIPY
+        self.sync_time()
         self._language = language
         import lang.en as en
         self._lang = en.WordClockLang()
         self._grid.overlay = self._lang.word_grid
 
+    def sync_time(self):
+        """Sync the time with NTP."""
+        client = untplib.NTPClient()
+        resp = client.request('0.ch.pool.ntp.org')
+        print("Offset is ", resp.offset)
+
+        from machine import RTC
+        import time
+
+        rtc = RTC()
+        print("Adjusting clock by ", resp.offset, "seconds")
+        rtc.init(time.localtime(time.time() + resp.offset))
+
+
     def run(self):
         """Run the wordclock application."""
         while True:
             self.show_time()
-            time.sleep(0.9)
+            # time.sleep_ms(900)
 
     def show_time(self):
         """Show current time in words."""
         # Reset the grid
         self._grid.reset()
 
+        # TODO: IS WIPY
         # Get the current time
-        localtime = time.localtime()
-        h = localtime.tm_hour
-        m = localtime.tm_min
-        s = localtime.tm_sec
+        _, _, _, h, m, s, _, _ = time.localtime()
 
         # Display the time
         for x, y in self._lang.time_to_leds(h, m, s):

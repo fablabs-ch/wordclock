@@ -66,6 +66,16 @@ class Controller():
         if HAS_WS2812:
             # Show the grid on the neopixels.
             self._controller.show(self._grid)
+            # TODO: IS DEBUG
+            for x in range(self._height):
+                for y in range(self._width):
+                    symbol = " "
+                    if self._grid[self._at(x, y)] != (0, 0, 0) and \
+                       overlay:
+                        symbol = overlay[x][y]
+                    print(symbol, end='')
+                print()
+            print()
 
         if HAS_ANSI:
             # Transform rgb color tuples to rgb integer
