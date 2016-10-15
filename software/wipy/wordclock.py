@@ -16,9 +16,8 @@ class WordClock(BaseApplication):
         self._timer = timer
 
     def run(self):
-        """Coroutine to run the wordclock."""
+        """Run the wordclock."""
         co = self._app.run()
-        next(co)
         while True:
             try:
                 co.send(None)
@@ -32,12 +31,6 @@ def main():
     """Entry point of the application"""
     wordclock = WordClock(1000)
     loop = wordclock.run()
-    next(loop)
-    while True:
-        try:
-            loop.send(None)
-        except StopIteration:
-            break
 
 
 if __name__ == '__main__':

@@ -106,7 +106,7 @@ class Meteo(app.BaseApplication):
     """Class for displaying meteo informations."""
 
     def run(self):
-        """Coroutine that run the application."""
+        """Run the meteo application."""
         self.show_icon('mostly_sunny')
         yield
         self.show_temp(-12)
