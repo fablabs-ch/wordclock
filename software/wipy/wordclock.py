@@ -39,7 +39,8 @@ class WordClock(BaseApplication):
         """Run the wordclock application."""
         while True:
             self.show_time()
-            # time.sleep_ms(900)
+            yield
+            time.sleep_ms(900)
 
     def show_time(self):
         """Show current time in words."""
