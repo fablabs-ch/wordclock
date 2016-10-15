@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 """Launcher application module."""
 
+import socket
+import time
+
 from app import BaseApplication
+from network import WLAN
 from wordclock import WordClock
+from meteo import Meteo
 
 
 # pylint: disable=too-few-public-methods
@@ -16,13 +21,35 @@ class Launcher(BaseApplication):
 
     def run(self):
         """Run the wordclock."""
+        server = self.server()
         coroutine = self._app.run()
         while True:
             try:
                 coroutine.send(None)
-                # time.sleep_ms(self._timer)
+                val = server.send(None)
+                if val is not None:
+                    coroutine.close()
+                    coroutine = Meteo().run()
             except StopIteration:
                 break
+
+    def server(self):
+        """Run the server for remote control."""
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        ip = WLAN().ifconfig()[0]
+        s.bind((ip, 9999))
+        s.setblocking(False)
+        s.listen(5)
+        while True:
+            yield
+            try:
+                client, _ = s.accept()
+            except OSError:
+                continue
+            time.sleep_ms(1000)
+            cmd = client.readline()
+            client.close()
+            yield cmd
 
 
 def main():
