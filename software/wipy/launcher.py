@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-"""Main application module."""
+"""Launcher application module."""
 
 from app import BaseApplication
-from meteo import Meteo
+from wordclock import WordClock
 
 
 # pylint: disable=too-few-public-methods
-class Main(BaseApplication):
-    """Main application."""
+class Launcher(BaseApplication):
+    """Launcher application."""
 
     def __init__(self, *args, **kwargs):
         """Initialize the wordclock."""
-        super(Main, self).__init__(*args, **kwargs)
-        self._app = Meteo()
+        super(Launcher, self).__init__(*args, **kwargs)
+        self._app = WordClock('en')
 
     def run(self):
         """Run the wordclock."""
@@ -27,7 +27,7 @@ class Main(BaseApplication):
 
 def main():
     """Entry point of the application"""
-    app = Main()
+    app = Launcher()
     app.run()
 
 
