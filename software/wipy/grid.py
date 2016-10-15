@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=too-many-arguments,invalid-name
-"""Control a grid of neopixels.
+"""A grid of neopixels.
 
 This module assumes a grid of neopixels connected as following:
 
@@ -19,28 +19,8 @@ Authors: Fabien Dubosson <fabien.dubosson@gmail.com>
 
 """
 
+import controller
 from chars import chars
-
-# Try to import the ws2812 module.
-# If it is not supported, disable related functionalities
-try:
-    from ws2812 import WS2812
-    HAS_WS2812 = True
-except ImportError:
-    HAS_WS2812 = False
-
-# Try to import the xtermcolor module.
-# If it is not supported, disable related functionalities
-try:
-    # Force xtermcolor to use xterm ANSI color codes
-    from os import environ
-    environ['TERM'] = "xterm"
-    # Import xtermcolor
-    from xtermcolor import colorize
-    from xtermcolor.ColorMap import XTermColorMap
-    HAS_ANSI = True
-except ImportError:
-    HAS_ANSI = False
 
 
 class Grid():
@@ -65,7 +45,7 @@ class Grid():
         self._grid = [(0, 0, 0)] * (width * height)
         # The controller of the neopixels
         # Its creation is delayed because it turns off the neopixels.
-        self._controller = None
+        self._controller = controller.CONTROLLER
 
     def _at(self, x, y, corrected=True):
         """Translate a <x,y> position to the corresponding index in the grid.
@@ -89,44 +69,14 @@ class Grid():
         # Translate the <x,y> position to the grid array index.
         return y + (x * self._height)
 
+    def show(self, transition=None):
+        """Show the grid."""
+        self._controller.show(self._grid, transition, self._overlay)
+
     def reset(self, fill=(0, 0, 0)):
         """Reset the grid by setting off all neopixels."""
         for i in range(len(self._grid)):
             self._grid[i] = fill
-
-    def show(self):
-        """Show the grid.
-
-        Display it on the neopixels if WS2812 is available, and display it on
-        the terminal if xtermcolor is available.
-
-        """
-        if HAS_WS2812:
-            # Create the controller if not already existing.
-            if self._controller is None:
-                self._controller = WS2812(self._width * self._height)
-            # Show the grid on the neopixels.
-            self._controller.show(self._grid)
-
-        if HAS_ANSI:
-            # Transform rgb color tuples to rgb integer
-            rgbs = (int("0x{0[0]:02X}{0[1]:02X}{0[2]:02X}".format(pixel), 0)
-                    for pixel in self._grid)
-            # Transform rgb integers to ansi color codes
-            ansi = [XTermColorMap().convert(rgb)[0] for rgb in rgbs]
-            # Show the grid in the terminal
-            for x in range(self._height):
-                for y in range(self._width):
-                    overlay = " "
-                    if self._grid[self._at(x, y, False)] != (0, 0, 0) and \
-                       self._overlay:
-                        overlay = self._overlay[x][y]
-                    print(colorize(" " + overlay,
-                                   rgb=0,
-                                   ansi_bg=ansi[self._at(x, y, False)]),
-                          end='')
-                print()
-            print()
 
     def draw_point(self, x, y, fill):
         """Draw the pixel at position <x,y>.
@@ -311,7 +261,7 @@ def demo():
     g.show()
 
     # Sight
-    g = Grid(11, 11)
+    g = Grid(12, 12)
     g.draw_rectangle(0, 0, 10, 10, fill=(100, 100, 100))
     # Fill circle
     g.draw_circle(5, 5, 4, fill=(255, 200, 200))
