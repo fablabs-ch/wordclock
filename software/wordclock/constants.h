@@ -9,6 +9,8 @@
 //Define if you want to substract the minute when after half an hour
 #define MINUTES_REVERSE false
 
+#define USE_EXTERNAL_CLOCK false
+
 //matrix
 #define DISPLAY_ROWS 12
 #define DISPLAY_COLUMNS 12

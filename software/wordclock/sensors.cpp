@@ -27,7 +27,7 @@ void Sensors::loop(unsigned long dtMs){
 		if(!found){
 			//the value was not found so, it means it changes a lot => flag big change
 			this->bigChange = true;
-			debugln("Big change append");
+			debugln("Big light change");
 
 			//insert the value in the last known values
 			this->lastValues[this->lastValuesIndex++] = this->lightIntensity;
@@ -41,14 +41,14 @@ void Sensors::loop(unsigned long dtMs){
 void Sensors::readLightSensor(){
     int sensorValue = analogRead(SENSOR_LIGHT_PIN);
 
-	debug("Sensor value: ");
+	debug("Sensor raw: ");
 	debug(sensorValue);
 	debug("\t");
 
     sensorValue = constrain(sensorValue, SENSOR_LIGHT_MIN, SENSOR_LIGHT_MAX);
 	this->lightIntensity = map(sensorValue, SENSOR_LIGHT_MIN, SENSOR_LIGHT_MAX, 0, 255);
 
-	debug("Light: ");
+	debug("light: ");
 	debug(this->lightIntensity);
 	debugln();
 }

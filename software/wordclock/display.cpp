@@ -102,11 +102,14 @@ void Display::allLedsOff() {
 }
 
 void Display::writeLeds() {
+ 	if (this->isDebugEnabled()) {
+ 	    this->displayDebug();
+ 	}
 	this->leds->sync();
 }
 
 bool Display::isledOn(int x, int y) {
-	uint16_t index = this->digitalLayout->getLedIndex(x, y);
+	uint16_t index = this->wordLayout->getLedIndex(x, y);
 
 	cRGB rgb = this->leds->get_crgb_at(index);
 	return rgb.r != 0 || rgb.g != 0 || rgb.b != 0;
@@ -149,4 +152,29 @@ cRGB Display::convert(hsv_type hsv) {
 				((g + m) * 255),
 				((b + m) * 255)
 	};
+}
+
+void Display::displayDebug() {
+    this->displayDebugLine(DISPLAY_COLUMNS * 4 + 2);
+    for (int col = 0; col < DISPLAY_COLUMNS; col++) {
+        for (int row = 0; row < DISPLAY_ROWS; row++) {
+            this->debug(" | ");
+            if (this->isledOn(row, col)) {
+                this->debug("*");
+            } else {
+                this->debug(" ");
+            }
+        }
+        this->debug(" | ");
+        this->debugln();
+        this->displayDebugLine(DISPLAY_COLUMNS * 4 + 2);
+    }
+    this->debugln();
+}
+
+void Display::displayDebugLine(int nb) {
+    for (int col = 0; col < nb; col++) {
+        this->debug("-");
+    }
+    this->debugln();
 }

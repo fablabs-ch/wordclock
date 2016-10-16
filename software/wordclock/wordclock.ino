@@ -40,7 +40,7 @@ void setup() {
     Serial.begin(115200);
 
     //!\ WARNING debug display can introduce bug on input reading (due to latency of the loop)
-    //display.debug(&Serial);
+    display.debug(&Serial);
     config.debug(&Serial);
     //input.debug(&Serial);
     stateManager.debug(&Serial);
@@ -51,10 +51,13 @@ void setup() {
 
     sensors.init();
     config.init();
+    Serial.println("cfg init");
     timeManager.init();
+    Serial.println("init time");
     display.init();
     stateManager.init();
     input.init();
+    Serial.println("init done");
 
     //Matrix tester mode if button is pressed when powered on
     if (input.isButtonPressed()) {

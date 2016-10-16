@@ -61,5 +61,8 @@ private:
 
 	cRGB convert(hsv_type);
 
+	void displayDebug();
+    void displayDebugLine(int);
+
 };
 #endif

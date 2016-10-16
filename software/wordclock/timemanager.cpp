@@ -6,7 +6,9 @@ TimeManager::TimeManager() {
 void TimeManager::init(){
   this->time = 0;
   this->accNextSync = 0;
-  this->externalClock.begin();
+  #if USE_EXTERNAL_CLOCK
+    this->externalClock.begin();
+  #endif
   this->editionMode = false;
   this->readFromExternalClock();
 }
@@ -51,8 +53,9 @@ void TimeManager::enterEditionMode(){
 }
 
 void TimeManager::exitEditionMode(){
-  //compute time
-  RTCDateTime dt = this->externalClock.getDateTime();
+  #if USE_EXTERNAL_CLOCK
+    RTCDateTime dt = this->externalClock.getDateTime();
+  #endif
 
   uint8_t hour, min, sec;
   this->getTime(&hour, &min, &sec);
@@ -60,25 +63,31 @@ void TimeManager::exitEditionMode(){
   this->debugTime();
 
   //save to clock
-	this->externalClock.setDateTime(dt.year, dt.month, dt.day, hour, min, sec);
+  #if USE_EXTERNAL_CLOCK
+    this->externalClock.setDateTime(dt.year, dt.month, dt.day, hour, min, sec);
+  #endif
 
   this->editionMode = false;
 }
 
 void TimeManager::readFromExternalClock(){
-  if(this->editionMode){
-    return;
-  }
+  #if USE_EXTERNAL_CLOCK
+      if(this->editionMode){
+        return;
+      }
 
-  RTCDateTime dt = this->externalClock.getDateTime();
-  this->time = (uint32_t)dt.hour;
-  this->time *= 60;
-  this->time += (uint32_t)dt.minute;
-  this->time *= 60;
-  this->time += (uint32_t)dt.second;
+      RTCDateTime dt = this->externalClock.getDateTime();
+      this->time = (uint32_t)dt.hour;
+      this->time *= 60;
+      this->time += (uint32_t)dt.minute;
+      this->time *= 60;
+      this->time += (uint32_t)dt.second;
 
-  this->debug("External clock ");
-  this->debugTime();
+      this->debug("External clock ");
+      this->debugTime();
+  #else
+    this->time = 234;
+  #endif
 }
 
 void TimeManager::debugTime(){
