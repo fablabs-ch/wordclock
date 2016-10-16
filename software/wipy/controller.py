@@ -1,26 +1,19 @@
 # -*- coding: utf-8 -*-
 """Controller of the neopixels."""
 
-# Try to import the ws2812 module.
-# If it is not supported, disable related functionalities
-try:
-    from ws2812 import WS2812
-    HAS_WS2812 = True
-except ImportError:
-    HAS_WS2812 = False
+import conf
 
-# Try to import the xtermcolor module.
-# If it is not supported, disable related functionalities
-try:
+
+if conf.IS_WIPY:
+    from ws2812 import WS2812
+
+if conf.HAS_XTERMCOLOR:
     # Force xtermcolor to use xterm ANSI color codes
     from os import environ
     environ['TERM'] = "xterm"
     # Import xtermcolor
     from xtermcolor import colorize
     from xtermcolor.ColorMap import XTermColorMap
-    HAS_ANSI = True
-except ImportError:
-    HAS_ANSI = False
 
 
 # pylint: disable=too-few-public-methods
@@ -32,7 +25,8 @@ class Controller():
         self._width = width
         self._height = height
         self._grid = [(0, 0, 0)] * (width * height)
-        if HAS_WS2812:
+        # On the wipy, load the neopixel controller
+        if conf.IS_WIPY:
             self._controller = WS2812(self._width * self._height)
 
     def _at(self, x, y):
@@ -60,48 +54,47 @@ class Controller():
         the terminal if xtermcolor is available.
 
         """
-        # Save the Grid
+        # Save as the new current grid
         self._grid = list(grid)
 
-        if HAS_WS2812:
+        # Use the controller to show the LEDs on the wipy
+        if conf.IS_WIPY:
             # Show the grid on the neopixels.
             self._controller.show(self._grid)
-            # TODO: IS DEBUG
-            for x in range(self._height):
-                for y in range(self._width):
-                    symbol = " "
-                    if self._grid[self._at(x, y)] != (0, 0, 0) and \
-                       overlay:
-                        symbol = overlay[x][y]
-                    print(symbol, end='')
-                print()
-            print()
 
-        if HAS_ANSI:
+        # If the platform support xtermcolor
+        ansi = None
+        if conf.HAS_XTERMCOLOR:
             # Transform rgb color tuples to rgb integer
             rgbs = (int("0x{0[0]:02X}{0[1]:02X}{0[2]:02X}".format(pixel), 0)
                     for pixel in self._grid)
             # Transform rgb integers to ansi color codes
             ansi = [XTermColorMap().convert(rgb)[0] for rgb in rgbs]
             # Show the grid in the terminal
+
+        # If on debug mode, print the grid
+        if conf.DEBUG:
             for x in range(self._height):
                 for y in range(self._width):
-                    symbol = " "
-                    if self._grid[self._at(x, y)] != (0, 0, 0) and \
-                       overlay:
-                        symbol = overlay[x][y]
-                    print(colorize(" " + symbol,
-                                   rgb=0,
-                                   ansi_bg=ansi[self._at(x, y)]),
-                          end='')
+                    if conf.HAS_XTERMCOLOR:
+                        symbol = overlay[x][y] if overlay else " "
+                        cell = colorize(" " + symbol,
+                                        rgb=0,
+                                        ansi_bg=ansi[self._at(x, y)])
+                    else:
+                        symbol = " "
+                        if self._grid[self._at(x, y)] != (0, 0, 0):
+                            symbol = overlay[x][y] if overlay else "X"
+                        cell = " " + symbol
+                    print(cell, end='')
                 print()
             print()
 
     def show(self, grid, transition=None, overlay=None):
         """Show a grid."""
+        # TODO: Support transition
         if transition is None:
             self._show(grid, overlay)
-        # TODO: Support transition
 
 
 CONTROLLER = Controller(12, 12)

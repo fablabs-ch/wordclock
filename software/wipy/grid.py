@@ -44,7 +44,6 @@ class Grid():
         # Create the grid of neopixels.
         self._grid = [(0, 0, 0)] * (width * height)
         # The controller of the neopixels
-        # Its creation is delayed because it turns off the neopixels.
         self._controller = controller.CONTROLLER
 
     def _at(self, x, y, corrected=True):

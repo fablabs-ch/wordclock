@@ -31,10 +31,10 @@ class WordClockLang():
         leds += [(0, 4), (0, 5)]
 
         # hours
-        if minutes > 30:
+        if minutes >= 35:
             hours += 1
 
-        if hours in [0, 24]:
+        if hours in [0, 12]:
             leds += [(7, 6), (7, 7), (7, 8), (7, 9), (7, 10), (7, 11)]
         elif hours in [1, 13]:
             leds += [(3, 8), (3, 9), (3, 10)]

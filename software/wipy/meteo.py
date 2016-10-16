@@ -2,6 +2,9 @@
 """Meteo application."""
 
 import app
+import conf
+import time
+
 
 # Colors abbreviation in 4 letters, for ICONS definitions alignment
 YELL = (255, 200, 100)
@@ -107,10 +110,19 @@ class Meteo(app.BaseApplication):
 
     def run(self):
         """Run the meteo application."""
-        self.show_icon('mostly_sunny')
-        yield
-        self.show_temp(-12)
-        yield
+        while True:
+            self.show_icon('mostly_sunny')
+            yield
+            if conf.IS_WIPY:
+                time.sleep_ms(900)
+            else:
+                time.sleep(9/10)
+            self.show_temp(-12)
+            yield
+            if conf.IS_WIPY:
+                time.sleep_ms(900)
+            else:
+                time.sleep(9/10)
 
     def show_temp(self, temp):
         """Show the temperature."""

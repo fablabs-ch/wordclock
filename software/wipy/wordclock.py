@@ -3,53 +3,59 @@
 
 import time
 
-import untplib
+import conf
 from app import BaseApplication
+
+if conf.IS_WIPY:
+    import untplib
 
 
 class WordClock(BaseApplication):
     """Class for displaying wordclock time."""
 
-    # TODO: conf.lang
-    def __init__(self, language, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """Initialize the wordclock."""
         super(WordClock, self).__init__(*args, **kwargs)
-        # TODO: IS WIPY
-        self.sync_time()
-        self._language = language
+        # Sync the time on the Wipy
+        if conf.IS_WIPY:
+            self.sync_wipy_time()
         import lang.en as en
         self._lang = en.WordClockLang()
         self._grid.overlay = self._lang.word_grid
 
-    def sync_time(self):
+    @staticmethod
+    def sync_wipy_time():
         """Sync the time with NTP."""
-        client = untplib.NTPClient()
-        resp = client.request('0.ch.pool.ntp.org')
-        print("Offset is ", resp.offset)
-
         from machine import RTC
         import time
 
+        client = untplib.NTPClient()
+        resp = client.request('0.ch.pool.ntp.org')
         rtc = RTC()
-        print("Adjusting clock by ", resp.offset, "seconds")
         rtc.init(time.localtime(time.time() + resp.offset))
-
 
     def run(self):
         """Run the wordclock application."""
         while True:
             self.show_time()
             yield
-            time.sleep_ms(900)
+            if conf.IS_WIPY:
+                time.sleep_ms(900)
+            else:
+                time.sleep(9/10)
 
     def show_time(self):
         """Show current time in words."""
         # Reset the grid
         self._grid.reset()
 
-        # TODO: IS WIPY
-        # Get the current time
-        _, _, _, h, m, s, _, _ = time.localtime()
+        if conf.IS_WIPY:
+            _, _, _, h, m, s, _, _ = time.localtime()
+        else:
+            localtime = time.localtime()
+            h = localtime.tm_hour
+            m = localtime.tm_min
+            s = localtime.tm_sec
 
         # Display the time
         for x, y in self._lang.time_to_leds(h, m, s):
@@ -61,8 +67,10 @@ class WordClock(BaseApplication):
 
 def demo():
     """Demo of the wordclock."""
-    wordclock = WordClock('en')
-    wordclock.run()
+    wordclock = WordClock().run()
+    next(wordclock)
+    while True:
+        wordclock.send(None)
 
 
 if __name__ == '__main__':
