@@ -9,23 +9,25 @@ from wordclock import WordClock
 if conf.IS_WIPY:
     from network import WLAN
 
+
 class Launcher():
     """Launcher application."""
 
     def __init__(self, *args, **kwargs):
         """Initialize the wordclock."""
         super(Launcher, self).__init__(*args, **kwargs)
+        # WordClock application
         self._app = WordClock()
+        self._run = self._app.run()
+        # Server application
+        self._server = self.server()
 
     def run(self):
         """Run the wordclock."""
-        server = self.server()
-        clock = WordClock().run()
-        coroutine = clock
         while True:
             try:
-                coroutine.send(None)
-                val = server.send(None)
+                self._run.send(None)
+                self.interpret_command(self._server.send(None))
             except StopIteration:
                 break
 
@@ -46,10 +48,22 @@ class Launcher():
                     if cmd == b'':
                         break
                     if cmd is not None:
-                        cmd = cmd.decode('ascii').split()[0].strip()
+                        cmd = cmd.decode('ascii').split('\r\n')[0].strip()
                     yield cmd
             except OSError:
                 continue
+
+    def interpret_command(self, cmd_string):
+        """Interpret a command."""
+        if cmd_string is None:
+            return
+
+        words = cmd_string.split(' ')
+        cmd = words[0]
+        print(cmd, words)
+
+        if cmd == 'set_color':
+            self._app.color = (int(words[1]), int(words[2]), int(words[3]))
 
 
 def main():

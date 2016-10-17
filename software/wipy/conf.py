@@ -2,28 +2,66 @@
 """Project configuration."""
 
 # --------------------------------------------------------------------------- #
-# Configuration variables                                                     #
+# Basic configuration                                                         #
 # --------------------------------------------------------------------------- #
-
-DEBUG = True
-"""Debug mode."""
 
 LANG = 'en'
 """The langage to use in the application.
 
+Type: String
+
 Possibles values are 'en', 'fr' or 'de'.
+
+"""
+
+CLOCK_COLOR = (255, 100, 255)
+"""The default color of the wordclock.
+
+Type: (Integer, Integer, Integer)
+
+"""
+
+NTP_SERVER = '0.ch.pool.ntp.org'
+"""NTP server to use.
+
+Type: String
+
+"""
+
+NTP_DELAY = 120
+"""Time between two NTP synchronization.
+
+Type: Integer
+
+Time in second.
 
 """
 
 TIME_SHIFT = 2 * 3600
 """The shift to apply on UTC time to get local time.
 
+Type: Integer
+
 Should be an integer, in second.
+
+"""
+
+
+# --------------------------------------------------------------------------- #
+# Advanced configuration                                                      #
+# --------------------------------------------------------------------------- #
+
+DEBUG = False
+"""Enable or disable debug output.
+
+Type: Boolean
 
 """
 
 IS_WIPY = None
 """Specify if the platform running the code is the Wipy.
+
+Type: Boolean
 
 Set it to None for auto-detection.
 
@@ -32,6 +70,8 @@ Set it to None for auto-detection.
 HAS_XTERMCOLOR = None
 """Specify if the xtermcolor package is installed.
 
+Type: Boolean
+
 Set it to None for auto-detection.
 
 """
@@ -39,12 +79,16 @@ Set it to None for auto-detection.
 DIGITS_SUPPORT = True
 """Specify if digits ([0-9]) should be supported.
 
+Type: Boolean
+
 Set it to None for auto-detection.
 
 """
 
-LETTERS_SUPPORT = None
+LETTERS_SUPPORT = True
 """Specify if letters ([A-Z]) should be supported.
+
+Type: Boolean
 
 Set it to None for auto-detection.
 

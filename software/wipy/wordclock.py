@@ -17,31 +17,33 @@ class WordClock(BaseApplication):
     def __init__(self, *args, **kwargs):
         """Initialize the wordclock."""
         super(WordClock, self).__init__(*args, **kwargs)
-        # Sync the time on the Wipy
-        if conf.IS_WIPY:
-            self.sync_wipy_time()
+        # Create synchronization tools
+        self._rtc = RTC()
+        self._ntp = untplib.NTPClient()
+        # Set last time synced to never
+        self._last_sync = 0
+        # Set the default color
+        self.color = conf.CLOCK_COLOR
+        # TODO: Load language
         import lang.en as en
         self._lang = en.WordClockLang()
         self._grid.overlay = self._lang.word_grid
 
-    @staticmethod
-    def sync_wipy_time():
+    def sync_wipy_time(self):
         """Sync the time with NTP."""
-
-        client = untplib.NTPClient()
-        resp = client.request('0.ch.pool.ntp.org')
-        rtc = RTC()
-        rtc.init(time.localtime(time.time() + resp.offset + conf.TIME_SHIFT))
+        resp = self._ntp.request(conf.NTP_SERVER)
+        self._rtc.init(time.localtime(time.time()
+                                      + resp.offset
+                                      + conf.TIME_SHIFT))
+        self._last_sync = time.time()
 
     def run(self):
         """Run the wordclock application."""
         while True:
+            if conf.IS_WIPY and time.time() - self._last_sync > conf.NTP_DELAY:
+                self.sync_wipy_time()
             self.show_time()
             yield
-            if conf.IS_WIPY:
-                time.sleep_ms(900)
-            else:
-                time.sleep(9/10)
 
     def show_time(self):
         """Show current time in words."""
@@ -58,7 +60,7 @@ class WordClock(BaseApplication):
 
         # Display the time
         for x, y in self._lang.time_to_leds(h, m, s):
-            self._grid.draw_point(x, y, (255, 100, 255))
+            self._grid.draw_point(x, y, self.color)
 
         # Show the grid
         self._grid.show()
