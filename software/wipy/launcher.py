@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 """Launcher application module."""
 
-import gc
 import socket
 
 import conf
-from app import BaseApplication
-from meteo import Meteo
 from wordclock import WordClock
 
 if conf.IS_WIPY:
     from network import WLAN
 
-
-class Launcher(BaseApplication):
+class Launcher():
     """Launcher application."""
 
     def __init__(self, *args, **kwargs):
@@ -24,17 +20,12 @@ class Launcher(BaseApplication):
     def run(self):
         """Run the wordclock."""
         server = self.server()
-        meteo = Meteo().run()
         clock = WordClock().run()
         coroutine = clock
         while True:
             try:
                 coroutine.send(None)
                 val = server.send(None)
-                if val == 'meteo':
-                    coroutine = meteo
-                if val == 'time':
-                    coroutine = clock
             except StopIteration:
                 break
 
