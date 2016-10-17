@@ -15,6 +15,13 @@ Possibles values are 'en', 'fr' or 'de'.
 
 """
 
+TIME_SHIFT = 2 * 3600
+"""The shift to apply on UTC time to get local time.
+
+Should be an integer, in second.
+
+"""
+
 IS_WIPY = None
 """Specify if the platform running the code is the Wipy.
 

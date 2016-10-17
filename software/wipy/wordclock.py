@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Main application module."""
+"""Launcher module."""
 
 import time
 
@@ -8,6 +8,7 @@ from app import BaseApplication
 
 if conf.IS_WIPY:
     import untplib
+    from machine import RTC
 
 
 class WordClock(BaseApplication):
@@ -26,13 +27,11 @@ class WordClock(BaseApplication):
     @staticmethod
     def sync_wipy_time():
         """Sync the time with NTP."""
-        from machine import RTC
-        import time
 
         client = untplib.NTPClient()
         resp = client.request('0.ch.pool.ntp.org')
         rtc = RTC()
-        rtc.init(time.localtime(time.time() + resp.offset))
+        rtc.init(time.localtime(time.time() + resp.offset + conf.TIME_SHIFT))
 
     def run(self):
         """Run the wordclock application."""
@@ -68,7 +67,6 @@ class WordClock(BaseApplication):
 def demo():
     """Demo of the wordclock."""
     wordclock = WordClock().run()
-    next(wordclock)
     while True:
         wordclock.send(None)
 
