@@ -40,7 +40,7 @@ void setup() {
     Serial.begin(115200);
 
     //!\ WARNING debug display can introduce bug on input reading (due to latency of the loop)
-    display.debug(&Serial);
+    //display.debug(&Serial);
     config.debug(&Serial);
     //input.debug(&Serial);
     stateManager.debug(&Serial);
