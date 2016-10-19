@@ -88,10 +88,10 @@ void TimeManager::readFromExternalClock(){
   #else
     int hour, min, sec;
     sscanf(__TIME__, "%d:%d:%d", &hour, &min, &sec);
-    this->time = hour*3600 + min*60 + sec;
     if(hour>=12){
       hour -= 12;
     }
+    this->time = (uint32_t)hour*3600 + (uint32_t)min*60 + (uint32_t)sec;
   #endif
 }
 
