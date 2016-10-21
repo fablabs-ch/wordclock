@@ -37,6 +37,7 @@ import os
 import sys
 import random
 import tempfile
+from io import StringIO
 
 from shlex import split
 from subprocess import check_output
@@ -156,12 +157,12 @@ def compute_baseline_height(font_size, font_family, font_weight,
     return height / MM_TO_PX_RATIO
 
 
-def parse_args():
+def args_parser():
     """
-    Parse command line arguments.
+    Parser for command line arguments.
 
     Returns:
-        argparse.Namespace: The parsed arguments.
+        argparse.Namespace: The parser.
     """
     # Prepare the parser
     parser = argparse.ArgumentParser(
@@ -207,21 +208,14 @@ def parse_args():
                            action='help',
                            help='show this help message and exit')
     # Really parse the arguments
-    return parser.parse_args()
+    return parser
 
 
-def main():
-    """Entry point of the script."""
-    args = parse_args()
-    if not os.path.isfile(args.filename):
-        print("The given file doesn't exists.")
-        sys.exit(1)
+def generate(raw_grid, conf):
+    """Generate the layout."""
+    grid = list(csv.reader(StringIO(raw_grid), delimiter='|'))
     # Baseline height
-    baseline_height = compute_baseline_height(args.fs, args.ff, args.fw)
-    # Read the grid
-    grid = None
-    with open(args.filename, newline='') as csvfile:
-        grid = list(csv.reader(csvfile, delimiter='|'))
+    baseline_height = compute_baseline_height(conf.fs, conf.ff, conf.fw)
     # Prepare the content
     letters = ""
     rects = "<g>\n"
@@ -232,25 +226,39 @@ def main():
             if not character:
                 character = chr(random.randint(0, 25) + 65)
             letters += generate_letter(
-                x=args.hm + args.hs / 2 + x * args.hs,
-                y=args.vm + args.vs / 2 + y * args.vs,
-                font_size=args.fs,
+                x=conf.hm + conf.hs / 2 + x * conf.hs,
+                y=conf.vm + conf.vs / 2 + y * conf.vs,
+                font_size=conf.fs,
                 baseline_height=baseline_height,
                 letter=character,
-                font_family=args.ff, font_weight=args.fw,
+                font_family=conf.ff, font_weight=conf.fw,
                 fill="white", stroke="none", stroke_width=0)
-            rects += generate_rect(x=args.hm + x * args.hs,
-                                   y=args.vm + y * args.vs,
-                                   width=args.hs, height=args.vs,
+            rects += generate_rect(x=conf.hm + x * conf.hs,
+                                   y=conf.vm + y * conf.vs,
+                                   width=conf.hs, height=conf.vs,
                                    stroke='red')
     rects += "</g>"
     frame = generate_rect(0, 0,
-                          width=num_x * args.hs + 2 * args.hm,
-                          height=num_y * args.vs + 2 * args.vm,
+                          width=num_x * conf.hs + 2 * conf.hm,
+                          height=num_y * conf.vs + 2 * conf.vm,
                           stroke="none", stroke_width=0, fill="#231f20")
-    svg = generate_svg(width=num_x * args.hs + 2 * args.hm,
-                       height=num_y * args.vs + 2 * args.vm,
+    svg = generate_svg(width=num_x * conf.hs + 2 * conf.hm,
+                       height=num_y * conf.vs + 2 * conf.vm,
                        content=frame + letters + rects)
+    return svg
+
+
+def main():
+    """Entry point of the script."""
+    args = args_parser().parse_args()
+    # Verify the file exists
+    if not os.path.isfile(args.filename):
+        print("The given file doesn't exists.")
+        sys.exit(1)
+    # Read the grid
+    with open(args.filename, newline='') as csvfile:
+        raw_grid = csvfile.read()
+    svg = generate(raw_grid, args)
     with open(args.output, 'w') as out:
         print(svg, file=out)
 
