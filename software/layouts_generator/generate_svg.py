@@ -5,7 +5,7 @@ Generate the SVG drawing for a given wordclock's layout.
 This file is part of the fablabs-ch wordclock project:
 https://github.com/fablabs-ch/wordclock
 
-This file is licensed under a MIT license:
+This file is licensed under the MIT license:
 
 ===============================================================================
 The MIT License (MIT)
