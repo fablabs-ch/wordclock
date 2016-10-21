@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+
+  layout-generator:
+    build: .
+    ports:
+      - 80:8000
