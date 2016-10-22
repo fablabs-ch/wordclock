@@ -69,8 +69,9 @@ def generate_layout():
         conf.__setattr__(param[0], val)
     print(conf)
     # Get the grid
-    lines = flask.request.form['grid'].strip('\n').split()
-    grid = [[c for c in line] for line in lines]
+    lines = flask.request.form['grid'].strip('\r\n').split('\r\n')
+    grid = [[c for c in line.strip('\r\n')] for line in lines]
+    print(grid)
     # Build the SVG
     try:
         svg = generate_svg.generate(grid, conf)
