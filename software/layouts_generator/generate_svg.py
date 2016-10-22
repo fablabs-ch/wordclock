@@ -37,7 +37,6 @@ import os
 import sys
 import random
 import tempfile
-from io import StringIO
 
 from shlex import split
 from subprocess import check_output
@@ -211,17 +210,16 @@ def args_parser():
     return parser
 
 
-def generate(raw_grid, conf):
+def generate(grid, conf):
     """Generate the layout."""
-    grid = list(csv.reader(StringIO(raw_grid), delimiter='|'))
     # Baseline height
     baseline_height = compute_baseline_height(conf.fs, conf.ff, conf.fw)
     # Prepare the content
     letters = ""
     rects = "<g>\n"
-    num_y, num_x = len(grid), len(grid[0]) - 2  # Remove external "|"
+    num_y, num_x = len(grid), len(grid[0])
     for y, row in enumerate(grid):
-        for x, char in enumerate(row[1:-1]):
+        for x, char in enumerate(row):
             character = char.strip()
             if not character:
                 character = chr(random.randint(0, 25) + 65)
@@ -256,9 +254,10 @@ def main():
         print("The given file doesn't exists.")
         sys.exit(1)
     # Read the grid
-    with open(args.filename, newline='') as csvfile:
-        raw_grid = csvfile.read()
-    svg = generate(raw_grid, args)
+    with open(args.filename) as csvfile:
+        lines = csvfile.readlines()
+    grid = [[c for c in line.strip('\n')] for line in lines]
+    svg = generate(grid, args)
     with open(args.output, 'w') as out:
         print(svg, file=out)
 
