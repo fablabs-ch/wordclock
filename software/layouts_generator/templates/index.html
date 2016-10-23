@@ -11,6 +11,12 @@
     {% endfor %}
     <div class="form-group">
         <label for="vs">Grid</label>
+        <p>You can load an existing grid, enventually modify it, or insert your own grid.</p>
+        <div class="form-group">
+            {% for template in templates %}
+            <button class="btn btn-primary" type="button" onclick="download_to_textbox('/grid/{{template}}', $('#grid'));">{{template}}</button>
+            {% endfor %}
+        </div>
         <textarea id="grid" name="grid" class="form-control" rows="15">
 YOUR
 GRID
@@ -18,7 +24,7 @@ HERE
         </textarea>
     </div>
     <div class="form-group">
-        <input type="submit" class="btn btn-success" value="Generate"/>
+        <button type="submit" class="btn btn-success">Generate</button>
     </div>
 </form>
 {% endblock %}

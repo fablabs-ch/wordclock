@@ -35,16 +35,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 """
 
-import flask
-import generate_svg
+import os
 
+import flask
+
+import generate_svg
 
 APP = flask.Flask(__name__)
 
 PARAMS = [('hs', 'Horizontal spacing of the letters (in mm):', 10, 'number'),
           ('vs', 'Vertical spacing of the letters (in mm):', 10, 'number'),
-          ('hm', 'Horizontal margins of the drawing (in mm):', 10, 'number'),
-          ('vm', 'Vertical margins of the drawing (in mm):', 10, 'number'),
+          ('hm', 'Horizontal margin of the drawing (in mm):', 10, 'number'),
+          ('vm', 'Vertical margin of the drawing (in mm):', 10, 'number'),
           ('fs', 'Font size of the letters (in mm):', 8, 'number'),
           ('ff', 'Font family of the letters:', '', 'text'),
           ('fw', 'Font weight of the letters:', '', 'text')]
@@ -53,7 +55,16 @@ PARAMS = [('hs', 'Horizontal spacing of the letters (in mm):', 10, 'number'),
 @APP.route('/')
 def index():
     """Index page."""
-    return flask.render_template('index.html', params=PARAMS)
+    templates = [os.path.splitext(x)[0] for x in os.listdir('raw')]
+    return flask.render_template('index.html',
+                                 params=PARAMS,
+                                 templates=templates)
+
+
+@APP.route('/grid/<lang>')
+def get_grid(lang):
+    """Return existing grids."""
+    return flask.send_from_directory('raw', lang + ".txt")
 
 
 @APP.route('/generate-layout/', methods=['POST'])
