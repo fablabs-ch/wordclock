@@ -34,13 +34,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import argparse
 import csv
 import os
-import sys
 import random
+import sys
 import tempfile
-
 from shlex import split
-from subprocess import check_output
-from subprocess import CalledProcessError
+from subprocess import CalledProcessError, check_output
 
 MM_TO_PX_RATIO = 3.543307
 
