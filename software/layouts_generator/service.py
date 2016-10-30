@@ -52,7 +52,8 @@ PARAMS = [('hs', 'Horizontal spacing of the letters (in mm):', 10, 'number'),
           ('vs', 'Vertical spacing of the letters (in mm):', 10, 'number'),
           ('hm', 'Horizontal margin of the drawing (in mm):', 10, 'number'),
           ('vm', 'Vertical margin of the drawing (in mm):', 10, 'number'),
-          ('ff', 'Desired font (Will be used only to extract font-name and compute cap-height of the font.):', '', 'file'),
+          ('ff', 'Desired font (Will be used only to extract font-name and'
+                 'compute cap-height of the font.):', '', 'file'),
           ('fs', 'Font size of the letters (in mm):', 8, 'number'),
           ('fw', 'Font weight of the letters: (e.g. "bold")', '', 'text')]
 
@@ -68,7 +69,7 @@ def allowed_file(filename):
 
 
 def short_name(font):
-    """Get the short name from the font's names table.
+    """Get the short name from the font's file.
 
     Taken from: https://gist.github.com/pklaus/dce37521579513c574d0
 
