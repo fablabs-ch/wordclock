@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# pylint: disable=bare-except
 """Serve the SVG generator as an HTTP service.
 
 The Flask server is not directly integrated within the main file because it
@@ -78,15 +79,12 @@ def generate_layout():
         if param[3] == 'number':
             val = int(val)
         conf.__setattr__(param[0], val)
-    print(conf)
     # Get the grid
     lines = flask.request.form['grid'].strip('\r\n').split('\r\n')
     grid = [[c for c in line.strip('\r\n')] for line in lines]
-    print(grid)
     # Build the SVG
     try:
         svg = generate_svg.generate(grid, conf)
-    # pylint: disable=bare-except
     except:
         return flask.render_template('error.html',
                                      msg='Impossible to generate the SVG.')
