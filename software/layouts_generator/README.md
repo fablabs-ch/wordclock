@@ -7,6 +7,7 @@ the tools that can be used to work with them.
 **Table of Contents**
 
 - [Layouts](#layouts)
+    - [Generated layouts](#generated-layouts)
     - [Available layouts](#available-layouts)
         - [French](#french)
         - [English](#english)
@@ -14,6 +15,7 @@ the tools that can be used to work with them.
     - [Tools](#tools)
         - [Raw format](#raw-format)
         - [SVG generation script](#svg-generation-script)
+        - [Web interface with docker](#web-interface-with-docker)
         - [Inkscape](#inkscape)
 
 <!-- markdown-toc end -->
@@ -98,23 +100,23 @@ format is used to make the creation of scripts that work with the layout easier.
 The format is simple, as shown here for the English layout:
 
 ```text
-|   | I | T |   | I | S |   | H | A | L | F |   |
-| T | E | N | A |   | Q | U | A | R | T | E | R |
-|   | T | W | E | N | T | Y | - | F | I | V | E |
-| P | A | S | T |   | T | O |   | O | N | E |   |
-| T | W | O | T | H | R | E | E | F | O | U | R |
-| F | I | V | E | S | I | X | S | E | V | E | N |
-| E | I | G | H | T | N | I | N | E | T | E | N |
-| E | L | E | V | E | N | T | W | E | L | V | E |
-|   |   |   | O | C | L | O | C | K |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   | * | * | * | * |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
+ IT IS HALF 
+TENA QUARTER
+ TWENTY-FIVE
+PAST TO ONE 
+TWOTHREEFOUR
+FIVESIXSEVEN
+EIGHTNINETEN
+ELEVENTWELVE
+   OCLOCK   
+            
+    ****    
+            
 ```
 
-It consists of vertical bars (`|`) separating the letters (`[A-Z]`). The number
-of rows and columns is free as long as the layout is a rectangle (i.e. always
-the same number of columns in all rows).
+It consists only of characters (`[A-Z]`) and spaces (` `). The number of rows
+and columns is free as long as the layout is a rectangle (i.e. always the same
+number of columns in all rows).
 
 To customize your wordclock, you can create your own raw layout before using the
 SVG generation script.
@@ -147,6 +149,21 @@ Some parameters that can be modified are:
 - The font family of the letters
 - The font weight of the letters
 - The output file
+
+### Web interface with docker
+
+It is possible to run a docker container that provide a web page that interfaces
+with the script in order to get use it without having to install all the
+dependencies. The web page provides the same parameters as the SVG generation
+script. In order to use the docker container, you will need a working `docker`
+installation, with the `docker-compose` tool:
+
+    docker-compose up
+    
+The simply open your browser on http://localhost . If docker complains about
+binding the port 80, just replace it with something else in the
+`docker-compose.yml` file, for instance the port 1234. You then need to open the
+following url: http://localhost:1234 .
 
 ### Inkscape
 
