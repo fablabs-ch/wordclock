@@ -52,7 +52,7 @@ PARAMS = [('hs', 'Horizontal spacing of the letters (in mm):', 10, 'number'),
           ('vs', 'Vertical spacing of the letters (in mm):', 10, 'number'),
           ('hm', 'Horizontal margin of the drawing (in mm):', 10, 'number'),
           ('vm', 'Vertical margin of the drawing (in mm):', 10, 'number'),
-          ('ff', 'Font for the letters:', '', 'file'),
+          ('ff', 'Desired font (Will be used only to extract font-name and compute cap-height of the font.):', '', 'file'),
           ('fs', 'Font size of the letters (in mm):', 8, 'number'),
           ('fw', 'Font weight of the letters: (e.g. "bold")', '', 'text')]
 
