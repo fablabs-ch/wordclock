@@ -2,7 +2,7 @@
 {% block content %}
 <h1>SVG layout generator</h1>
 
-<form action="/generate-layout/" method="POST">
+<form action="/generate-layout/" method="POST" enctype="multipart/form-data">
     {% for param in params %}
     <div class="form-group">
         <label for="{{param.0}}">{{param.1}}</label>
