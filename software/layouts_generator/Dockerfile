@@ -1,7 +1,9 @@
-FROM python:3.5-alpine
+FROM python:3.5
 MAINTAINER Fabien Dubosson <fabien.dubosson@gmail.com>
 
-RUN apk add --no-cache inkscape
+RUN apt-get update \
+    && apt-get install -y inkscape \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY ./ /usr/src/app/
 WORKDIR /usr/src/app/
