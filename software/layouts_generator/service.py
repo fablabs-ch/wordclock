@@ -80,7 +80,10 @@ def short_name(font):
         if b'\x00' in record.string:
             name_str = record.string.decode('utf-16-be')
         else:
-            name_str = record.string.decode('utf-8')
+            try:
+                name_str = record.string.decode('utf-8')
+            except UnicodeDecodeError:
+                name_str = record.string.decode('iso8859-1')
         if record.nameID == FONT_SPECIFIER_NAME_ID and not name:
             name = name_str
         elif record.nameID == FONT_SPECIFIER_FAMILY_ID and not family:
