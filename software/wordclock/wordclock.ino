@@ -45,7 +45,7 @@ void setup() {
     //input.debug(&Serial);
     stateManager.debug(&Serial);
     timeManager.debug(&Serial);
-    //sensors.debug(&Serial);
+//    sensors.debug(&Serial);
 
     input.readFromSerial(&Serial);
 

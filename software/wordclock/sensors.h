@@ -4,7 +4,7 @@
 #include "constants.h"
 #include "debugable.h"
 
-#define SENSOR_LAST_VALUE_BUFFER 8
+#define SENSOR_LAST_VALUE_BUFFER 16
 #define SENSOR_DELAY_READ_MS 100
 
 class Sensors : public Debugable {
