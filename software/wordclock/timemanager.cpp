@@ -86,7 +86,12 @@ void TimeManager::readFromExternalClock(){
       this->debug("External clock ");
       this->debugTime();
   #else
-    this->time = 234;
+    int hour, min, sec;
+    sscanf(__TIME__, "%d:%d:%d", &hour, &min, &sec);
+    if(hour>=12){
+      hour -= 12;
+    }
+    this->time = (uint32_t)hour*3600 + (uint32_t)min*60 + (uint32_t)sec;
   #endif
 }
 
