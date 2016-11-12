@@ -4,5 +4,7 @@ services:
 
   layout-generator:
     build: .
+    image: gaetancollaud/wordclock-layout-generator
+    container_name: wordclock-layout-generator
     ports:
-      - 80:8000
+      - 8000:8000

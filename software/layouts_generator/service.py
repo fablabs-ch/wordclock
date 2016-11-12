@@ -48,11 +48,11 @@ FONT_SPECIFIER_NAME_ID = 4
 FONT_SPECIFIER_FAMILY_ID = 1
 UPLOAD_FOLDER = '/usr/share/fonts/truetype/'
 ALLOWED_EXTENSIONS = set(['otf', 'ttf'])
-PARAMS = [('hs', 'Horizontal spacing of the letters (in mm):', 10, 'number'),
-          ('vs', 'Vertical spacing of the letters (in mm):', 10, 'number'),
+PARAMS = [('hs', 'Horizontal spacing of the letters (in mm):', 16, 'number'),
+          ('vs', 'Vertical spacing of the letters (in mm):', 16, 'number'),
           ('hm', 'Horizontal margin of the drawing (in mm):', 10, 'number'),
           ('vm', 'Vertical margin of the drawing (in mm):', 10, 'number'),
-          ('ff', 'Desired font (Will be used only to extract font-name and'
+          ('ff', 'Desired font, default is Arial black (Will be used only to extract font-name and'
                  'compute cap-height of the font.):', '', 'file'),
           ('fs', 'Font size of the letters (in mm):', 8, 'number'),
           ('fw', 'Font weight of the letters: (e.g. "bold")', '', 'text')]
@@ -97,16 +97,21 @@ def handle_font():
     """Handle the posted font."""
     # check if the post flask.request has the file part
     if 'ff' not in flask.request.files:
-        print('No file part')
-    file = flask.request.files['ff']
-    # if user does not select file, browser also
-    # submit a empty part without filename
-    if file.filename == '':
-        print('No selected file')
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        fullname = os.path.join(APP.config['UPLOAD_FOLDER'], filename)
-        file.save(fullname)
+        print('No file part, use default font')
+        fullname = 'fonts/ariblk.ttf'
+        print(fullname);
+    else:
+        file = flask.request.files['ff']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            print('No selected file, use default font')
+            fullname = 'fonts/ariblk.ttf'
+            print(fullname);
+        elif file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            fullname = os.path.join(APP.config['UPLOAD_FOLDER'], filename)
+            file.save(fullname)
     font = ttLib.TTFont(fullname)
     print(short_name(font))
     return short_name(font)[1]
