@@ -9,6 +9,7 @@
 //Define if you want to substract the minute when after half an hour
 #define MINUTES_REVERSE false
 
+//!\ WARNING if 'false' the clock will be simulated
 #define USE_EXTERNAL_CLOCK true
 
 //matrix
