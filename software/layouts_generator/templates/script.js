@@ -9,10 +9,11 @@ function download_to_textbox(url, el)
 
 function preview_layout(){
   var params={
-    grid:'salut'
+    grid:'salut\ncava',
+    base64:true
   };
   $.post('/generate-layout/', params, function(data){
-    $('#preview_txt').html(data);
-    // $('#preview').attr('src', 'data:image/png;base64,' + data);
-  });
+    $('#preview_txt').html(btoa(data));
+    $('#preview').attr('src', 'data:image/png;base64,' + data);
+  }, 'text');
 }

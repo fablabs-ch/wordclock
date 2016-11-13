@@ -39,6 +39,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import os
 
 import flask
+import base64
 from fontTools import ttLib
 from werkzeug.utils import secure_filename
 
@@ -167,13 +168,18 @@ def generate_layout():
     lines = flask.request.form['grid'].strip('\r\n').split('\r\n')
     grid = [[c for c in line.strip('\r\n')] for line in lines]
     # Build the SVG
+
     try:
         svg = generate_svg.generate(grid, conf)
     except:
         return flask.render_template('error.html',
                                      msg='Impossible to generate the SVG.')
     else:
+        print(svg)
         # Prepare and return the response
+        # if('base64' in flask.request.form):
+        #     svg = base64.standard_b64encode(svg)
+
         resp = flask.Response(svg)
         resp.headers['Content-Type'] = 'image/svg+xml'
         resp.headers['Content-Disposition'] = 'attachment; ' \
