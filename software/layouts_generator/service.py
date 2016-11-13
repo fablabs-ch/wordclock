@@ -175,11 +175,6 @@ def generate_layout():
         return flask.render_template('error.html',
                                      msg='Impossible to generate the SVG.')
     else:
-        print(svg)
-        # Prepare and return the response
-        # if('base64' in flask.request.form):
-        #     svg = base64.standard_b64encode(svg)
-
         resp = flask.Response(svg)
         resp.headers['Content-Type'] = 'image/svg+xml'
         resp.headers['Content-Disposition'] = 'attachment; ' \
