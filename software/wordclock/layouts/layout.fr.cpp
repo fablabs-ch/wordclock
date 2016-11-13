@@ -53,8 +53,7 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 			break;
 		case 2:
 		case 14:
-			//this->append(d, 67, 68, 69, 70); // deux
-			this->append(d, 66, 67, 68, 69); // deux
+			this->append(d, 67, 68, 69, 70); // deux
 			break;
 		case 3:
 		case 15:
@@ -98,7 +97,7 @@ void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t second, Display* d)
 			break;
 	}
 
-	this->append(d, 60, 61, 62, 63, 64); //heure
+	this->append(d, 60, 61, 62, 63, 64); //heures
 	if(hour>1){
 	    // heures avec s
 	    this->append(d, 65);

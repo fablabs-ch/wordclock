@@ -23,7 +23,7 @@ public:
 
 	void loop(unsigned long);
 
-  /**
+    /**
 	 * Get the current time
 	 * @param hour the hour [0,23]
 	 * @param min the minutes [0,59]
