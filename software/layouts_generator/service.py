@@ -131,6 +131,19 @@ def get_grid(lang):
     """Return existing grids."""
     return flask.send_from_directory('raw', lang + ".txt")
 
+@APP.route('/script.js')
+def get_script():
+    return flask.render_template('script.js')
+
+@APP.route('/preview')
+def get_preview():
+    username = request.args.get('username')
+    password = request.args.get('password')
+
+    resp = flask.Response(svg)
+    resp.headers['Content-Type'] = 'image/svg+xml'
+    resp.headers['Pragma'] = 'no-cache'
+    # return flask.send_from_directory('./', "template.svg")
 
 @APP.route('/generate-layout/', methods=['POST'])
 def generate_layout():
@@ -139,10 +152,11 @@ def generate_layout():
     conf = generate_svg.args_parser().parse_args([''])
     # Get parameters
     for param in [x for x in PARAMS if x[0] != 'ff']:
-        val = flask.request.form[param[0]]
-        if param[3] == 'number':
-            val = int(val)
-        conf.__setattr__(param[0], val)
+        if(param[0] in flask.request.form):
+            val = flask.request.form[param[0]]
+            if param[3] == 'number':
+                val = int(val)
+            conf.__setattr__(param[0], val)
     # Get font
     try:
         conf.ff = handle_font()
