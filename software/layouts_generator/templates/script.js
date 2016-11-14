@@ -8,11 +8,14 @@ function download_to_textbox(url, el)
 }
 
 function preview_layout(){
-  var params={
-    grid:$('textarea[name="grid"]').val()
-  };
+  $('#preview_txt').html("Loading...");
+  var list = ['grid', 'hs', 'vs', 'hm', 'vm', 'ff', 'fs', 'fw'];
+  var params = {};
+  list.forEach(function(v){
+    params[v] = $('*[name="'+v+'"]').val()
+  });
+  params.grid = params.grid.split('\n').join('\r\n');
   $.post('/generate-layout/', params, function(data){
-    data.ownerDocument = document;
     $('#preview_txt').html(data);
   }, 'text');
 }
