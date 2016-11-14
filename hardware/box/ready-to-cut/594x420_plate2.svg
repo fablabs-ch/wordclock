@@ -15,7 +15,7 @@
    id="svg12840"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="564x420_plate2.svg">
+   sodipodi:docname="594x420_plate2.svg">
   <defs
      id="defs12842">
     <clipPath
@@ -34,9 +34,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.41064301"
-     inkscape:cx="1322.4217"
-     inkscape:cy="828.24798"
+     inkscape:zoom="2.3229477"
+     inkscape:cx="1070.5556"
+     inkscape:cy="926.55266"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1839,7 +1839,7 @@
     <g
        style="stroke-width:0.80000001;stroke-miterlimit:4;stroke-dasharray:none"
        id="g5224"
-       transform="matrix(1.25,0,0,-1.25,1030.4708,249.4324)">
+       transform="matrix(1.25,0,0,-1.25,1090.4708,249.4324)">
       <path
          d="m 0,0 c 0,2.961 -1.219,5.902 -3.313,7.996 -2.094,2.096 -5.035,3.313 -7.996,3.313 -2.965,0 -5.906,-1.217 -8,-3.313 -2.094,-2.094 -3.312,-5.035 -3.312,-7.996 0,-2.961 1.218,-5.904 3.312,-8 2.094,-2.094 5.035,-3.313 8,-3.313 2.961,0 5.902,1.219 7.996,3.313 C -1.219,-5.904 0,-2.961 0,0 Z"
          style="fill:none;stroke:#ff0000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1899,7 +1899,7 @@
          x="1022.8751"
          y="-69.085388">github.com/fablabs-ch/wordclock</tspan></text>
     <g
-       transform="matrix(0.42570717,0,0,-0.41445731,1207.8819,-370.09702)"
+       transform="matrix(0.42570717,0,0,-0.41445731,1207.8819,-350.09702)"
        id="g5403"
        style="stroke-width:0.80000001;stroke-miterlimit:4;stroke-dasharray:none">
       <path
