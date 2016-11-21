@@ -26,15 +26,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="-206.76467"
-     inkscape:cy="146.09806"
+     inkscape:cx="-415.26245"
+     inkscape:cy="148.26493"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
-     inkscape:window-x="1912"
-     inkscape:window-y="593"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata12845">
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1382,26 +1382,6 @@
            id="path18261"
            inkscape:connector-curvature="0" />
       </g>
-    </g>
-    <g
-       id="g11631"
-       transform="matrix(1.25,0,0,-1.25,-137.88106,624.38001)"
-       style="stroke-width:0.80000001;stroke-miterlimit:4;stroke-dasharray:none">
-      <path
-         d="m 0,0 c 0,-0.782 -0.635,-1.417 -1.417,-1.417 -0.783,0 -1.418,0.635 -1.418,1.417 0,0.782 0.635,1.417 1.418,1.417 C -0.635,1.417 0,0.782 0,0 Z"
-         style="fill:none;stroke:#ff0000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="path11633"
-         inkscape:connector-curvature="0" />
-    </g>
-    <g
-       id="g11635"
-       transform="matrix(1.25,0,0,-1.25,-137.88106,817.49226)"
-       style="stroke-width:0.80000001;stroke-miterlimit:4;stroke-dasharray:none">
-      <path
-         d="m 0,0 c 0,-0.781 -0.635,-1.416 -1.417,-1.416 -0.783,0 -1.418,0.635 -1.418,1.416 0,0.783 0.635,1.418 1.418,1.418 C -0.635,1.418 0,0.783 0,0 Z"
-         style="fill:none;stroke:#ff0000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="path11637"
-         inkscape:connector-curvature="0" />
     </g>
     <g
        id="g4420"
