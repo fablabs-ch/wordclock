@@ -64,7 +64,7 @@ void Display::computeColorOn(){
     hsv_type hsv = config->getColor();
     if(hsv.v==0){
         //take from sensor
-        hsv.v = map(this->sensors->getLightIntensity(), 0, 255, 5, 100);
+        hsv.v = map(this->sensors->getLightIntensity(), 0, 255, LIGHT_MIN_AUTO, LIGHT_MAX_AUTO);
     }
 	this->colorOn = this->convert(hsv);
 }

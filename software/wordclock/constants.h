@@ -30,6 +30,10 @@
 #define SENSOR_LIGHT_MIN 100
 #define SENSOR_LIGHT_MAX 970
 
+//Max auto light
+#define LIGHT_MIN_AUTO 5
+#define LIGHT_MAX_AUTO 50
+
 //Outputs
 #define PIN_LED_STRIP 8
 
