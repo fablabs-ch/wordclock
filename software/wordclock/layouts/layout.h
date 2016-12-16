@@ -1,6 +1,6 @@
 #ifndef _LAYOUT_H
 #define _LAYOUT_H
-#ifdef LAYOUT_FR
+#if  defined (LAYOUT_EN) || defined (LAYOUT_FR)
 
 #include "Arduino.h"
 #include "../constants.h"
