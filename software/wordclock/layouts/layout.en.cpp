@@ -29,19 +29,15 @@
 |120|121|122|123|124|125|126|127|128|129|130|131|
 |143|142|141|140|139|138|137|136|135|134|133|132|
 
-
  */
 
 Layout::Layout() {
-
 }
 
-void Layout::getLayout(char hour, char minute, char sec, Display* d) {
+void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t sec, Display* d) {
 	if (minute >= 30) {
 		hour++;
 	}
-	
-	this->append(d, 10);
 
 	this->append(d, 1, 2); // it
 	this->append(d, 4, 5); // is
