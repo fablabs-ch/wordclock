@@ -35,9 +35,12 @@ Layout::Layout() {
 }
 
 void Layout::getLayout(uint8_t hour, uint8_t minute, uint8_t sec, Display* d) {
-	if (minute >= 30) {
-		hour++;
-	}
+	if (minute >= 35) {
+    		hour += 1;
+    		if (hour >= 24) {
+    			hour -= 24;
+    		}
+    	}
 
 	this->append(d, 1, 2); // it
 	this->append(d, 4, 5); // is
