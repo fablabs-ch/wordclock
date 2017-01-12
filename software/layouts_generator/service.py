@@ -39,6 +39,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import os
 
 import flask
+import base64
 from fontTools import ttLib
 from werkzeug.utils import secure_filename
 
@@ -131,6 +132,19 @@ def get_grid(lang):
     """Return existing grids."""
     return flask.send_from_directory('raw', lang + ".txt")
 
+@APP.route('/script.js')
+def get_script():
+    return flask.render_template('script.js')
+
+@APP.route('/preview')
+def get_preview():
+    username = request.args.get('username')
+    password = request.args.get('password')
+
+    resp = flask.Response(svg)
+    resp.headers['Content-Type'] = 'image/svg+xml'
+    resp.headers['Pragma'] = 'no-cache'
+    # return flask.send_from_directory('./', "template.svg")
 
 @APP.route('/generate-layout/', methods=['POST'])
 def generate_layout():
@@ -139,10 +153,11 @@ def generate_layout():
     conf = generate_svg.args_parser().parse_args([''])
     # Get parameters
     for param in [x for x in PARAMS if x[0] != 'ff']:
-        val = flask.request.form[param[0]]
-        if param[3] == 'number':
-            val = int(val)
-        conf.__setattr__(param[0], val)
+        if(param[0] in flask.request.form):
+            val = flask.request.form[param[0]]
+            if param[3] == 'number':
+                val = int(val)
+            conf.__setattr__(param[0], val)
     # Get font
     try:
         conf.ff = handle_font()
@@ -153,13 +168,13 @@ def generate_layout():
     lines = flask.request.form['grid'].strip('\r\n').split('\r\n')
     grid = [[c for c in line.strip('\r\n')] for line in lines]
     # Build the SVG
+
     try:
         svg = generate_svg.generate(grid, conf)
     except:
         return flask.render_template('error.html',
                                      msg='Impossible to generate the SVG.')
     else:
-        # Prepare and return the response
         resp = flask.Response(svg)
         resp.headers['Content-Type'] = 'image/svg+xml'
         resp.headers['Content-Disposition'] = 'attachment; ' \
