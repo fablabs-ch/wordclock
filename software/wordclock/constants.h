@@ -3,7 +3,8 @@
 
 
 //Language
-#define LAYOUT_FR
+#define LAYOUT_DE
+//#define LAYOUT_FR
 //#define LAYOUT_EN
 
 //Define if you want to substract the minute when after half an hour

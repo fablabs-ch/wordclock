@@ -22,6 +22,7 @@
 #include "layouts/layout.h"
 #include "layouts/layout.fr.cpp"
 #include "layouts/layout.en.cpp"
+#include "layouts/layout.de.cpp"
 
 
 WS2812 ws2812(DISPLAY_LEDS);

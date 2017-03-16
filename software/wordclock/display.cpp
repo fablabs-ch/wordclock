@@ -50,7 +50,7 @@ void Display::draw() {
 	this->debugln();
 
     this->computeColorOn();
-	
+
 	this->allLedsOff();
 	if(this->currentState==CLOCK_DIGITAL || this->currentState==SET_HOUR || this->currentState==SET_MINUTE){
 		this->digitalLayout->getLayout(hour, minute, second, this);
