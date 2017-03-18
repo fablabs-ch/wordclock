@@ -3,16 +3,16 @@
 
 /*
 
-|   | I | T |   | I | S |   | H | A | L | F |   |
-| T | E | N | A |   | Q | U | A | R | T | E | R |
-|   | T | W | E | N | T | Y | - | F | I | V | E |
-| P | A | S | T |   | T | O |   | O | N | E |   |
-| T | W | O | T | H | R | E | E | F | O | U | R |
-| F | I | V | E | S | I | X | S | E | V | E | N |
-| E | I | G | H | T | N | I | N | E | T | E | N |
-| E | L | E | V | E | N | T | W | E | L | V | E |
-|   |   |   | O | C | L | O | C | K |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
+| E | S |   | I | S | T |   | H | A | L | B |   |
+| Z | E | H | N |   | V | I | E | R | T | E | L |
+| F | Ü | N | F |   | U | N | D |   |   |   |   |
+|   |   |   |   | Z | W | A | N | Z | I | G |   |
+|   | V | O | R |   |   | N | A | C | H |   |   |
+| E | I | N | S | Z | W | E | I | V | I | E | R |
+| D | R | E | I | F | Ü | N | F | A | C | H | T |
+| S | E | C | H | S | S | I | E | B | E | N |   |
+|   | N | E | U | N | Z | E | H | N | E | L | F |
+|   | Z | W | Ö | L | F |   |   |   |   |   |   |
 |   |   |   |   | * | * | * | * |   |   |   |   |
 |   |   |   |   |   |   |   |   |   |   |   |   |
 
