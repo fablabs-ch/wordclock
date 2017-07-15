@@ -38,5 +38,8 @@
 //Outputs
 #define PIN_LED_STRIP 8
 
+#define PIN_MOTION_SENSOR 5
+#define MOTION_TIME_MS 60000
+
 
 #endif

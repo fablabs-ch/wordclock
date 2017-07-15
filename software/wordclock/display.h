@@ -54,6 +54,8 @@ private:
 
 	cRGB lastColor = {255, 255, 255};
 
+	bool wasMotionDetected = true;
+
 	void allLedsOff();
 	void writeLeds();
 	bool isledOn(int row, int colum);

@@ -31,8 +31,22 @@ void Display::loop(unsigned long dtMs) {
 			this->accNextDraw = 0;
 		}
 	} else {
+	    //watch for motion detection changes
+	    if(this->wasMotionDetected != this->sensors->isMotionDetected()){
+	        this->wasMotionDetected = this->sensors->isMotionDetected();
+	        if(this->wasMotionDetected){
+	            this->draw();
+	        }else{
+                 this->allLedsOff();
+                 this->writeLeds();
+            }
+	    }
+
 		if (this->accNextDraw >= DISPLAY_REFRESH_MS || this->sensors->bigChangeOccurs()) {
-			this->draw();
+		    if(this->sensors->isMotionDetected()){
+		        //draw only if motion is detected
+			    this->draw();
+		    }
 			this->accNextDraw = 0;
 		}
 	}
