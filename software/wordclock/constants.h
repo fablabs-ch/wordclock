@@ -3,8 +3,8 @@
 
 
 //Language
-#define LAYOUT_DE
-//#define LAYOUT_FR
+//#define LAYOUT_DE
+#define LAYOUT_FR
 //#define LAYOUT_EN
 
 //Define if you want to substract the minute when after half an hour
@@ -38,8 +38,9 @@
 //Outputs
 #define PIN_LED_STRIP 8
 
-#define PIN_MOTION_SENSOR 5
-#define MOTION_TIME_MS 60000
+// Uncomment to add motion sensor support
+//#define PIN_MOTION_SENSOR 5
+//#define MOTION_TIME_MS 60000
 
 
 #endif
