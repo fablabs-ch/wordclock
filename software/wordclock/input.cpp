@@ -31,10 +31,7 @@ void Input::loop(unsigned long dtMs){
 	this->checkButtonLongPress(dtMs);
 	this->checkButtonNormalPress();
 	if(this->antiReboundMs!=0){
-		this->antiReboundMs-=dtMs;
-		if(antiReboundMs<0){
-			this->antiReboundMs = 0;
-		}
+		this->antiReboundMs -= min(dtMs, this->antiReboundMs);
 	}
 }
 
